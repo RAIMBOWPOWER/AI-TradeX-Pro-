@@ -1443,6 +1443,30 @@
         .premium-plans {
             margin-top: 50px;
         }
+        
+        .game-status {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .wheel-spinning {
+            animation: spin 0.5s linear infinite;
+        }
+        
+        @keyframes wheelStop {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -1515,7 +1539,7 @@
         <div class="container">
             <div class="hero-content fade-in">
                 <h1 class="hero-title">AI Trading Platform - Start Earning Today!</h1>
-                <p class="hero-subtitle">Join thousands of investors using our advanced AI algorithms. Start with as low as ₹500 and earn up to 40% daily returns.</p>
+                <p class="hero-subtitle">Join thousands of investors using our advanced AI algorithms. Start with as low as ₹300 and earn up to 40% daily returns.</p>
                 
                 <div class="hero-buttons">
                     <button class="btn btn-primary" id="startInvestingBtn">
@@ -1581,9 +1605,17 @@
             </div>
             
             <div class="coin-options">
+                <div class="coin-option" data-amount="300">
+                    <div class="coin-amount">₹300</div>
+                    <div class="coin-price">Basic Package</div>
+                    <button class="btn btn-sm btn-primary add-balance-btn" data-amount="300">
+                        Add Now
+                    </button>
+                </div>
+                
                 <div class="coin-option" data-amount="500">
                     <div class="coin-amount">₹500</div>
-                    <div class="coin-price">Basic Package</div>
+                    <div class="coin-price">Starter Package</div>
                     <button class="btn btn-sm btn-primary add-balance-btn" data-amount="500">
                         Add Now
                     </button>
@@ -1591,7 +1623,7 @@
                 
                 <div class="coin-option" data-amount="1000">
                     <div class="coin-amount">₹1,000</div>
-                    <div class="coin-price">Starter Package</div>
+                    <div class="coin-price">Pro Package</div>
                     <button class="btn btn-sm btn-primary add-balance-btn" data-amount="1000">
                         Add Now
                     </button>
@@ -1599,7 +1631,7 @@
                 
                 <div class="coin-option" data-amount="2500">
                     <div class="coin-amount">₹2,500</div>
-                    <div class="coin-price">Pro Package</div>
+                    <div class="coin-price">Premium Package</div>
                     <button class="btn btn-sm btn-primary add-balance-btn" data-amount="2500">
                         Add Now
                     </button>
@@ -1607,7 +1639,7 @@
                 
                 <div class="coin-option" data-amount="5000">
                     <div class="coin-amount">₹5,000</div>
-                    <div class="coin-price">Premium Package</div>
+                    <div class="coin-price">VIP Package</div>
                     <button class="btn btn-sm btn-primary add-balance-btn" data-amount="5000">
                         Add Now
                     </button>
@@ -1648,7 +1680,7 @@
                         <h3 class="card-title">Starter Plan</h3>
                         <span class="card-badge">Entry Level</span>
                     </div>
-                    <div class="card-price">₹2,999<span>/month</span></div>
+                    <div class="card-price">₹300<span>/month</span></div>
                     <p class="card-period">Perfect for beginners</p>
                     
                     <ul class="card-features">
@@ -1659,7 +1691,7 @@
                         <li><i class="fas fa-check"></i> Weekly reports</li>
                     </ul>
                     
-                    <button class="btn btn-primary invest-btn" data-plan="starter" data-price="2999">
+                    <button class="btn btn-primary invest-btn" data-plan="starter" data-price="300">
                         <i class="fas fa-shopping-cart"></i> Invest Now
                     </button>
                 </div>
@@ -1674,7 +1706,7 @@
                         <h3 class="card-title">Pro Trader</h3>
                         <span class="card-badge" style="background:linear-gradient(135deg, #ff9f43 0%, #ff8c29 100%);">Most Popular</span>
                     </div>
-                    <div class="card-price">₹9,999<span>/month</span></div>
+                    <div class="card-price">₹2,000<span>/month</span></div>
                     <p class="card-period">For serious investors</p>
                     
                     <ul class="card-features">
@@ -1685,7 +1717,7 @@
                         <li><i class="fas fa-check"></i> Risk protection</li>
                     </ul>
                     
-                    <button class="btn btn-primary invest-btn" data-plan="pro" data-price="9999">
+                    <button class="btn btn-primary invest-btn" data-plan="pro" data-price="2000">
                         <i class="fas fa-shopping-cart"></i> Invest Now
                     </button>
                 </div>
@@ -1700,7 +1732,7 @@
                         <h3 class="card-title">Gold Elite</h3>
                         <span class="card-badge badge-gold">Premium</span>
                     </div>
-                    <div class="card-price">₹24,999<span>/month</span></div>
+                    <div class="card-price">₹5,000<span>/month</span></div>
                     <p class="card-period">Maximum profits</p>
                     
                     <ul class="card-features">
@@ -1711,70 +1743,9 @@
                         <li><i class="fas fa-check"></i> VIP access</li>
                     </ul>
                     
-                    <button class="btn btn-gold invest-btn" data-plan="gold" data-price="24999">
+                    <button class="btn btn-gold invest-btn" data-plan="gold" data-price="5000">
                         <i class="fas fa-crown"></i> Invest Now
                     </button>
-                </div>
-            </div>
-            
-            <div class="premium-plans">
-                <div class="section-header fade-in">
-                    <h2 class="section-title">Premium Investment Plans</h2>
-                    <p class="section-subtitle">Exclusive high-return plans for VIP members</p>
-                </div>
-                
-                <div class="trading-cards">
-                    <div class="trading-card fade-in">
-                        <div class="product-image">
-                            <div class="product-icon" style="background: linear-gradient(135deg, #e5e4e2 0%, #b8b8b8 100%); color: #333;">
-                                <i class="fas fa-gem"></i>
-                            </div>
-                        </div>
-                        <div class="card-header">
-                            <h3 class="card-title">Platinum VIP</h3>
-                            <span class="card-badge badge-platinum">VIP</span>
-                        </div>
-                        <div class="card-price">₹49,999<span>/month</span></div>
-                        <p class="card-period">Exclusive benefits</p>
-                        
-                        <ul class="card-features">
-                            <li><i class="fas fa-check"></i> Daily 25-40% returns</li>
-                            <li><i class="fas fa-check"></i> Ultra-premium AI</li>
-                            <li><i class="fas fa-check"></i> Personal account manager</li>
-                            <li><i class="fas fa-check"></i> Instant withdrawals</li>
-                            <li><i class="fas fa-check"></i> Priority access</li>
-                        </ul>
-                        
-                        <button class="btn btn-platinum invest-btn" data-plan="platinum" data-price="49999">
-                            <i class="fas fa-gem"></i> Invest Now
-                        </button>
-                    </div>
-                    
-                    <div class="trading-card fade-in">
-                        <div class="product-image">
-                            <div class="product-icon" style="background: linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%);">
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="card-header">
-                            <h3 class="card-title">Diamond Elite</h3>
-                            <span class="card-badge" style="background:linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%);">Elite</span>
-                        </div>
-                        <div class="card-price">₹99,999<span>/month</span></div>
-                        <p class="card-period">Maximum luxury</p>
-                        
-                        <ul class="card-features">
-                            <li><i class="fas fa-check"></i> Daily 40-60% returns</li>
-                            <li><i class="fas fa-check"></i> Custom AI development</li>
-                            <li><i class="fas fa-check"></i> 24/7 dedicated support</li>
-                            <li><i class="fas fa-check"></i> Zero fees</li>
-                            <li><i class="fas fa-check"></i> Exclusive events</li>
-                        </ul>
-                        
-                        <button class="btn btn-primary invest-btn" data-plan="diamond" data-price="99999" style="background:linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%);">
-                            <i class="fas fa-star"></i> Invest Now
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1822,7 +1793,7 @@
                 </div>
                 
                 <div class="trading-controls fade-in">
-                    <input type="number" class="bet-amount" id="betAmount" min="100" max="50000" value="1000" placeholder="Bet Amount">
+                    <input type="number" class="bet-amount" id="betAmount" min="300" max="5000" value="500" placeholder="Bet Amount">
                     <button class="btn btn-success" id="placeBetBtn">
                         <i class="fas fa-play"></i> Spin Wheel
                     </button>
@@ -1831,7 +1802,9 @@
                     </button>
                 </div>
                 
-                <div id="betResult" style="text-align: center; margin-top: 15px; font-size: 14px; font-weight: 600; min-height: 40px;"></div>
+                <div class="game-status" id="betResult">
+                    Select a color and place your bet!
+                </div>
                 
                 <div id="gameStats" style="text-align: center; margin-top: 15px; color: var(--gray); font-size: 12px;">
                     <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
@@ -3062,6 +3035,9 @@
                         this.selectedColorText.style.color = option.style.background;
                         this.multiplierValue.textContent = `${this.selectedMultiplier}x`;
                         this.multiplierValue.style.color = option.style.background;
+                        
+                        this.betResult.innerHTML = `Selected: ${this.selectedColor.toUpperCase()} (${this.selectedMultiplier}x)`;
+                        this.betResult.style.color = option.style.background;
                     });
                 });
                 
@@ -3075,8 +3051,8 @@
                     }
                     
                     const amount = parseInt(this.betAmount.value) || 0;
-                    if (amount < 100 || amount > 50000) {
-                        this.showNotification('Bet amount must be between ₹100 and ₹50,000', 'error');
+                    if (amount < 300 || amount > 5000) {
+                        this.showNotification('Bet amount must be between ₹300 and ₹5,000', 'error');
                         return;
                     }
                     
@@ -3096,7 +3072,7 @@
                 this.resetBetBtn.addEventListener('click', () => {
                     if (this.colorGameRunning) return;
                     
-                    this.betAmount.value = 1000;
+                    this.betAmount.value = 500;
                     this.colorOptions.forEach(opt => opt.classList.remove('selected'));
                     this.selectedColor = null;
                     this.selectedMultiplier = 1;
@@ -3104,7 +3080,8 @@
                     this.selectedColorText.style.color = '';
                     this.multiplierValue.textContent = '0x';
                     this.multiplierValue.style.color = '';
-                    this.betResult.innerHTML = '';
+                    this.betResult.innerHTML = 'Select a color and place your bet!';
+                    this.betResult.style.color = '';
                     this.wheelContainer.className = 'wheel-container';
                     this.wheel.style.transform = 'rotate(0deg)';
                 });
@@ -3112,8 +3089,8 @@
                 this.betAmount.addEventListener('input', (e) => {
                     let value = parseInt(e.target.value);
                     if (isNaN(value)) value = 0;
-                    if (value < 100) e.target.value = 100;
-                    if (value > 50000) e.target.value = 50000;
+                    if (value < 300) e.target.value = 300;
+                    if (value > 5000) e.target.value = 5000;
                     if (this.currentUser && value > this.currentUser.balance) {
                         e.target.value = this.currentUser.balance;
                     }
@@ -3137,7 +3114,6 @@
                 let winningSegment;
                 
                 // ACTUAL LOGIC: 10% chance to win, 90% chance to lose
-                // UI mein 33.33% dikhate hain, but actual 10% hai
                 if (random < 0.1) {
                     winningColor = this.selectedColor;
                 } else if (random < 0.55) {
@@ -3711,7 +3687,7 @@
                     }
                     
                     if (this.betAmount) {
-                        const maxBet = Math.min(50000, this.currentUser.balance);
+                        const maxBet = Math.min(5000, this.currentUser.balance);
                         this.betAmount.max = maxBet;
                         if (parseInt(this.betAmount.value) > maxBet) {
                             this.betAmount.value = maxBet;
@@ -3824,4 +3800,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
