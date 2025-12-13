@@ -1,0 +1,3827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI TradeX Pro - Premium AI Trading Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1a5f7a;
+            --primary-dark: #0d4a63;
+            --secondary: #0a1931;
+            --accent: #00d4aa;
+            --accent-red: #ff4757;
+            --accent-gold: #ffd700;
+            --accent-platinum: #e5e4e2;
+            --light: #ffffff;
+            --dark: #0a1931;
+            --gray: #8b9bb4;
+            --gray-light: #1e2a3a;
+            --success: #00d4aa;
+            --danger: #ff4757;
+            --warning: #ff9f43;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --bg-gradient: linear-gradient(135deg, #0a0f1e 0%, #1a2b3c 100%);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: #e0e6ff;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(26, 95, 122, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 71, 87, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(26, 95, 122, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 95, 122, 0.5);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(0, 212, 170, 0.1);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--success) 0%, #00a884 100%);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger) 0%, #ff3838 100%);
+            color: white;
+        }
+        
+        .btn-telegram {
+            background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+            color: white;
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            color: #333;
+        }
+        
+        .btn-platinum {
+            background: linear-gradient(135deg, #e5e4e2 0%, #b8b8b8 100%);
+            color: #333;
+        }
+        
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+        
+        header {
+            background: rgba(10, 25, 49, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 900;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(26, 95, 122, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .nav-boxes {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .nav-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #e0e6ff;
+            font-weight: 500;
+            font-size: 12px;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+        }
+        
+        .nav-box:hover {
+            background: rgba(26, 95, 122, 0.2);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(26, 95, 122, 0.3);
+        }
+        
+        .nav-box.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .nav-box i {
+            font-size: 12px;
+        }
+        
+        .user-menu {
+            position: relative;
+        }
+        
+        .user-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .user-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+            box-shadow: 0 4px 8px rgba(26, 95, 122, 0.3);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 180px;
+            background: rgba(10, 25, 49, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            margin-top: 6px;
+            padding: 6px 0;
+            display: none;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+        
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            color: #e0e6ff;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .dropdown-menu a:hover {
+            background: rgba(26, 95, 122, 0.1);
+            color: var(--accent);
+        }
+        
+        .hero {
+            padding: 30px 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .quick-features {
+            margin: 30px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .feature-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 12px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 6px 15px rgba(26, 95, 122, 0.3);
+        }
+        
+        .feature-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+        }
+        
+        .feature-desc {
+            color: var(--gray);
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .trading-section {
+            padding: 50px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .trading-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .trading-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trading-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+        
+        .trading-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .card-badge {
+            padding: 4px 8px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00a884 100%);
+            color: white;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .badge-gold {
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            color: #333;
+        }
+        
+        .badge-platinum {
+            background: linear-gradient(135deg, #e5e4e2 0%, #b8b8b8 100%);
+            color: #333;
+        }
+        
+        .card-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .card-period {
+            color: var(--gray);
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .card-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .card-features li {
+            padding: 5px 0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+        
+        .card-features li i {
+            color: var(--accent);
+            font-size: 11px;
+        }
+        
+        .color-trading {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow-lg);
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .color-trading::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #ff4757 0%, #ff9f43 50%, #00d4aa 100%);
+        }
+        
+        .color-trading-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .color-trading-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 6px;
+        }
+        
+        .color-trading-subtitle {
+            color: var(--gray);
+            font-size: 13px;
+        }
+        
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .wheel-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto;
+        }
+        
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                #ff4757 0deg 120deg,
+                #00d4aa 120deg 240deg,
+                #3742fa 240deg 360deg
+            );
+            position: relative;
+            transition: transform 3s cubic-bezier(0.2, 0.8, 0.3, 1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .wheel-pointer {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 25px;
+            color: white;
+            font-size: 16px;
+            z-index: 10;
+        }
+        
+        .color-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .color-option {
+            width: 90px;
+            height: 90px;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .color-option.selected {
+            border-color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+        }
+        
+        .color-red {
+            background: linear-gradient(135deg, #ff4757 0%, #ff3838 100%);
+        }
+        
+        .color-green {
+            background: linear-gradient(135deg, #00d4aa 0%, #00a884 100%);
+        }
+        
+        .color-blue {
+            background: linear-gradient(135deg, #3742fa 0%, #1e90ff 100%);
+        }
+        
+        .trading-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .bet-amount {
+            padding: 10px 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            width: 160px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(10, 25, 49, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            width: 90%;
+            max-width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            z-index: 2001;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            display: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-header {
+            padding: 20px 20px 12px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(10, 25, 49, 0.98);
+        }
+        
+        .modal-logo {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 6px;
+        }
+        
+        .modal-subtitle {
+            color: var(--gray);
+            font-size: 13px;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            transition: all 0.3s;
+            z-index: 11;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--accent);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 14px;
+            color: white;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+        }
+        
+        footer {
+            background: rgba(10, 15, 30, 0.98);
+            backdrop-filter: blur(10px);
+            color: #b0b8d0;
+            padding: 40px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-logo {
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .footer-desc {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #8b9bb4;
+            max-width: 220px;
+        }
+        
+        .footer-title {
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #8b9bb4;
+            transition: color 0.3s;
+            font-size: 13px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8b9bb4;
+            font-size: 12px;
+        }
+        
+        .profile-section {
+            padding: 50px 0;
+        }
+        
+        .profile-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(26, 95, 122, 0.4);
+        }
+        
+        .profile-info h3 {
+            font-size: 20px;
+            color: white;
+            margin-bottom: 4px;
+        }
+        
+        .profile-role {
+            display: inline-block;
+            padding: 3px 10px;
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--accent);
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-stat {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .profile-stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        
+        .profile-stat-label {
+            color: var(--gray);
+            font-size: 12px;
+        }
+        
+        .coin-balance-section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .coin-balance-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .coin-balance-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 6px;
+        }
+        
+        .coin-balance-subtitle {
+            color: var(--gray);
+            font-size: 13px;
+        }
+        
+        .coin-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .coin-option {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .coin-option:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .coin-amount {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+        
+        .coin-price {
+            font-size: 14px;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+        
+        .payment-method:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .payment-method.selected {
+            background: rgba(26, 95, 122, 0.2);
+            border-color: var(--accent);
+        }
+        
+        .support-section {
+            padding: 50px 0;
+        }
+        
+        .quick-support {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .support-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .admin-tab {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .admin-tab.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+        }
+        
+        .admin-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-tab-content {
+            display: none;
+        }
+        
+        .admin-tab-content.active {
+            display: block;
+        }
+        
+        .users-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .user-item:last-child {
+            border-bottom: none;
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .user-username {
+            font-size: 11px;
+            color: var(--gray);
+        }
+        
+        .user-balance {
+            font-size: 12px;
+            color: var(--accent);
+        }
+        
+        .user-role {
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .role-user {
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--accent);
+        }
+        
+        .role-officer {
+            background: rgba(255, 159, 67, 0.1);
+            color: #ff9f43;
+        }
+        
+        .role-admin {
+            background: rgba(255, 71, 87, 0.1);
+            color: #ff4757;
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .admin-action-btn {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .promote-btn {
+            background: rgba(0, 212, 170, 0.2);
+            color: #00d4aa;
+            border: 1px solid rgba(0, 212, 170, 0.3);
+        }
+        
+        .demote-btn {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+        }
+        
+        .admin-section {
+            padding: 50px 0;
+        }
+        
+        .admin-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 10px;
+                height: auto;
+                padding: 8px 0;
+            }
+            
+            header {
+                height: auto;
+                padding: 6px 0;
+            }
+            
+            .header-right {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 6px;
+                margin: 5px 0;
+            }
+            
+            .nav-boxes {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 6px;
+                margin: 5px 0;
+            }
+            
+            .hero-title {
+                font-size: 22px;
+            }
+            
+            .hero-subtitle {
+                font-size: 13px;
+            }
+            
+            .color-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .support-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .modal {
+                width: 95%;
+                max-height: 85vh;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .logo {
+                font-size: 16px;
+            }
+            
+            .logo-img {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .admin-tabs {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .trading-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .wheel-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .coin-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-box {
+                padding: 5px 8px;
+                font-size: 11px;
+            }
+            
+            .nav-box i {
+                font-size: 10px;
+            }
+            
+            .admin-actions {
+                flex-direction: column;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(26, 95, 122, 0.4);
+            z-index: 3000;
+            font-weight: 500;
+            animation: slideIn 0.3s ease;
+            max-width: 280px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 13px;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .spinning {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .win-animation {
+            animation: pulse 0.5s ease 3;
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .balance-update {
+            animation: countUp 0.5s ease;
+        }
+        
+        .win-red .wheel { background: conic-gradient(#ff4757 0deg 360deg); }
+        .win-green .wheel { background: conic-gradient(#00d4aa 0deg 360deg); }
+        .win-blue .wheel { background: conic-gradient(#3742fa 0deg 360deg); }
+        
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .header-right {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 10px;
+                gap: 5px;
+            }
+            
+            .header-right.show {
+                display: flex;
+            }
+            
+            .nav-box {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .auth-buttons {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #1a5f7a 0%, #0a1931 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .premium-plans {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="https://image.zaw-myo.workers.dev/image/6abd44b9-7d82-424a-8172-47fed8c7c7d2" alt="AI TradeX Pro Logo" class="logo-img">
+                <span>AI TradeX Pro</span>
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="header-right" id="headerRight">
+                <div class="nav-boxes" id="navBoxes">
+                    <a href="#ai-trading" class="nav-box">
+                        <i class="fas fa-robot"></i>
+                        AI Trading
+                    </a>
+                    <a href="#color-trading" class="nav-box">
+                        <i class="fas fa-gamepad"></i>
+                        Color Trading
+                    </a>
+                    <a href="#profile" class="nav-box">
+                        <i class="fas fa-user"></i>
+                        My Profile
+                    </a>
+                    <a href="#admin-section" class="nav-box" id="adminNavBtn" style="display: none;">
+                        <i class="fas fa-crown"></i>
+                        Admin
+                    </a>
+                    <a href="#support" class="nav-box">
+                        <i class="fas fa-headset"></i>
+                        Support
+                    </a>
+                </div>
+                
+                <nav>
+                    <div class="auth-buttons" id="authButtons">
+                        <button class="btn btn-primary" id="loginBtn">
+                            <i class="fas fa-user"></i> Login
+                        </button>
+                    </div>
+                    
+                    <div class="user-menu" id="userMenu" style="display: none;">
+                        <div class="user-btn" id="userButton">
+                            <div class="user-avatar" id="userAvatar">G</div>
+                            <div>
+                                <div id="userName" style="font-size: 12px;">Guest</div>
+                                <div style="font-size: 10px; color: #8b9bb4;">₹<span id="userBalance">0</span></div>
+                            </div>
+                            <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                        </div>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="#profile" id="profileBtn"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="#ai-trading"><i class="fas fa-chart-line"></i> AI Trading</a>
+                            <a href="#color-trading"><i class="fas fa-gamepad"></i> Color Trading</a>
+                            <a href="#coin-balance"><i class="fas fa-coins"></i> Add Balance</a>
+                            <a href="#admin-section" id="adminPanelBtn" style="display: none;"><i class="fas fa-crown"></i> Admin Panel</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">AI Trading Platform - Start Earning Today!</h1>
+                <p class="hero-subtitle">Join thousands of investors using our advanced AI algorithms. Start with as low as ₹500 and earn up to 40% daily returns.</p>
+                
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="startInvestingBtn">
+                        <i class="fas fa-rocket"></i> Start Investing
+                    </button>
+                    <button class="btn btn-outline" id="learnMoreBtn">
+                        <i class="fas fa-info-circle"></i> Learn More
+                    </button>
+                </div>
+                
+                <div class="quick-features fade-in">
+                    <div class="features-grid">
+                        <div class="feature-box" onclick="window.location.href='#ai-trading'">
+                            <div class="product-image">
+                                <div class="product-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                            </div>
+                            <h3 class="feature-title">AI Trading</h3>
+                            <p class="feature-desc">Advanced AI algorithms for maximum returns with minimal risk.</p>
+                        </div>
+                        
+                        <div class="feature-box" onclick="window.location.href='#color-trading'">
+                            <div class="product-image">
+                                <div class="product-icon">
+                                    <i class="fas fa-gamepad"></i>
+                                </div>
+                            </div>
+                            <h3 class="feature-title">Color Trading</h3>
+                            <p class="feature-desc">Play and earn with our exciting color prediction game.</p>
+                        </div>
+                        
+                        <div class="feature-box" onclick="window.location.href='#coin-balance'">
+                            <div class="product-image">
+                                <div class="product-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                            </div>
+                            <h3 class="feature-title">Easy Deposit</h3>
+                            <p class="feature-desc">Add balance instantly by contacting admin on Telegram.</p>
+                        </div>
+                        
+                        <div class="feature-box" onclick="window.location.href='#support'">
+                            <div class="product-image">
+                                <div class="product-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                            </div>
+                            <h3 class="feature-title">24/7 Support</h3>
+                            <p class="feature-desc">Round-the-clock customer support for all your queries.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="coin-balance-section" id="coin-balance">
+        <div class="container">
+            <div class="coin-balance-header">
+                <h2 class="coin-balance-title">Add Balance Instantly</h2>
+                <p class="coin-balance-subtitle">Choose amount and contact admin on Telegram to add balance</p>
+            </div>
+            
+            <div class="coin-options">
+                <div class="coin-option" data-amount="500">
+                    <div class="coin-amount">₹500</div>
+                    <div class="coin-price">Basic Package</div>
+                    <button class="btn btn-sm btn-primary add-balance-btn" data-amount="500">
+                        Add Now
+                    </button>
+                </div>
+                
+                <div class="coin-option" data-amount="1000">
+                    <div class="coin-amount">₹1,000</div>
+                    <div class="coin-price">Starter Package</div>
+                    <button class="btn btn-sm btn-primary add-balance-btn" data-amount="1000">
+                        Add Now
+                    </button>
+                </div>
+                
+                <div class="coin-option" data-amount="2500">
+                    <div class="coin-amount">₹2,500</div>
+                    <div class="coin-price">Pro Package</div>
+                    <button class="btn btn-sm btn-primary add-balance-btn" data-amount="2500">
+                        Add Now
+                    </button>
+                </div>
+                
+                <div class="coin-option" data-amount="5000">
+                    <div class="coin-amount">₹5,000</div>
+                    <div class="coin-price">Premium Package</div>
+                    <button class="btn btn-sm btn-primary add-balance-btn" data-amount="5000">
+                        Add Now
+                    </button>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="color: var(--gray); margin-bottom: 10px; font-size: 13px;">Click "Add Now" to contact admin on Telegram</p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-success" id="proceedPaymentBtn" style="padding: 10px 25px; font-size: 14px;">
+                    <i class="fab fa-telegram"></i> Contact Admin on Telegram
+                </button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 12px; color: var(--gray); font-size: 12px;">
+                <p><i class="fas fa-info-circle"></i> Balance will be added instantly after payment confirmation</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="trading-section" id="ai-trading">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">AI Trading Packages</h2>
+                <p class="section-subtitle">Choose from our premium AI trading algorithms with proven track records</p>
+            </div>
+            
+            <div class="trading-cards">
+                <div class="trading-card fade-in">
+                    <div class="product-image">
+                        <div class="product-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Starter Plan</h3>
+                        <span class="card-badge">Entry Level</span>
+                    </div>
+                    <div class="card-price">₹2,999<span>/month</span></div>
+                    <p class="card-period">Perfect for beginners</p>
+                    
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Daily 3-7% returns</li>
+                        <li><i class="fas fa-check"></i> Basic AI monitoring</li>
+                        <li><i class="fas fa-check"></i> Risk management</li>
+                        <li><i class="fas fa-check"></i> Email support</li>
+                        <li><i class="fas fa-check"></i> Weekly reports</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary invest-btn" data-plan="starter" data-price="2999">
+                        <i class="fas fa-shopping-cart"></i> Invest Now
+                    </button>
+                </div>
+                
+                <div class="trading-card fade-in">
+                    <div class="product-image">
+                        <div class="product-icon" style="background: linear-gradient(135deg, #ff9f43 0%, #ff8c29 100%);">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Pro Trader</h3>
+                        <span class="card-badge" style="background:linear-gradient(135deg, #ff9f43 0%, #ff8c29 100%);">Most Popular</span>
+                    </div>
+                    <div class="card-price">₹9,999<span>/month</span></div>
+                    <p class="card-period">For serious investors</p>
+                    
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Daily 8-15% returns</li>
+                        <li><i class="fas fa-check"></i> Advanced AI algorithms</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Daily reports</li>
+                        <li><i class="fas fa-check"></i> Risk protection</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary invest-btn" data-plan="pro" data-price="9999">
+                        <i class="fas fa-shopping-cart"></i> Invest Now
+                    </button>
+                </div>
+                
+                <div class="trading-card fade-in">
+                    <div class="product-image">
+                        <div class="product-icon" style="background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Gold Elite</h3>
+                        <span class="card-badge badge-gold">Premium</span>
+                    </div>
+                    <div class="card-price">₹24,999<span>/month</span></div>
+                    <p class="card-period">Maximum profits</p>
+                    
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Daily 15-25% returns</li>
+                        <li><i class="fas fa-check"></i> Premium AI models</li>
+                        <li><i class="fas fa-check"></i> 24/7 personal support</li>
+                        <li><i class="fas fa-check"></i> Custom strategies</li>
+                        <li><i class="fas fa-check"></i> VIP access</li>
+                    </ul>
+                    
+                    <button class="btn btn-gold invest-btn" data-plan="gold" data-price="24999">
+                        <i class="fas fa-crown"></i> Invest Now
+                    </button>
+                </div>
+            </div>
+            
+            <div class="premium-plans">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">Premium Investment Plans</h2>
+                    <p class="section-subtitle">Exclusive high-return plans for VIP members</p>
+                </div>
+                
+                <div class="trading-cards">
+                    <div class="trading-card fade-in">
+                        <div class="product-image">
+                            <div class="product-icon" style="background: linear-gradient(135deg, #e5e4e2 0%, #b8b8b8 100%); color: #333;">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <h3 class="card-title">Platinum VIP</h3>
+                            <span class="card-badge badge-platinum">VIP</span>
+                        </div>
+                        <div class="card-price">₹49,999<span>/month</span></div>
+                        <p class="card-period">Exclusive benefits</p>
+                        
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Daily 25-40% returns</li>
+                            <li><i class="fas fa-check"></i> Ultra-premium AI</li>
+                            <li><i class="fas fa-check"></i> Personal account manager</li>
+                            <li><i class="fas fa-check"></i> Instant withdrawals</li>
+                            <li><i class="fas fa-check"></i> Priority access</li>
+                        </ul>
+                        
+                        <button class="btn btn-platinum invest-btn" data-plan="platinum" data-price="49999">
+                            <i class="fas fa-gem"></i> Invest Now
+                        </button>
+                    </div>
+                    
+                    <div class="trading-card fade-in">
+                        <div class="product-image">
+                            <div class="product-icon" style="background: linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%);">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <h3 class="card-title">Diamond Elite</h3>
+                            <span class="card-badge" style="background:linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%);">Elite</span>
+                        </div>
+                        <div class="card-price">₹99,999<span>/month</span></div>
+                        <p class="card-period">Maximum luxury</p>
+                        
+                        <ul class="card-features">
+                            <li><i class="fas fa-check"></i> Daily 40-60% returns</li>
+                            <li><i class="fas fa-check"></i> Custom AI development</li>
+                            <li><i class="fas fa-check"></i> 24/7 dedicated support</li>
+                            <li><i class="fas fa-check"></i> Zero fees</li>
+                            <li><i class="fas fa-check"></i> Exclusive events</li>
+                        </ul>
+                        
+                        <button class="btn btn-primary invest-btn" data-plan="diamond" data-price="99999" style="background:linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%);">
+                            <i class="fas fa-star"></i> Invest Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="color-trading" id="color-trading">
+        <div class="container">
+            <div class="color-trading-header fade-in">
+                <h2 class="color-trading-title">Color Trading Wheel</h2>
+                <p class="color-trading-subtitle">Spin the wheel and win big! Fair game with equal chances for everyone.</p>
+            </div>
+            
+            <div class="game-container">
+                <div class="wheel-container" id="wheelContainer">
+                    <div class="wheel" id="wheel">
+                        <div class="color-segments">
+                            <div class="segment" style="background: #ff4757;"></div>
+                            <div class="segment" style="background: #00d4aa;"></div>
+                            <div class="segment" style="background: #3742fa;"></div>
+                        </div>
+                    </div>
+                    <div class="wheel-pointer">
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+                
+                <div class="color-options">
+                    <div class="color-option color-red" data-color="red" data-multiplier="2">
+                        <div style="font-size: 18px;">RED</div>
+                        <div style="font-size: 12px; opacity: 0.9;">2x Returns</div>
+                        <div style="font-size: 10px; margin-top: 4px;">33.33% Chance</div>
+                    </div>
+                    
+                    <div class="color-option color-green" data-color="green" data-multiplier="3">
+                        <div style="font-size: 18px;">GREEN</div>
+                        <div style="font-size: 12px; opacity: 0.9;">3x Returns</div>
+                        <div style="font-size: 10px; margin-top: 4px;">33.33% Chance</div>
+                    </div>
+                    
+                    <div class="color-option color-blue" data-color="blue" data-multiplier="5">
+                        <div style="font-size: 18px;">BLUE</div>
+                        <div style="font-size: 12px; opacity: 0.9;">5x Returns</div>
+                        <div style="font-size: 10px; margin-top: 4px;">33.33% Chance</div>
+                    </div>
+                </div>
+                
+                <div class="trading-controls fade-in">
+                    <input type="number" class="bet-amount" id="betAmount" min="100" max="50000" value="1000" placeholder="Bet Amount">
+                    <button class="btn btn-success" id="placeBetBtn">
+                        <i class="fas fa-play"></i> Spin Wheel
+                    </button>
+                    <button class="btn btn-danger" id="resetBetBtn">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+                
+                <div id="betResult" style="text-align: center; margin-top: 15px; font-size: 14px; font-weight: 600; min-height: 40px;"></div>
+                
+                <div id="gameStats" style="text-align: center; margin-top: 15px; color: var(--gray); font-size: 12px;">
+                    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                        <div>
+                            <div style="color: white; font-weight: 600;">Current Balance</div>
+                            <div style="font-size: 18px; color: var(--accent);">₹<span id="currentBalance">0</span></div>
+                        </div>
+                        <div>
+                            <div style="color: white; font-weight: 600;">Selected Color</div>
+                            <div id="selectedColorText" style="font-size: 14px; font-weight: 600;">None</div>
+                        </div>
+                        <div>
+                            <div style="color: white; font-weight: 600;">Multiplier</div>
+                            <div id="multiplierValue" style="font-size: 14px; font-weight: 600;">0x</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="admin-section" id="admin-section" style="display: none;">
+        <div class="container">
+            <div class="admin-container fade-in">
+                <div class="section-header">
+                    <h2 class="section-title">Admin Control Panel</h2>
+                    <p class="section-subtitle">Manage users, officers, and platform settings</p>
+                </div>
+                
+                <div class="admin-tabs">
+                    <div class="admin-tab active" data-tab="addBalance">Add Balance</div>
+                    <div class="admin-tab" data-tab="reduceBalance">Reduce Balance</div>
+                    <div class="admin-tab" data-tab="createOfficer">Create Officer</div>
+                    <div class="admin-tab" data-tab="manageOfficers">Manage Officers</div>
+                    <div class="admin-tab" data-tab="viewUsers">View All Users</div>
+                </div>
+                
+                <div id="addBalanceTab" class="admin-tab-content active">
+                    <div style="background: rgba(255, 159, 67, 0.1); border: 1px solid rgba(255, 159, 67, 0.3); border-radius: 8px; padding: 10px; margin-bottom: 12px; color: #ffcc8c; font-size: 12px;">
+                        <i class="fas fa-info-circle"></i> <strong>Note:</strong> Only admins and officers can add balance
+                    </div>
+                    
+                    <form id="adminForm">
+                        <div class="form-group">
+                            <label class="form-label">Username *</label>
+                            <input type="text" class="form-input" id="adminUsername" placeholder="Enter username to add balance" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Amount (₹) *</label>
+                            <input type="number" class="form-input" id="adminAmount" placeholder="Enter amount in ₹" required min="1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Reason (Optional)</label>
+                            <select class="form-input" id="adminReason">
+                                <option value="balance_add">Balance Addition</option>
+                                <option value="bonus">Bonus</option>
+                                <option value="refund">Refund</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-plus-circle"></i> Add Balance
+                        </button>
+                    </form>
+                    
+                    <div id="adminResult" style="text-align: center; margin-top: 15px; font-size: 13px; min-height: 40px;"></div>
+                </div>
+                
+                <div id="reduceBalanceTab" class="admin-tab-content">
+                    <div style="background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3); border-radius: 8px; padding: 10px; margin-bottom: 12px; color: #ff8c8c; font-size: 12px;">
+                        <i class="fas fa-info-circle"></i> <strong>Note:</strong> Only admins and officers can reduce balance
+                    </div>
+                    
+                    <form id="reduceBalanceForm">
+                        <div class="form-group">
+                            <label class="form-label">Username *</label>
+                            <input type="text" class="form-input" id="reduceUsername" placeholder="Enter username to reduce balance" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Amount (₹) *</label>
+                            <input type="number" class="form-input" id="reduceAmount" placeholder="Enter amount to reduce" required min="1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Reason *</label>
+                            <select class="form-input" id="reduceReason" required>
+                                <option value="">Select reason</option>
+                                <option value="penalty">Penalty</option>
+                                <option value="withdrawal_fee">Withdrawal Fee</option>
+                                <option value="mistake_correction">Mistake Correction</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-input" id="reduceDescription" placeholder="Optional description" rows="2"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-danger" style="width: 100%;">
+                            <i class="fas fa-minus-circle"></i> Reduce Balance
+                        </button>
+                    </form>
+                    
+                    <div id="reduceResult" style="text-align: center; margin-top: 15px; font-size: 13px; min-height: 40px;"></div>
+                </div>
+                
+                <div id="createOfficerTab" class="admin-tab-content">
+                    <div style="background: rgba(255, 159, 67, 0.1); border: 1px solid rgba(255, 159, 67, 0.3); border-radius: 8px; padding: 10px; margin-bottom: 12px; color: #ffcc8c; font-size: 12px;">
+                        <i class="fas fa-info-circle"></i> <strong>Note:</strong> Only admins can create officers
+                    </div>
+                    
+                    <form id="createOfficerForm">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" class="form-input" id="officerName" placeholder="Enter officer's full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Username *</label>
+                            <input type="text" class="form-input" id="officerUsername" placeholder="Choose unique username" required minlength="3" maxlength="20">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Password *</label>
+                            <input type="password" class="form-input" id="officerPassword" placeholder="••••••••" required minlength="6">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Confirm Password *</label>
+                            <input type="password" class="form-input" id="officerConfirmPassword" placeholder="••••••••" required minlength="6">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-user-shield"></i> Create Officer Account
+                        </button>
+                    </form>
+                    
+                    <div id="officerResult" style="text-align: center; margin-top: 15px; font-size: 13px; min-height: 40px;"></div>
+                </div>
+                
+                <div id="manageOfficersTab" class="admin-tab-content">
+                    <div style="background: rgba(255, 159, 67, 0.1); border: 1px solid rgba(255, 159, 67, 0.3); border-radius: 8px; padding: 10px; margin-bottom: 12px; color: #ffcc8c; font-size: 12px;">
+                        <i class="fas fa-info-circle"></i> <strong>Note:</strong> Only admins can manage officers (promote/demote)
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Promote User to Officer</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" class="form-input" id="promoteUsername" placeholder="Enter username to promote">
+                            <button class="btn btn-success" id="promoteBtn">
+                                <i class="fas fa-user-plus"></i> Promote
+                            </button>
+                        </div>
+                        <div style="font-size: 11px; color: #8b9bb4; margin-top: 4px;">
+                            Enter username of existing user to make them an officer
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: white; margin: 20px 0 10px; font-size: 16px;">Current Officers</h3>
+                    <div class="users-list" id="officersList">
+                        <!-- Officers will be listed here -->
+                    </div>
+                </div>
+                
+                <div id="viewUsersTab" class="admin-tab-content">
+                    <div style="background: rgba(255, 159, 67, 0.1); border: 1px solid rgba(255, 159, 67, 0.3); border-radius: 8px; padding: 10px; margin-bottom: 12px; color: #ffcc8c; font-size: 12px;">
+                        <i class="fas fa-info-circle"></i> <strong>Note:</strong> Only admins and officers can view all users
+                    </div>
+                    
+                    <div class="users-list" id="usersList">
+                        <!-- Users will be listed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="profile-section" id="profile">
+        <div class="container">
+            <div class="profile-container fade-in">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profileAvatar">U</div>
+                    <div class="profile-info">
+                        <h3 id="profileName">User Name</h3>
+                        <span class="profile-role" id="profileRole">USER</span>
+                        <p style="color: #8b9bb4; margin-top: 6px;" id="profileUsername">@username</p>
+                    </div>
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="profile-stat-value">₹<span id="profileBalance">0</span></div>
+                        <div class="profile-stat-label">Current Balance</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="profileInvestments">0</div>
+                        <div class="profile-stat-label">Total Investments</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="profileGames">0</div>
+                        <div class="profile-stat-label">Games Played</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="profileWins">0</div>
+                        <div class="profile-stat-label">Games Won</div>
+                    </div>
+                </div>
+                
+                <h3 style="color: white; margin-bottom: 12px; font-size: 16px;">Recent Activity</h3>
+                <div id="profileActivity">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="support-section" id="support">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">24/7 Customer Support</h2>
+                <p class="section-subtitle">We're here to help you with any questions or issues</p>
+            </div>
+            
+            <div class="quick-support">
+                <h3 style="text-align: center; margin-bottom: 12px; color: white; font-size: 16px;">
+                    <i class="fas fa-headset"></i> Need Help? Join Our Telegram Channel
+                </h3>
+                <div class="support-buttons">
+                    <button class="btn btn-telegram" id="contactTelegramBtn">
+                        <i class="fab fa-telegram"></i> Join Telegram Support Channel
+                    </button>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 25px; color: #8b9bb4; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 13px;">
+                <p>Our support team is available 24/7 to assist you with any questions regarding investments, balance additions, or technical issues.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <i class="fas fa-robot"></i>
+                        AI TradeX Pro
+                    </div>
+                    <p class="footer-desc">AI-powered trading and investment platform helping investors make smarter decisions with advanced algorithms.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#ai-trading"><i class="fas fa-arrow-right"></i> AI Trading</a></li>
+                        <li><a href="#color-trading"><i class="fas fa-arrow-right"></i> Color Trading</a></li>
+                        <li><a href="#profile"><i class="fas fa-arrow-right"></i> My Profile</a></li>
+                        <li><a href="#support"><i class="fas fa-arrow-right"></i> Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-file-contract"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-file-signature"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Risk Disclosure</a></li>
+                        <li><a href="#"><i class="fas fa-undo"></i> Refund Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Contact Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" id="footerTelegramBtn"><i class="fab fa-telegram"></i> Telegram Support</a></li>
+                        <li><a href="#coin-balance"><i class="fas fa-coins"></i> Add Balance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 AI TradeX Pro. All rights reserved. Trading involves risk. Past performance doesn't guarantee future results.</p>
+                <p style="margin-top: 6px; font-size: 11px; color: #8b9bb4;">
+                    This platform is for demonstration purposes only.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+    
+    <div class="modal" id="loginModal">
+        <button class="close-modal" id="closeLoginModal">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="modal-header">
+            <div class="modal-logo">AI TradeX Pro</div>
+            <h2 class="modal-title">Login / Register</h2>
+            <p class="modal-subtitle">Create new account or login to existing</p>
+        </div>
+        
+        <div class="modal-body">
+            <div style="background: rgba(255, 159, 67, 0.1); border: 1px solid rgba(255, 159, 67, 0.3); border-radius: 8px; padding: 10px; margin-bottom: 12px; color: #ffcc8c; font-size: 12px;">
+                <i class="fas fa-info-circle"></i> <strong>Important:</strong> All new users start with ₹0 balance. Add balance to start investing.
+            </div>
+            
+            <div style="margin-bottom: 12px;">
+                <button class="btn btn-outline" id="switchToRegister" style="width: 100%; margin-bottom: 6px;">
+                    <i class="fas fa-user-plus"></i> Create New Account
+                </button>
+                <button class="btn btn-outline" id="switchToLogin" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Login to Existing Account
+                </button>
+            </div>
+            
+            <form id="registerForm" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" id="registerName" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Username *</label>
+                    <input type="text" class="form-input" id="registerUsername" placeholder="Choose unique username" required minlength="3" maxlength="20">
+                    <div style="font-size: 11px; color: #8b9bb4; margin-top: 4px;">
+                        Must be unique (3-20 characters)
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password *</label>
+                    <input type="password" class="form-input" id="registerPassword" placeholder="••••••••" required minlength="6">
+                    <div style="font-size: 11px; color: #8b9bb4; margin-top: 4px;">
+                        Minimum 6 characters required
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Confirm Password *</label>
+                    <input type="password" class="form-input" id="registerConfirmPassword" placeholder="••••••••" required minlength="6">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Username *</label>
+                    <input type="text" class="form-input" id="loginUsername" placeholder="Enter your username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password *</label>
+                    <input type="password" class="form-input" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="paymentModal">
+        <button class="close-modal" id="closePaymentModal">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="modal-header">
+            <div class="modal-logo">AI TradeX Pro</div>
+            <h2 class="modal-title">Add Balance</h2>
+            <p class="modal-subtitle">Contact admin on Telegram to add balance</p>
+        </div>
+        
+        <div class="modal-body">
+            <div id="paymentDetails">
+            </div>
+            
+            <div style="background: rgba(0, 212, 170, 0.1); border: 1px solid rgba(0, 212, 170, 0.3); border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+                <h3 style="color: var(--accent); margin-bottom: 10px; font-size: 14px;">
+                    <i class="fas fa-info-circle"></i> Instructions
+                </h3>
+                <p style="color: #e0e6ff; font-size: 12px;">
+                    1. Click the button below to open Telegram<br>
+                    2. Send a message to admin with your username<br>
+                    3. Admin will add balance after payment confirmation<br>
+                    4. Balance will be added within 5 minutes
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin: 12px 0;">
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <p style="color: var(--gray); margin-bottom: 6px; font-size: 12px;">Contact Admin on Telegram:</p>
+                    <p style="font-size: 16px; font-weight: 700; color: var(--accent);">@abhaysharma0012</p>
+                    <p style="color: var(--gray); font-size: 11px; margin-top: 6px;">(Click button below to open)</p>
+                </div>
+                
+                <button class="btn btn-telegram" id="openAdminTelegramBtn" style="width: 100%; margin-bottom: 6px; padding: 10px;">
+                    <i class="fab fa-telegram"></i> Open Admin Telegram
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="contactModal">
+        <button class="close-modal" id="closeContactModal">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="modal-header">
+            <div class="modal-logo">AI TradeX Pro</div>
+            <h2 class="modal-title">Contact Support</h2>
+            <p class="modal-subtitle">Join our Telegram support channel</p>
+        </div>
+        
+        <div class="modal-body">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <p style="color: #e0e6ff; margin-bottom: 12px; font-size: 13px;">
+                    Join our Telegram channel for support and updates:
+                </p>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button class="btn btn-telegram" id="modalTelegramBtn">
+                        <i class="fab fa-telegram"></i> Join Telegram Support Channel
+                    </button>
+                </div>
+            </div>
+            
+            <div style="background: rgba(0, 212, 170, 0.1); border: 1px solid rgba(0, 212, 170, 0.3); border-radius: 8px; padding: 10px; margin-top: 12px;">
+                <p style="color: #e0e6ff; font-size: 12px;">
+                    <i class="fas fa-clock"></i> <strong>Response Time:</strong> Usually within 5-10 minutes.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class AI_TradeX_Storage {
+            constructor() {
+                this.prefix = 'ai_tradex_';
+                this.initStorage();
+            }
+            
+            initStorage() {
+                if (!localStorage.getItem(this.prefix + 'users')) {
+                    localStorage.setItem(this.prefix + 'users', JSON.stringify({}));
+                }
+                this.createAdminAccount();
+            }
+            
+            createAdminAccount() {
+                const users = this.getUsers();
+                
+                if (!users['ABHAY']) {
+                    users['ABHAY'] = {
+                        username: 'ABHAY',
+                        name: 'Abhay Admin',
+                        password: this.hashPassword('ABHAYxJOD'),
+                        balance: 9999999,
+                        role: 'admin',
+                        joined: new Date().toISOString(),
+                        investments: [],
+                        color_games: [],
+                        last_login: new Date().toISOString(),
+                        total_deposits: 0
+                    };
+                    this.saveUsers(users);
+                }
+            }
+            
+            getUsers() {
+                return JSON.parse(localStorage.getItem(this.prefix + 'users') || '{}');
+            }
+            
+            saveUsers(users) {
+                localStorage.setItem(this.prefix + 'users', JSON.stringify(users));
+            }
+            
+            hashPassword(password) {
+                let hash = 0;
+                for (let i = 0; i < password.length; i++) {
+                    const char = password.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                return hash.toString();
+            }
+            
+            verifyPassword(storedHash, password) {
+                return storedHash === this.hashPassword(password);
+            }
+            
+            registerUser(name, username, password, role = 'user') {
+                const users = this.getUsers();
+                
+                if (users[username]) {
+                    return { success: false, message: 'Username already exists' };
+                }
+                
+                users[username] = {
+                    username: username,
+                    name: name,
+                    password: this.hashPassword(password),
+                    balance: 0,
+                    role: role,
+                    joined: new Date().toISOString(),
+                    investments: [],
+                    color_games: [],
+                    last_login: new Date().toISOString(),
+                    total_deposits: 0
+                };
+                
+                this.saveUsers(users);
+                
+                if (role === 'user') {
+                    this.setCurrentUser(username);
+                }
+                
+                return { 
+                    success: true, 
+                    message: `${role.charAt(0).toUpperCase() + role.slice(1)} account created successfully!`,
+                    user: users[username]
+                };
+            }
+            
+            loginUser(username, password) {
+                const users = this.getUsers();
+                const user = users[username];
+                
+                if (!user) {
+                    return { success: false, message: 'User not found' };
+                }
+                
+                if (!this.verifyPassword(user.password, password)) {
+                    return { success: false, message: 'Incorrect password' };
+                }
+                
+                user.last_login = new Date().toISOString();
+                users[username] = user;
+                this.saveUsers(users);
+                this.setCurrentUser(username);
+                
+                return { 
+                    success: true, 
+                    message: 'Login successful!',
+                    user: user
+                };
+            }
+            
+            setCurrentUser(username) {
+                localStorage.setItem(this.prefix + 'current_user', username);
+            }
+            
+            getCurrentUser() {
+                const username = localStorage.getItem(this.prefix + 'current_user');
+                if (!username) return null;
+                const users = this.getUsers();
+                return users[username] || null;
+            }
+            
+            logoutUser() {
+                localStorage.removeItem(this.prefix + 'current_user');
+            }
+            
+            updateUser(username, updates) {
+                const users = this.getUsers();
+                if (!users[username]) return null;
+                
+                users[username] = { ...users[username], ...updates };
+                this.saveUsers(users);
+                
+                const currentUser = this.getCurrentUser();
+                if (currentUser && currentUser.username === username) {
+                    this.setCurrentUser(username);
+                }
+                
+                return users[username];
+            }
+            
+            addBalanceToUser(username, amount) {
+                const user = this.getUsers()[username];
+                if (!user) return null;
+                
+                const newBalance = user.balance + amount;
+                const totalDeposits = (user.total_deposits || 0) + amount;
+                
+                if (!user.deposits) user.deposits = [];
+                
+                user.deposits.unshift({
+                    id: 'dep_' + Date.now(),
+                    amount: amount,
+                    new_balance: newBalance,
+                    date: new Date().toISOString(),
+                    status: 'completed'
+                });
+                
+                return this.updateUser(username, {
+                    balance: newBalance,
+                    total_deposits: totalDeposits,
+                    deposits: user.deposits
+                });
+            }
+            
+            reduceBalanceFromUser(username, amount, reason, description = '') {
+                const user = this.getUsers()[username];
+                if (!user) return null;
+                
+                const newBalance = user.balance - amount;
+                if (newBalance < 0) return { success: false, message: 'Cannot reduce below 0' };
+                
+                if (!user.reductions) user.reductions = [];
+                
+                user.reductions.unshift({
+                    id: 'red_' + Date.now(),
+                    amount: amount,
+                    reason: reason,
+                    description: description,
+                    new_balance: newBalance,
+                    date: new Date().toISOString(),
+                    reduced_by: this.getCurrentUser()?.username || 'system'
+                });
+                
+                return this.updateUser(username, {
+                    balance: newBalance,
+                    reductions: user.reductions
+                });
+            }
+            
+            addInvestment(username, investment) {
+                const user = this.getUsers()[username];
+                if (!user) return null;
+                
+                if (user.balance < investment.amount) {
+                    return { success: false, message: 'Insufficient balance' };
+                }
+                
+                const newBalance = user.balance - investment.amount;
+                
+                const investmentData = {
+                    id: 'inv_' + Date.now(),
+                    ...investment,
+                    date: new Date().toISOString(),
+                    status: 'active',
+                    transaction_id: 'TXN' + Date.now(),
+                    user_balance_before: user.balance,
+                    user_balance_after: newBalance
+                };
+                
+                if (!user.investments) user.investments = [];
+                user.investments.unshift(investmentData);
+                
+                const updated = this.updateUser(username, {
+                    balance: newBalance,
+                    investments: user.investments
+                });
+                
+                return { success: true, user: updated };
+            }
+            
+            addColorGame(username, gameData) {
+                const user = this.getUsers()[username];
+                if (!user) return null;
+                
+                if (!user.color_games) user.color_games = [];
+                
+                const game = {
+                    id: 'game_' + Date.now(),
+                    ...gameData,
+                    date: new Date().toISOString(),
+                    user_balance_before: user.balance,
+                    user_balance_after: gameData.win ? 
+                        user.balance - gameData.bet_amount + gameData.win_amount : 
+                        user.balance - gameData.bet_amount
+                };
+                
+                user.color_games.unshift(game);
+                
+                const newBalance = gameData.win ? 
+                    user.balance - gameData.bet_amount + gameData.win_amount : 
+                    user.balance - gameData.bet_amount;
+                
+                return this.updateUser(username, {
+                    balance: newBalance,
+                    color_games: user.color_games
+                });
+            }
+            
+            promoteToOfficer(username) {
+                const users = this.getUsers();
+                const user = users[username];
+                
+                if (!user) return { success: false, message: 'User not found' };
+                
+                if (user.role === 'officer') {
+                    return { success: false, message: 'User is already an officer' };
+                }
+                
+                if (user.role === 'admin') {
+                    return { success: false, message: 'Cannot change admin role' };
+                }
+                
+                user.role = 'officer';
+                users[username] = user;
+                this.saveUsers(users);
+                
+                return { 
+                    success: true, 
+                    message: `${username} has been promoted to officer`,
+                    user: user
+                };
+            }
+            
+            demoteToUser(username) {
+                const users = this.getUsers();
+                const user = users[username];
+                
+                if (!user) return { success: false, message: 'User not found' };
+                
+                if (user.role === 'user') {
+                    return { success: false, message: 'User is already a regular user' };
+                }
+                
+                if (user.role === 'admin') {
+                    return { success: false, message: 'Cannot demote admin' };
+                }
+                
+                user.role = 'user';
+                users[username] = user;
+                this.saveUsers(users);
+                
+                return { 
+                    success: true, 
+                    message: `${username} has been demoted to regular user`,
+                    user: user
+                };
+            }
+            
+            getAllUsers(currentUserRole) {
+                const users = this.getUsers();
+                const usersArray = Object.values(users);
+                
+                return usersArray.map(user => {
+                    const userCopy = { ...user };
+                    delete userCopy.password;
+                    
+                    if (currentUserRole !== 'admin') {
+                        if (currentUserRole === 'officer') {
+                            return {
+                                username: userCopy.username,
+                                name: userCopy.name,
+                                role: userCopy.role,
+                                balance: userCopy.balance,
+                                joined: userCopy.joined
+                            };
+                        } else {
+                            return null;
+                        }
+                    }
+                    
+                    return userCopy;
+                }).filter(user => user !== null);
+            }
+            
+            getOfficers() {
+                const users = this.getUsers();
+                return Object.values(users).filter(user => user.role === 'officer');
+            }
+        }
+
+        class AI_TradeX_App {
+            constructor() {
+                this.storage = new AI_TradeX_Storage();
+                this.currentUser = null;
+                this.selectedPaymentAmount = 0;
+                this.selectedPaymentMethod = 'upi';
+                this.selectedColor = null;
+                this.selectedMultiplier = 1;
+                this.colorGameRunning = false;
+                
+                this.init();
+            }
+            
+            init() {
+                this.currentUser = this.storage.getCurrentUser();
+                this.cacheElements();
+                this.setupEventListeners();
+                this.setupColorGame();
+                this.updateUI();
+                
+                if (!this.currentUser) {
+                    setTimeout(() => {
+                        this.showNotification('🔒 Login to access all features');
+                    }, 2000);
+                }
+            }
+            
+            cacheElements() {
+                this.loginBtn = document.getElementById('loginBtn');
+                this.startInvestingBtn = document.getElementById('startInvestingBtn');
+                this.authButtons = document.getElementById('authButtons');
+                this.userMenu = document.getElementById('userMenu');
+                this.userButton = document.getElementById('userButton');
+                this.dropdownMenu = document.getElementById('dropdownMenu');
+                this.userName = document.getElementById('userName');
+                this.userAvatar = document.getElementById('userAvatar');
+                this.userBalance = document.getElementById('userBalance');
+                
+                this.loginModal = document.getElementById('loginModal');
+                this.paymentModal = document.getElementById('paymentModal');
+                this.contactModal = document.getElementById('contactModal');
+                this.modalOverlay = document.getElementById('modalOverlay');
+                
+                this.closeLoginModal = document.getElementById('closeLoginModal');
+                this.closePaymentModal = document.getElementById('closePaymentModal');
+                this.closeContactModal = document.getElementById('closeContactModal');
+                
+                this.loginForm = document.getElementById('loginForm');
+                this.registerForm = document.getElementById('registerForm');
+                this.switchToRegister = document.getElementById('switchToRegister');
+                this.switchToLogin = document.getElementById('switchToLogin');
+                
+                this.profileBtn = document.getElementById('profileBtn');
+                this.profileSection = document.querySelector('.profile-section');
+                
+                this.wheel = document.getElementById('wheel');
+                this.wheelContainer = document.getElementById('wheelContainer');
+                this.betAmount = document.getElementById('betAmount');
+                this.placeBetBtn = document.getElementById('placeBetBtn');
+                this.resetBetBtn = document.getElementById('resetBetBtn');
+                this.betResult = document.getElementById('betResult');
+                this.currentBalance = document.getElementById('currentBalance');
+                this.selectedColorText = document.getElementById('selectedColorText');
+                this.multiplierValue = document.getElementById('multiplierValue');
+                this.colorOptions = document.querySelectorAll('.color-option');
+                
+                this.logoutBtn = document.getElementById('logoutBtn');
+                this.adminPanelBtn = document.getElementById('adminPanelBtn');
+                this.adminNavBtn = document.getElementById('adminNavBtn');
+                this.adminSection = document.getElementById('admin-section');
+                
+                this.contactTelegramBtn = document.getElementById('contactTelegramBtn');
+                this.modalTelegramBtn = document.getElementById('modalTelegramBtn');
+                this.footerTelegramBtn = document.getElementById('footerTelegramBtn');
+                
+                this.addBalanceButtons = document.querySelectorAll('.add-balance-btn');
+                this.proceedPaymentBtn = document.getElementById('proceedPaymentBtn');
+                this.openAdminTelegramBtn = document.getElementById('openAdminTelegramBtn');
+                
+                this.investButtons = document.querySelectorAll('.invest-btn');
+                
+                this.learnMoreBtn = document.getElementById('learnMoreBtn');
+                
+                this.menuToggle = document.getElementById('menuToggle');
+                this.headerRight = document.getElementById('headerRight');
+                
+                this.adminTabs = document.querySelectorAll('.admin-tab');
+                this.adminTabContents = document.querySelectorAll('.admin-tab-content');
+                this.usersList = document.getElementById('usersList');
+                this.officersList = document.getElementById('officersList');
+                
+                this.adminForm = document.getElementById('adminForm');
+                this.createOfficerForm = document.getElementById('createOfficerForm');
+                this.reduceBalanceForm = document.getElementById('reduceBalanceForm');
+                this.promoteBtn = document.getElementById('promoteBtn');
+                this.promoteUsername = document.getElementById('promoteUsername');
+            }
+            
+            setupEventListeners() {
+                this.loginBtn.addEventListener('click', () => this.openModal(this.loginModal));
+                this.startInvestingBtn.addEventListener('click', () => {
+                    if (!this.currentUser) {
+                        this.showNotification('Please login first', 'warning');
+                        this.openModal(this.loginModal);
+                    } else if (this.currentUser.balance === 0) {
+                        this.showNotification('Please add balance first', 'warning');
+                        document.getElementById('coin-balance').scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        document.getElementById('ai-trading').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+                
+                this.switchToRegister.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.loginForm.style.display = 'none';
+                    this.registerForm.style.display = 'block';
+                });
+                
+                this.switchToLogin.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.registerForm.style.display = 'none';
+                    this.loginForm.style.display = 'block';
+                });
+                
+                this.closeLoginModal.addEventListener('click', () => this.closeModal(this.loginModal));
+                this.closePaymentModal.addEventListener('click', () => this.closeModal(this.paymentModal));
+                this.closeContactModal.addEventListener('click', () => this.closeModal(this.contactModal));
+                this.modalOverlay.addEventListener('click', () => {
+                    this.closeModal(this.loginModal);
+                    this.closeModal(this.paymentModal);
+                    this.closeModal(this.contactModal);
+                });
+                
+                this.loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleLogin();
+                });
+                
+                this.registerForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleRegister();
+                });
+                
+                this.adminForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleAdminAddBalance();
+                });
+                
+                this.reduceBalanceForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleAdminReduceBalance();
+                });
+                
+                this.createOfficerForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleCreateOfficer();
+                });
+                
+                this.promoteBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.handlePromoteUser();
+                });
+                
+                this.adminTabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const tabId = tab.dataset.tab;
+                        this.switchAdminTab(tabId);
+                    });
+                });
+                
+                this.userButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.dropdownMenu.classList.toggle('show');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!this.userButton.contains(e.target) && !this.dropdownMenu.contains(e.target)) {
+                        this.dropdownMenu.classList.remove('show');
+                    }
+                });
+                
+                this.logoutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.handleLogout();
+                });
+                
+                this.adminPanelBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showAdminSection();
+                });
+                
+                this.adminNavBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showAdminSection();
+                });
+                
+                this.profileBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showProfile();
+                });
+                
+                this.addBalanceButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const amount = parseInt(e.target.dataset.amount);
+                        this.openPaymentModal(amount);
+                    });
+                });
+                
+                this.proceedPaymentBtn.addEventListener('click', () => {
+                    if (!this.currentUser) {
+                        this.showNotification('Please login first', 'warning');
+                        this.openModal(this.loginModal);
+                        return;
+                    }
+                    
+                    const amount = this.getSelectedAmount();
+                    if (amount > 0) {
+                        this.openPaymentModal(amount);
+                    } else {
+                        this.showNotification('Please select an amount first', 'error');
+                    }
+                });
+                
+                this.openAdminTelegramBtn.addEventListener('click', () => {
+                    const username = this.currentUser ? this.currentUser.username : 'guest';
+                    const amount = this.selectedPaymentAmount;
+                    const message = `Hi Admin, I want to add ₹${amount} balance to my account.\nUsername: ${username}\nPlease add balance after payment.`;
+                    
+                    window.open('tg://openmessage?user_id=6169352386', '_blank');
+                });
+                
+                this.investButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.handleInvestmentClick(e.target);
+                    });
+                });
+                
+                this.setupContactButtons();
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.closeModal(this.loginModal);
+                        this.closeModal(this.paymentModal);
+                        this.closeModal(this.contactModal);
+                    }
+                });
+                
+                this.learnMoreBtn.addEventListener('click', () => {
+                    document.getElementById('ai-trading').scrollIntoView({ behavior: 'smooth' });
+                });
+                
+                document.querySelectorAll('.coin-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        document.querySelectorAll('.coin-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        option.classList.add('selected');
+                    });
+                });
+                
+                this.menuToggle.addEventListener('click', () => {
+                    this.headerRight.classList.toggle('show');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!this.menuToggle.contains(e.target) && !this.headerRight.contains(e.target)) {
+                        this.headerRight.classList.remove('show');
+                    }
+                });
+            }
+            
+            setupContactButtons() {
+                const contactButtons = [
+                    this.contactTelegramBtn,
+                    this.footerTelegramBtn
+                ];
+                
+                contactButtons.forEach(btn => {
+                    if (btn) {
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            this.openModal(this.contactModal);
+                        });
+                    }
+                });
+                
+                this.modalTelegramBtn.addEventListener('click', () => {
+                    window.open('https://t.me/+7_L2j4iqNow5ZmE1', '_blank');
+                    this.closeModal(this.contactModal);
+                });
+            }
+            
+            switchAdminTab(tabId) {
+                this.adminTabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.dataset.tab === tabId) {
+                        tab.classList.add('active');
+                    }
+                    
+                    if (tabId === 'createOfficer' || tabId === 'manageOfficers') {
+                        if (this.currentUser.role !== 'admin') {
+                            tab.style.display = 'none';
+                        } else {
+                            tab.style.display = 'block';
+                        }
+                    }
+                });
+                
+                this.adminTabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === tabId + 'Tab') {
+                        content.classList.add('active');
+                    }
+                });
+                
+                if (tabId === 'viewUsers') {
+                    this.loadUsersList();
+                } else if (tabId === 'manageOfficers') {
+                    this.loadOfficersList();
+                }
+            }
+            
+            loadUsersList() {
+                if (!this.currentUser || (this.currentUser.role !== 'admin' && this.currentUser.role !== 'officer')) {
+                    this.usersList.innerHTML = `
+                        <div style="text-align: center; padding: 20px; color: #8b9bb4;">
+                            <i class="fas fa-lock" style="font-size: 30px; margin-bottom: 12px; opacity: 0.5;"></i>
+                            <p style="font-size: 13px;">Access denied. Only admins and officers can view users.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const users = this.storage.getAllUsers(this.currentUser.role);
+                
+                if (users.length === 0) {
+                    this.usersList.innerHTML = `
+                        <div style="text-align: center; padding: 20px; color: #8b9bb4;">
+                            <i class="fas fa-users" style="font-size: 30px; margin-bottom: 12px; opacity: 0.5;"></i>
+                            <p style="font-size: 13px;">No users found.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                users.forEach(user => {
+                    let roleClass = 'role-user';
+                    if (user.role === 'officer') roleClass = 'role-officer';
+                    if (user.role === 'admin') roleClass = 'role-admin';
+                    
+                    let actions = '';
+                    if (this.currentUser.role === 'admin' && user.role === 'user') {
+                        actions = `<button class="admin-action-btn promote-btn" data-username="${user.username}">Promote</button>`;
+                    } else if (this.currentUser.role === 'admin' && user.role === 'officer') {
+                        actions = `<button class="admin-action-btn demote-btn" data-username="${user.username}">Demote</button>`;
+                    }
+                    
+                    html += `
+                        <div class="user-item">
+                            <div class="user-info">
+                                <div class="user-name">${user.name}</div>
+                                <div class="user-username">@${user.username}</div>
+                                <div class="user-balance">₹${user.balance}</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div class="user-role ${roleClass}">${user.role.toUpperCase()}</div>
+                                ${actions}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                this.usersList.innerHTML = html;
+                
+                this.usersList.querySelectorAll('.promote-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const username = e.target.dataset.username;
+                        this.promoteUser(username);
+                    });
+                });
+                
+                this.usersList.querySelectorAll('.demote-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const username = e.target.dataset.username;
+                        this.demoteUser(username);
+                    });
+                });
+            }
+            
+            loadOfficersList() {
+                if (!this.currentUser || this.currentUser.role !== 'admin') {
+                    this.officersList.innerHTML = `
+                        <div style="text-align: center; padding: 20px; color: #8b9bb4;">
+                            <i class="fas fa-lock" style="font-size: 30px; margin-bottom: 12px; opacity: 0.5;"></i>
+                            <p style="font-size: 13px;">Access denied. Only admins can manage officers.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const officers = this.storage.getOfficers();
+                
+                if (officers.length === 0) {
+                    this.officersList.innerHTML = `
+                        <div style="text-align: center; padding: 20px; color: #8b9bb4;">
+                            <i class="fas fa-user-shield" style="font-size: 30px; margin-bottom: 12px; opacity: 0.5;"></i>
+                            <p style="font-size: 13px;">No officers found.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                officers.forEach(officer => {
+                    html += `
+                        <div class="user-item">
+                            <div class="user-info">
+                                <div class="user-name">${officer.name}</div>
+                                <div class="user-username">@${officer.username}</div>
+                                <div class="user-balance">₹${officer.balance}</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div class="user-role role-officer">OFFICER</div>
+                                ${officer.username !== 'ABHAY' ? `<button class="admin-action-btn demote-btn" data-username="${officer.username}">Demote</button>` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                this.officersList.innerHTML = html;
+                
+                this.officersList.querySelectorAll('.demote-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const username = e.target.dataset.username;
+                        this.demoteUser(username);
+                    });
+                });
+            }
+            
+            setupColorGame() {
+                this.colorOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        if (this.colorGameRunning) return;
+                        
+                        this.colorOptions.forEach(opt => opt.classList.remove('selected'));
+                        option.classList.add('selected');
+                        this.selectedColor = option.dataset.color;
+                        this.selectedMultiplier = parseInt(option.dataset.multiplier);
+                        
+                        this.selectedColorText.textContent = this.selectedColor.toUpperCase();
+                        this.selectedColorText.style.color = option.style.background;
+                        this.multiplierValue.textContent = `${this.selectedMultiplier}x`;
+                        this.multiplierValue.style.color = option.style.background;
+                    });
+                });
+                
+                this.placeBetBtn.addEventListener('click', () => {
+                    if (this.colorGameRunning) return;
+                    
+                    if (!this.currentUser) {
+                        this.showNotification('Please login to play', 'warning');
+                        this.openModal(this.loginModal);
+                        return;
+                    }
+                    
+                    const amount = parseInt(this.betAmount.value) || 0;
+                    if (amount < 100 || amount > 50000) {
+                        this.showNotification('Bet amount must be between ₹100 and ₹50,000', 'error');
+                        return;
+                    }
+                    
+                    if (!this.selectedColor) {
+                        this.showNotification('Please select a color first', 'error');
+                        return;
+                    }
+                    
+                    if (amount > this.currentUser.balance) {
+                        this.showNotification(`Insufficient balance! Your balance: ₹${this.currentUser.balance}`, 'error');
+                        return;
+                    }
+                    
+                    this.spinWheel(amount);
+                });
+                
+                this.resetBetBtn.addEventListener('click', () => {
+                    if (this.colorGameRunning) return;
+                    
+                    this.betAmount.value = 1000;
+                    this.colorOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.selectedColor = null;
+                    this.selectedMultiplier = 1;
+                    this.selectedColorText.textContent = 'None';
+                    this.selectedColorText.style.color = '';
+                    this.multiplierValue.textContent = '0x';
+                    this.multiplierValue.style.color = '';
+                    this.betResult.innerHTML = '';
+                    this.wheelContainer.className = 'wheel-container';
+                    this.wheel.style.transform = 'rotate(0deg)';
+                });
+                
+                this.betAmount.addEventListener('input', (e) => {
+                    let value = parseInt(e.target.value);
+                    if (isNaN(value)) value = 0;
+                    if (value < 100) e.target.value = 100;
+                    if (value > 50000) e.target.value = 50000;
+                    if (this.currentUser && value > this.currentUser.balance) {
+                        e.target.value = this.currentUser.balance;
+                    }
+                });
+            }
+            
+            spinWheel(amount) {
+                this.colorGameRunning = true;
+                this.placeBetBtn.disabled = true;
+                this.resetBetBtn.disabled = true;
+                this.placeBetBtn.innerHTML = '<i class="fas fa-spinner spinning"></i> Spinning...';
+                
+                this.betResult.innerHTML = `
+                    <div style="color: var(--accent);">
+                        <i class="fas fa-spinner spinning"></i> Wheel spinning...
+                    </div>
+                `;
+                
+                const random = Math.random();
+                let winningColor;
+                let winningSegment;
+                
+                // ACTUAL LOGIC: 10% chance to win, 90% chance to lose
+                // UI mein 33.33% dikhate hain, but actual 10% hai
+                if (random < 0.1) {
+                    winningColor = this.selectedColor;
+                } else if (random < 0.55) {
+                    let otherColors = ['red', 'green', 'blue'].filter(color => color !== this.selectedColor);
+                    winningColor = otherColors[0];
+                } else {
+                    let otherColors = ['red', 'green', 'blue'].filter(color => color !== this.selectedColor);
+                    winningColor = otherColors[1];
+                }
+                
+                if (winningColor === 'red') {
+                    winningSegment = 0;
+                } else if (winningColor === 'green') {
+                    winningSegment = 1;
+                } else {
+                    winningSegment = 2;
+                }
+                
+                const segmentSize = 120;
+                const extraSpin = 1080;
+                const targetRotation = extraSpin + (winningSegment * segmentSize) + (segmentSize / 2);
+                
+                this.wheel.style.transition = 'transform 3s cubic-bezier(0.2, 0.8, 0.3, 1)';
+                this.wheel.style.transform = `rotate(${targetRotation}deg)`;
+                
+                setTimeout(() => {
+                    const win = this.selectedColor === winningColor;
+                    const winAmount = win ? amount * this.selectedMultiplier : 0;
+                    
+                    let resultText = '';
+                    let resultColor = '';
+                    
+                    if (win) {
+                        resultText = `🎉 Congratulations! ${this.selectedColor.toUpperCase()} came! You won ₹${winAmount}`;
+                        resultColor = '#00d4aa';
+                        
+                        this.betResult.classList.add('win-animation');
+                        setTimeout(() => {
+                            this.betResult.classList.remove('win-animation');
+                        }, 1500);
+                        
+                        this.wheelContainer.classList.add(`win-${winningColor}`);
+                        setTimeout(() => {
+                            this.wheelContainer.classList.remove(`win-${winningColor}`);
+                        }, 1000);
+                    } else {
+                        resultText = `😔 You lost! ${winningColor.toUpperCase()} came. Try again!`;
+                        resultColor = '#ff4757';
+                    }
+                    
+                    this.betResult.innerHTML = resultText;
+                    this.betResult.style.color = resultColor;
+                    
+                    const gameData = {
+                        bet_amount: amount,
+                        selected_color: this.selectedColor,
+                        selected_multiplier: this.selectedMultiplier,
+                        winning_color: winningColor,
+                        win: win,
+                        win_amount: winAmount
+                    };
+                    
+                    const updatedUser = this.storage.addColorGame(this.currentUser.username, gameData);
+                    if (updatedUser) {
+                        this.currentUser = updatedUser;
+                        this.updateUI();
+                        
+                        this.userBalance.classList.add('balance-update');
+                        this.currentBalance.textContent = this.currentUser.balance;
+                        this.currentBalance.classList.add('balance-update');
+                        setTimeout(() => {
+                            this.userBalance.classList.remove('balance-update');
+                            this.currentBalance.classList.remove('balance-update');
+                        }, 500);
+                    }
+                    
+                    setTimeout(() => {
+                        this.colorGameRunning = false;
+                        this.placeBetBtn.disabled = false;
+                        this.resetBetBtn.disabled = false;
+                        this.placeBetBtn.innerHTML = '<i class="fas fa-play"></i> Spin Wheel';
+                    }, 2000);
+                    
+                }, 3000);
+            }
+            
+            handleLogin() {
+                const username = document.getElementById('loginUsername').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                
+                if (!username || !password) {
+                    this.showNotification('Please enter username and password', 'error');
+                    return;
+                }
+                
+                const result = this.storage.loginUser(username, password);
+                
+                if (result.success) {
+                    this.currentUser = result.user;
+                    this.updateUI();
+                    this.closeModal(this.loginModal);
+                    this.loginForm.reset();
+                    this.showNotification(result.message, 'success');
+                    
+                    if (this.currentUser.role === 'admin' || this.currentUser.role === 'officer') {
+                        this.adminPanelBtn.style.display = 'flex';
+                        this.adminNavBtn.style.display = 'flex';
+                    }
+                } else {
+                    this.showNotification(result.message, 'error');
+                }
+            }
+            
+            handleRegister() {
+                const name = document.getElementById('registerName').value.trim();
+                const username = document.getElementById('registerUsername').value.trim();
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                
+                if (!name || !username || !password || !confirmPassword) {
+                    this.showNotification('Please fill all fields', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    this.showNotification('Passwords do not match', 'error');
+                    return;
+                }
+                
+                const result = this.storage.registerUser(name, username, password, 'user');
+                
+                if (result.success) {
+                    this.currentUser = result.user;
+                    this.updateUI();
+                    this.closeModal(this.loginModal);
+                    this.registerForm.reset();
+                    this.showNotification(result.message, 'success');
+                    
+                    this.registerForm.style.display = 'none';
+                    this.loginForm.style.display = 'block';
+                } else {
+                    this.showNotification(result.message, 'error');
+                }
+            }
+            
+            handleAdminAddBalance() {
+                const username = document.getElementById('adminUsername').value.trim();
+                const amount = parseInt(document.getElementById('adminAmount').value);
+                const reason = document.getElementById('adminReason').value;
+                
+                if (!username || !amount || amount <= 0) {
+                    this.showNotification('Please enter valid username and amount', 'error');
+                    return;
+                }
+                
+                if (!this.currentUser || (this.currentUser.role !== 'admin' && this.currentUser.role !== 'officer')) {
+                    document.getElementById('adminResult').innerHTML = `
+                        <div style="color: #ff4757;">
+                            <i class="fas fa-exclamation-circle"></i> Access denied! Only admins and officers can add balance.
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const users = this.storage.getUsers();
+                if (!users[username]) {
+                    document.getElementById('adminResult').innerHTML = `
+                        <div style="color: #ff4757;">
+                            <i class="fas fa-exclamation-circle"></i> User not found!
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const updatedUser = this.storage.addBalanceToUser(username, amount);
+                if (updatedUser) {
+                    document.getElementById('adminResult').innerHTML = `
+                        <div style="color: #00d4aa;">
+                            <i class="fas fa-check-circle"></i> Successfully added ₹${amount} to ${username}'s account!
+                        </div>
+                    `;
+                    document.getElementById('adminForm').reset();
+                    
+                    if (this.currentUser && this.currentUser.username === username) {
+                        this.currentUser = updatedUser;
+                        this.updateUI();
+                    }
+                    
+                    this.loadUsersList();
+                }
+            }
+            
+            handleAdminReduceBalance() {
+                const username = document.getElementById('reduceUsername').value.trim();
+                const amount = parseInt(document.getElementById('reduceAmount').value);
+                const reason = document.getElementById('reduceReason').value;
+                const description = document.getElementById('reduceDescription').value;
+                
+                if (!username || !amount || amount <= 0 || !reason) {
+                    this.showNotification('Please fill all required fields', 'error');
+                    return;
+                }
+                
+                if (!this.currentUser || (this.currentUser.role !== 'admin' && this.currentUser.role !== 'officer')) {
+                    document.getElementById('reduceResult').innerHTML = `
+                        <div style="color: #ff4757;">
+                            <i class="fas fa-exclamation-circle"></i> Access denied! Only admins and officers can reduce balance.
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const users = this.storage.getUsers();
+                if (!users[username]) {
+                    document.getElementById('reduceResult').innerHTML = `
+                        <div style="color: #ff4757;">
+                            <i class="fas fa-exclamation-circle"></i> User not found!
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const result = this.storage.reduceBalanceFromUser(username, amount, reason, description);
+                if (result && result.success === false) {
+                    document.getElementById('reduceResult').innerHTML = `
+                        <div style="color: #ff4757;">
+                            <i class="fas fa-exclamation-circle"></i> ${result.message}
+                        </div>
+                    `;
+                    return;
+                }
+                
+                if (result) {
+                    document.getElementById('reduceResult').innerHTML = `
+                        <div style="color: #00d4aa;">
+                            <i class="fas fa-check-circle"></i> Successfully reduced ₹${amount} from ${username}'s account!
+                        </div>
+                    `;
+                    document.getElementById('reduceBalanceForm').reset();
+                    
+                    if (this.currentUser && this.currentUser.username === username) {
+                        this.currentUser = result;
+                        this.updateUI();
+                    }
+                    
+                    this.loadUsersList();
+                }
+            }
+            
+            handleCreateOfficer() {
+                if (!this.currentUser || this.currentUser.role !== 'admin') {
+                    document.getElementById('officerResult').innerHTML = `
+                        <div style="color: #ff4757;">
+                            <i class="fas fa-exclamation-circle"></i> Only admins can create officers!
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const name = document.getElementById('officerName').value.trim();
+                const username = document.getElementById('officerUsername').value.trim();
+                const password = document.getElementById('officerPassword').value;
+                const confirmPassword = document.getElementById('officerConfirmPassword').value;
+                
+                if (!name || !username || !password || !confirmPassword) {
+                    document.getElementById('officerResult').innerHTML = `
+                        <div style="color: #ff4757;">
+                            <i class="fas fa-exclamation-circle"></i> Please fill all fields!
+                        </div>
+                    `;
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    document.getElementById('officerResult').innerHTML = `
+                        <div style="color: #ff4757;">
+                            <i class="fas fa-exclamation-circle"></i> Passwords do not match!
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const result = this.storage.registerUser(name, username, password, 'officer');
+                
+                if (result.success) {
+                    document.getElementById('officerResult').innerHTML = `
+                        <div style="color: #00d4aa;">
+                            <i class="fas fa-check-circle"></i> Officer account created successfully!<br>
+                            Username: ${username}<br>
+                            Password: ${password}
+                        </div>
+                    `;
+                    document.getElementById('createOfficerForm').reset();
+                    
+                    this.loadOfficersList();
+                } else {
+                    document.getElementById('officerResult').innerHTML = `
+                        <div style="color: #ff4757;">
+                            <i class="fas fa-exclamation-circle"></i> ${result.message}
+                        </div>
+                    `;
+                }
+            }
+            
+            handlePromoteUser() {
+                const username = this.promoteUsername.value.trim();
+                
+                if (!username) {
+                    this.showNotification('Please enter a username', 'error');
+                    return;
+                }
+                
+                this.promoteUser(username);
+                this.promoteUsername.value = '';
+            }
+            
+            promoteUser(username) {
+                if (!this.currentUser || this.currentUser.role !== 'admin') {
+                    this.showNotification('Only admins can promote users', 'error');
+                    return;
+                }
+                
+                if (username === 'ABHAY') {
+                    this.showNotification('Cannot change admin role', 'error');
+                    return;
+                }
+                
+                const result = this.storage.promoteToOfficer(username);
+                
+                if (result.success) {
+                    this.showNotification(result.message, 'success');
+                    this.loadUsersList();
+                    this.loadOfficersList();
+                    
+                    if (this.currentUser.username === username) {
+                        this.currentUser = result.user;
+                        this.updateUI();
+                    }
+                } else {
+                    this.showNotification(result.message, 'error');
+                }
+            }
+            
+            demoteUser(username) {
+                if (!this.currentUser || this.currentUser.role !== 'admin') {
+                    this.showNotification('Only admins can demote officers', 'error');
+                    return;
+                }
+                
+                if (username === 'ABHAY') {
+                    this.showNotification('Cannot demote admin', 'error');
+                    return;
+                }
+                
+                const result = this.storage.demoteToUser(username);
+                
+                if (result.success) {
+                    this.showNotification(result.message, 'success');
+                    this.loadUsersList();
+                    this.loadOfficersList();
+                    
+                    if (this.currentUser.username === username) {
+                        this.currentUser = result.user;
+                        this.updateUI();
+                    }
+                } else {
+                    this.showNotification(result.message, 'error');
+                }
+            }
+            
+            showAdminSection() {
+                if (!this.currentUser || (this.currentUser.role !== 'admin' && this.currentUser.role !== 'officer')) {
+                    this.showNotification('Access denied. Admin/Officer only.', 'error');
+                    return;
+                }
+                
+                this.adminSection.style.display = 'block';
+                this.adminSection.scrollIntoView({ behavior: 'smooth' });
+                
+                this.switchAdminTab('addBalance');
+            }
+            
+            handleInvestmentClick(button) {
+                if (!this.currentUser) {
+                    this.showNotification('Please login first', 'warning');
+                    this.openModal(this.loginModal);
+                    return;
+                }
+                
+                if (this.currentUser.balance === 0) {
+                    this.showNotification('Please add balance first', 'warning');
+                    document.getElementById('coin-balance').scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+                
+                const plan = button.dataset.plan;
+                const price = parseInt(button.dataset.price);
+                const name = button.closest('.trading-card').querySelector('.card-title').textContent;
+                
+                if (this.currentUser.balance < price) {
+                    this.showNotification(`Insufficient balance! You need ₹${price}, but you have only ₹${this.currentUser.balance}`, 'error');
+                    document.getElementById('coin-balance').scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+                
+                const result = this.storage.addInvestment(this.currentUser.username, {
+                    name: name,
+                    amount: price,
+                    type: 'package',
+                    id: plan
+                });
+                
+                if (result.success) {
+                    this.currentUser = result.user;
+                    this.updateUI();
+                    this.showNotification(`Successfully invested in ${name} for ₹${price}`, 'success');
+                } else {
+                    this.showNotification(result.message, 'error');
+                }
+            }
+            
+            getSelectedAmount() {
+                const selectedOption = document.querySelector('.coin-option.selected');
+                if (selectedOption) {
+                    return parseInt(selectedOption.dataset.amount);
+                }
+                return 0;
+            }
+            
+            openPaymentModal(amount) {
+                this.selectedPaymentAmount = amount;
+                
+                const paymentDetails = document.getElementById('paymentDetails');
+                paymentDetails.innerHTML = `
+                    <div style="background: rgba(255, 255, 255, 0.03); border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                        <h3 style="font-size: 16px; font-weight: 700; color: white; margin-bottom: 6px;">Add Balance</h3>
+                        <div style="font-size: 28px; font-weight: 800; color: var(--accent); margin-bottom: 4px;">₹${amount}</div>
+                        <div style="color: #8b9bb4; font-size: 12px;">Username: ${this.currentUser.username}</div>
+                    </div>
+                    <div style="background: rgba(0, 212, 170, 0.1); border: 1px solid rgba(0, 212, 170, 0.3); border-radius: 8px; padding: 10px; margin-bottom: 12px;">
+                        <p style="color: #00d4aa; font-weight: 600; font-size: 13px;">
+                            <i class="fas fa-wallet"></i> Your Current Balance: ₹${this.currentUser.balance}
+                        </p>
+                        <p style="color: #00d4aa; font-weight: 600; margin-top: 6px; font-size: 13px;">
+                            After Adding: ₹${this.currentUser.balance + amount}
+                        </p>
+                    </div>
+                `;
+                
+                this.openModal(this.paymentModal);
+            }
+            
+            showProfile() {
+                if (!this.currentUser) {
+                    this.showNotification('Please login to view profile', 'warning');
+                    this.openModal(this.loginModal);
+                    return;
+                }
+                
+                document.getElementById('profileName').textContent = this.currentUser.name;
+                document.getElementById('profileUsername').textContent = '@' + this.currentUser.username;
+                document.getElementById('profileRole').textContent = this.currentUser.role.toUpperCase();
+                document.getElementById('profileRole').className = 'profile-role role-' + this.currentUser.role;
+                document.getElementById('profileAvatar').textContent = this.currentUser.name.charAt(0).toUpperCase();
+                document.getElementById('profileBalance').textContent = this.currentUser.balance;
+                
+                const investments = this.currentUser.investments ? this.currentUser.investments.length : 0;
+                const games = this.currentUser.color_games ? this.currentUser.color_games.length : 0;
+                const wins = this.currentUser.color_games ? this.currentUser.color_games.filter(g => g.win).length : 0;
+                
+                document.getElementById('profileInvestments').textContent = investments;
+                document.getElementById('profileGames').textContent = games;
+                document.getElementById('profileWins').textContent = wins;
+                
+                this.loadProfileActivity();
+                
+                this.profileSection.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            loadProfileActivity() {
+                const activityContainer = document.getElementById('profileActivity');
+                const user = this.currentUser;
+                
+                const allActivities = [
+                    ...(user.investments || []).map(inv => ({ 
+                        ...inv, 
+                        type: 'investment',
+                        icon: 'fas fa-chart-line',
+                        color: '#3742fa'
+                    })),
+                    ...(user.color_games || []).map(game => ({ 
+                        ...game, 
+                        type: 'game',
+                        icon: game.win ? 'fas fa-trophy' : 'fas fa-gamepad',
+                        color: game.win ? '#00d4aa' : '#ff4757'
+                    }))
+                ].sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                let html = '';
+                
+                if (allActivities.length === 0) {
+                    html = `
+                        <div style="text-align: center; padding: 25px; color: #8b9bb4;">
+                            <i class="fas fa-history" style="font-size: 30px; margin-bottom: 12px; opacity: 0.5;"></i>
+                            <p style="font-size: 13px;">No activity yet. Start by adding balance and making investments!</p>
+                        </div>
+                    `;
+                } else {
+                    allActivities.slice(0, 5).forEach(activity => {
+                        const date = new Date(activity.date);
+                        const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth()+1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+                        const time = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+                        
+                        let description = '';
+                        let amount = '';
+                        
+                        if (activity.type === 'investment') {
+                            description = `Invested in ${activity.name}`;
+                            amount = `- ₹${activity.amount}`;
+                        } else if (activity.type === 'game') {
+                            description = `Color Trading (${activity.selected_color}) - ${activity.win ? 'WON' : 'LOST'}`;
+                            amount = activity.win ? `+ ₹${activity.win_amount}` : `- ₹${activity.bet_amount}`;
+                        }
+                        
+                        html += `
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(255, 255, 255, 0.03); border-radius: 8px; margin-bottom: 6px;">
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: ${activity.color}; display: flex; align-items: center; justify-content: center; color: white;">
+                                    <i class="${activity.icon}"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: white; font-size: 13px;">${description}</div>
+                                    <div style="font-size: 10px; color: #8b9bb4;">${formattedDate} at ${time}</div>
+                                </div>
+                                <div style="font-weight: 700; color: ${amount.startsWith('+') ? '#00d4aa' : amount.startsWith('-') ? '#ff4757' : 'white'}; font-size: 13px;">
+                                    ${amount}
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                activityContainer.innerHTML = html;
+            }
+            
+            handleLogout() {
+                this.storage.logoutUser();
+                this.currentUser = null;
+                this.updateUI();
+                this.dropdownMenu.classList.remove('show');
+                this.showNotification('You have been logged out.', 'info');
+                this.adminSection.style.display = 'none';
+            }
+            
+            updateUI() {
+                if (this.currentUser) {
+                    this.authButtons.style.display = 'none';
+                    this.userMenu.style.display = 'block';
+                    
+                    this.userName.textContent = this.currentUser.name;
+                    this.userAvatar.textContent = this.currentUser.name.charAt(0).toUpperCase();
+                    this.userBalance.textContent = this.currentUser.balance.toLocaleString();
+                    this.currentBalance.textContent = this.currentUser.balance.toLocaleString();
+                    
+                    if (this.currentUser.role === 'admin' || this.currentUser.role === 'officer') {
+                        this.adminPanelBtn.style.display = 'flex';
+                        this.adminNavBtn.style.display = 'flex';
+                    } else {
+                        this.adminPanelBtn.style.display = 'none';
+                        this.adminNavBtn.style.display = 'none';
+                        this.adminSection.style.display = 'none';
+                    }
+                    
+                    if (this.betAmount) {
+                        const maxBet = Math.min(50000, this.currentUser.balance);
+                        this.betAmount.max = maxBet;
+                        if (parseInt(this.betAmount.value) > maxBet) {
+                            this.betAmount.value = maxBet;
+                        }
+                    }
+                } else {
+                    this.authButtons.style.display = 'flex';
+                    this.userMenu.style.display = 'none';
+                    this.adminPanelBtn.style.display = 'none';
+                    this.adminNavBtn.style.display = 'none';
+                    this.adminSection.style.display = 'none';
+                    
+                    this.currentBalance.textContent = '0';
+                    this.selectedColorText.textContent = 'None';
+                    this.multiplierValue.textContent = '0x';
+                }
+            }
+            
+            openModal(modal) {
+                modal.style.display = 'block';
+                this.modalOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                setTimeout(() => {
+                    const firstInput = modal.querySelector('input, select, textarea');
+                    if (firstInput) firstInput.focus();
+                }, 100);
+            }
+            
+            closeModal(modal) {
+                modal.style.display = 'none';
+                this.modalOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                this.dropdownMenu.classList.remove('show');
+            }
+            
+            showNotification(message, type = 'info') {
+                document.querySelectorAll('.notification').forEach(n => n.remove());
+                
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.innerHTML = message;
+                
+                if (type === 'error') {
+                    notification.style.background = '#ff4757';
+                } else if (type === 'success') {
+                    notification.style.background = '#00d4aa';
+                } else if (type === 'warning') {
+                    notification.style.background = '#ff9f43';
+                } else if (type === 'info') {
+                    notification.style.background = '#3742fa';
+                }
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 5000);
+                
+                notification.addEventListener('click', () => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.aiTradeXApp = new AI_TradeX_App();
+            
+            setTimeout(() => {
+                const firstCoinOption = document.querySelector('.coin-option');
+                if (firstCoinOption) {
+                    firstCoinOption.classList.add('selected');
+                }
+            }, 500);
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('section[id]');
+                const navBoxes = document.querySelectorAll('.nav-box');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navBoxes.forEach(box => {
+                    box.classList.remove('active');
+                    if (box.getAttribute('href') === `#${current}`) {
+                        box.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
