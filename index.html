@@ -8,7 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* RESET AND BASE STYLES */
+        /* ===== COPY PROTECTION ===== */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        input, textarea, [contenteditable="true"] {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        
+        /* ===== RESET AND BASE STYLES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -48,8 +64,10 @@
             overflow-x: hidden;
             position: relative;
             font-size: 14px;
+            cursor: default;
         }
         
+        /* FIXED BACKGROUND - NO MOVEMENT */
         body::before {
             content: '';
             position: fixed;
@@ -356,7 +374,6 @@
             width: 200%;
             height: 200%;
             background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            animation: pulse 4s infinite alternate;
         }
         
         .hero-title {
@@ -661,7 +678,6 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.05) 50%, transparent 70%);
-            animation: shine 3s infinite linear;
         }
         
         .color-options {
@@ -1566,17 +1582,6 @@
             }
         }
         
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(1.1);
-                opacity: 0.3;
-            }
-        }
-        
         @keyframes shine {
             0% {
                 transform: translateX(-100%);
@@ -2161,15 +2166,37 @@
                 </select>
             </div>
             
-            <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
-                <h4 style="font-size: 14px; color: #FFD700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+            <!-- QR CODE SECTION -->
+            <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center;">
+                <h4 style="font-size: 14px; color: #FFD700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; justify-content: center;">
+                    <i class="fas fa-qrcode"></i> Payment QR Code
+                </h4>
+                
+                <img src="https://image.zaw-myo.workers.dev/image/1bcb03d4-39ec-4af3-9e66-e27be9752bb1" 
+                     alt="Payment QR Code" 
+                     style="max-width: 250px; border-radius: 12px; border: 3px solid #FFD700; margin: 10px auto;">
+                
+                <p style="color: #FFD700; font-weight: 900; font-size: 14px; margin-top: 15px;">
+                    <i class="fas fa-hand-point-right"></i> Please pay using this QR code
+                </p>
+                <p style="color: #b8c4d9; font-size: 12px; margin-top: 8px; font-weight: 600;">
+                    After payment, send screenshot to admin for account credit.
+                </p>
+                <p style="color: #00d4aa; font-size: 12px; margin-top: 8px; font-weight: 700;">
+                    <i class="fas fa-info-circle"></i> Send payment and then contact admin on Telegram
+                </p>
+            </div>
+            
+            <div style="background: rgba(0, 212, 170, 0.1); border: 2px solid rgba(0, 212, 170, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
+                <h4 style="font-size: 14px; color: #00d4aa; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
                     <i class="fas fa-info-circle"></i> Payment Instructions
                 </h4>
                 <ol style="font-size: 12px; color: #b8c4d9; padding-left: 20px; margin: 0;">
                     <li style="margin-bottom: 8px;">Select payment method above</li>
+                    <li style="margin-bottom: 8px;">Scan QR code and make payment</li>
+                    <li style="margin-bottom: 8px;">Take screenshot of payment confirmation</li>
                     <li style="margin-bottom: 8px;">Click "Open Telegram" to contact admin</li>
-                    <li style="margin-bottom: 8px;">Send payment with your username</li>
-                    <li>Admin will add balance within 5-10 minutes</li>
+                    <li>Send payment screenshot with your username</li>
                 </ol>
             </div>
             
@@ -2276,10 +2303,10 @@
                     <p class="card-subtitle">Perfect for beginners</p>
                     <div class="card-price">₹500</div>
                     <ul class="card-features">
-                        <li><i class="fas fa-check"></i> 5% Daily Returns</li>
-                        <li><i class="fas fa-check"></i> ₹75 Daily Profit</li>
-                        <li><i class="fas fa-check"></i> ₹525 Weekly</li>
-                        <li><i class="fas fa-check"></i> ₹2,250 Monthly</li>
+                        <li><i class="fas fa-check"></i> 5% Daily Returns = ₹25</li>
+                        <li><i class="fas fa-check"></i> ₹25 Daily Profit</li>
+                        <li><i class="fas fa-check"></i> ₹175 Weekly (₹25 × 7)</li>
+                        <li><i class="fas fa-check"></i> ₹750 Monthly (₹25 × 30)</li>
                         <li><i class="fas fa-check"></i> Auto Trading</li>
                     </ul>
                     <button class="btn-primary invest-btn" data-plan="basic" data-price="500" style="width: 100%;">
@@ -2301,10 +2328,10 @@
                     <p class="card-subtitle">For serious investors</p>
                     <div class="card-price">₹2,000</div>
                     <ul class="card-features">
-                        <li><i class="fas fa-check"></i> 5% Daily Returns</li>
-                        <li><i class="fas fa-check"></i> ₹300 Daily Profit</li>
-                        <li><i class="fas fa-check"></i> ₹2,100 Weekly</li>
-                        <li><i class="fas fa-check"></i> ₹9,000 Monthly</li>
+                        <li><i class="fas fa-check"></i> 5% Daily Returns = ₹100</li>
+                        <li><i class="fas fa-check"></i> ₹100 Daily Profit</li>
+                        <li><i class="fas fa-check"></i> ₹700 Weekly (₹100 × 7)</li>
+                        <li><i class="fas fa-check"></i> ₹3,000 Monthly (₹100 × 30)</li>
                         <li><i class="fas fa-check"></i> Priority Support</li>
                     </ul>
                     <button class="btn-primary invest-btn" data-plan="pro" data-price="2000" style="width: 100%;">
@@ -2326,10 +2353,10 @@
                     <p class="card-subtitle">Maximum returns</p>
                     <div class="card-price">₹5,000</div>
                     <ul class="card-features">
-                        <li><i class="fas fa-check"></i> 5% Daily Returns</li>
-                        <li><i class="fas fa-check"></i> ₹750 Daily Profit</li>
-                        <li><i class="fas fa-check"></i> ₹5,250 Weekly</li>
-                        <li><i class="fas fa-check"></i> ₹22,500 Monthly</li>
+                        <li><i class="fas fa-check"></i> 5% Daily Returns = ₹250</li>
+                        <li><i class="fas fa-check"></i> ₹250 Daily Profit</li>
+                        <li><i class="fas fa-check"></i> ₹1,750 Weekly (₹250 × 7)</li>
+                        <li><i class="fas fa-check"></i> ₹7,500 Monthly (₹250 × 30)</li>
                         <li><i class="fas fa-check"></i> VIP Support</li>
                     </ul>
                     <button class="btn-primary invest-btn" data-plan="premium" data-price="5000" style="width: 100%;">
@@ -2344,7 +2371,7 @@
             <h2 class="section-title">
                 <i class="fas fa-palette"></i> <span style="background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Color Trading</span>
             </h2>
-            <p style="color: #b8c4d9; font-size: 14px; margin-bottom: 25px; font-style: italic;">Fast-paced color prediction with high multipliers. Win up to 5x your bet!</p>
+            <p style="color: #b8c4d9; font-size: 14px; margin-bottom: 25px; font-style: italic;">Fast-paced color prediction with 2-5% returns. Perfect for small investments!</p>
             
             <div class="color-trading-container">
                 <!-- Left: Trading Board -->
@@ -2366,17 +2393,17 @@
                         <div class="color-option color-red" data-color="red">
                             <div class="color-multiplier">2.0x</div>
                             <div class="color-name">RED</div>
-                            <div style="font-size: 9px; color: rgba(255,255,255,0.8); margin-top: 3px;">Low Risk</div>
+                            <div style="font-size: 9px; color: rgba(255,255,255,0.8); margin-top: 3px;">2% Return</div>
                         </div>
                         <div class="color-option color-green" data-color="green">
                             <div class="color-multiplier">3.0x</div>
                             <div class="color-name">GREEN</div>
-                            <div style="font-size: 9px; color: rgba(255,255,255,0.8); margin-top: 3px;">Medium Risk</div>
+                            <div style="font-size: 9px; color: rgba(255,255,255,0.8); margin-top: 3px;">2.5% Return</div>
                         </div>
                         <div class="color-option color-blue" data-color="blue">
                             <div class="color-multiplier">5.0x</div>
                             <div class="color-name">BLUE</div>
-                            <div style="font-size: 9px; color: rgba(255,255,255,0.8); margin-top: 3px;">High Risk</div>
+                            <div style="font-size: 9px; color: rgba(255,255,255,0.8); margin-top: 3px;">5% Return</div>
                         </div>
                     </div>
                     
@@ -2939,9 +2966,37 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // ================================================
+        // COPY PROTECTION
+        // ================================================
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showNotification('Copying is disabled on this platform', 'warning');
+        });
+
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            showNotification('Copying is disabled on this platform', 'warning');
+        });
+
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            showNotification('Cutting is disabled on this platform', 'warning');
+        });
+
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                showNotification('Image dragging is disabled', 'warning');
+            }
+        });
+
+        // ================================================
         // COLOR TRADING CLASS - FIXED TIMER VERSION
         // ================================================
-
         class RealColorTrading {
             constructor(app) {
                 this.app = app;
@@ -2977,14 +3032,12 @@
             init() {
                 this.cacheElements();
                 this.setupEventListeners();
-                this.startTimer(); // TIMER STARTS AUTOMATICALLY
+                this.startTimer();
                 this.generateChartData();
                 this.initChart();
                 this.updateUI();
                 this.generateRecentTrades();
                 this.predefinedResults();
-                
-                console.log("Color Trading Initialized - Timer Fixed");
             }
             
             predefinedResults() {
@@ -3128,21 +3181,19 @@
                 // Refresh stats button
                 document.getElementById('refreshStats').addEventListener('click', () => {
                     this.updateStats();
-                    this.app.showNotification('Statistics refreshed!', 'success');
+                    showNotification('Statistics refreshed!', 'success');
                 });
             }
             
             // ================================================
             // FIXED TIMER IMPLEMENTATION
             // ================================================
-            
             startTimer() {
                 // Clear any existing timer
                 if (this.timerInterval) {
                     clearInterval(this.timerInterval);
                 }
                 
-                console.log("Starting timer...");
                 this.timerInterval = setInterval(() => {
                     this.timeLeft--;
                     
@@ -3156,7 +3207,6 @@
                     
                     // Check if round ended
                     if (this.timeLeft <= 0) {
-                        console.log("Round ended, starting new round...");
                         this.endRound();
                         this.timeLeft = 12; // RESET TO 12 SECONDS
                         this.currentRound++;
@@ -3234,33 +3284,28 @@
                     const actualWins = user.color_games.filter(g => g.win).length;
                     this.userWinCount = actualWins;
                     this.userTotalGames = actualTotalGames;
-                    
-                    // For admin, log actual stats
-                    if (user.username === 'ABHAY') {
-                        console.log(`Displayed: 30 trades, 27% win rate | Actual: ${actualTotalGames} trades, ${actualWins} wins`);
-                    }
                 }
             }
             
             placeTrade() {
                 if (!this.app.currentUser) {
-                    this.app.showNotification('Please login to place a trade', 'warning');
-                    this.app.openModal(this.app.loginModal);
+                    showNotification('Please login to place a trade', 'warning');
+                    openModal(loginModal);
                     return;
                 }
                 
                 if (!this.selectedColor) {
-                    this.app.showNotification('Please select a color first', 'error');
+                    showNotification('Please select a color first', 'error');
                     return;
                 }
                 
                 if (this.tradeAmount < 300 || this.tradeAmount > 5000) {
-                    this.app.showNotification('Trade amount must be between ₹300 and ₹5,000', 'error');
+                    showNotification('Trade amount must be between ₹300 and ₹5,000', 'error');
                     return;
                 }
                 
                 if (this.tradeAmount > this.app.currentUser.balance) {
-                    this.app.showNotification(`Insufficient balance! You need ₹${this.tradeAmount}, but you have only ₹${this.app.currentUser.balance}`, 'error');
+                    showNotification(`Insufficient balance! You need ₹${this.tradeAmount}, but you have only ₹${this.app.currentUser.balance}`, 'error');
                     return;
                 }
                 
@@ -3296,13 +3341,13 @@
             
             cancelAllTrades() {
                 if (this.activeTrades.length === 0) {
-                    this.app.showNotification('No active trades to cancel', 'info');
+                    showNotification('No active trades to cancel', 'info');
                     return;
                 }
                 
                 this.activeTrades = [];
                 this.updateMyTradesDisplay();
-                this.app.showNotification('All trades cancelled', 'info');
+                showNotification('All trades cancelled', 'info');
             }
             
             endRound() {
@@ -3691,7 +3736,6 @@
         // ================================================
         // PROFIT DASHBOARD IMPLEMENTATION
         // ================================================
-
         class ProfitDashboard {
             constructor(app) {
                 this.app = app;
@@ -3887,8 +3931,8 @@
             
             processWithdrawal() {
                 if (!this.app.currentUser) {
-                    this.app.showNotification('Please login to withdraw', 'warning');
-                    this.app.openModal(this.app.loginModal);
+                    showNotification('Please login to withdraw', 'warning');
+                    openModal(loginModal);
                     return;
                 }
                 
@@ -3966,7 +4010,7 @@
                     this.updateWithdrawalPreview();
                     
                     // Show success notification
-                    this.app.showNotification(`₹${withdrawalAmount} withdrawn successfully!`, 'success');
+                    showNotification(`₹${withdrawalAmount} withdrawn successfully!`, 'success');
                     
                     // Update color trading UI if exists
                     if (this.app.colorTrading) {
@@ -4177,7 +4221,6 @@
         // ================================================
         // STORAGE SYSTEM
         // ================================================
-
         class AI_TradeX_Storage {
             constructor() {
                 this.prefix = 'tradex_';
@@ -4550,307 +4593,579 @@
         }
 
         // ================================================
-        // MAIN APP
+        // GLOBAL VARIABLES
         // ================================================
+        let app = null;
+        let colorTrading = null;
+        let profitDashboard = null;
+        const storage = new AI_TradeX_Storage();
 
-        class AI_TradeX_App {
-            constructor() {
-                this.storage = new AI_TradeX_Storage();
-                this.currentUser = null;
-                this.selectedPaymentAmount = 0;
-                this.selectedPaymentMethod = 'upi';
-                this.colorTrading = null;
-                this.profitDashboard = null;
-                
-                this.init();
+        // ================================================
+        // GLOBAL FUNCTIONS
+        // ================================================
+        function showNotification(message, type = 'info') {
+            document.querySelectorAll('.notification').forEach(n => n.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = message;
+            
+            if (type === 'error') {
+                notification.style.background = 'linear-gradient(45deg, #ff4757, #ff3838)';
+            } else if (type === 'success') {
+                notification.style.background = 'var(--gold-gradient)';
+            } else if (type === 'warning') {
+                notification.style.background = 'linear-gradient(45deg, #ff9f43, #ff8c00)';
+            } else if (type === 'info') {
+                notification.style.background = 'linear-gradient(45deg, #4169E1, #3742fa)';
             }
             
-            init() {
-                this.currentUser = this.storage.getCurrentUser();
-                this.cacheElements();
-                this.setupEventListeners();
-                this.updateUI();
-                
-                // Initialize color trading after DOM is loaded
-                setTimeout(() => {
-                    this.colorTrading = new RealColorTrading(this);
-                    this.profitDashboard = new ProfitDashboard(this);
-                }, 100);
-                
-                if (!this.currentUser) {
-                    setTimeout(() => {
-                        this.showNotification('Login to access all features');
-                    }, 2000);
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+            
+            notification.addEventListener('click', () => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            });
+        }
+
+        function openModal(modal) {
+            modal.style.display = 'block';
+            modalOverlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(() => {
+                const firstInput = modal.querySelector('input, select, textarea');
+                if (firstInput) firstInput.focus();
+            }, 100);
+        }
+
+        function closeModal(modal) {
+            modal.style.display = 'none';
+            modalOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            dropdownMenu.classList.remove('show');
+        }
+
+        // ================================================
+        // MAIN INITIALIZATION
+        // ================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cache DOM elements
+            const loginBtn = document.getElementById('loginBtn');
+            const signupBtn = document.getElementById('signupBtn');
+            const startInvestingBtn = document.getElementById('startInvestingBtn');
+            const authButtons = document.getElementById('authButtons');
+            const userMenu = document.getElementById('userMenu');
+            const userButton = document.getElementById('userButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+            const userBalance = document.getElementById('userBalance');
+            
+            const loginModal = document.getElementById('loginModal');
+            const paymentModal = document.getElementById('paymentModal');
+            const contactModal = document.getElementById('contactModal');
+            const modalOverlay = document.getElementById('modalOverlay');
+            
+            const closeLoginModal = document.getElementById('closeLoginModal');
+            const closePaymentModal = document.getElementById('closePaymentModal');
+            const closeContactModal = document.getElementById('closeContactModal');
+            
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const switchToRegister = document.getElementById('switchToRegister');
+            const switchToLogin = document.getElementById('switchToLogin');
+            
+            const profileBtn = document.getElementById('profileBtn');
+            const profileSection = document.querySelector('.profile-section');
+            
+            const logoutBtn = document.getElementById('logoutBtn');
+            const adminPanelBtn = document.getElementById('adminPanelBtn');
+            const adminNavBtn = document.getElementById('adminNavBtn');
+            const adminSection = document.getElementById('admin-section');
+            
+            const modalTelegramBtn = document.getElementById('modalTelegramBtn');
+            const footerTelegramBtn = document.getElementById('footerTelegramBtn');
+            
+            const addBalanceButtons = document.querySelectorAll('.add-balance-btn');
+            const proceedPaymentBtn = document.getElementById('proceedPaymentBtn');
+            const openAdminTelegramBtn = document.getElementById('openAdminTelegramBtn');
+            
+            const investButtons = document.querySelectorAll('.invest-btn');
+            
+            const learnMoreBtn = document.getElementById('learnMoreBtn');
+            
+            const menuToggle = document.getElementById('menuToggle');
+            
+            const adminTabs = document.querySelectorAll('.admin-tab');
+            const adminTabContents = document.querySelectorAll('.admin-tab-content');
+            const usersList = document.getElementById('usersList');
+            const officersList = document.getElementById('officersList');
+            
+            const adminForm = document.getElementById('adminForm');
+            const createOfficerForm = document.getElementById('createOfficerForm');
+            const reduceBalanceForm = document.getElementById('reduceBalanceForm');
+            const promoteBtn = document.getElementById('promoteBtn');
+            const promoteUsername = document.getElementById('promoteUsername');
+
+            // Initialize app
+            app = {
+                storage: storage,
+                currentUser: storage.getCurrentUser(),
+                selectedPaymentAmount: 0,
+                selectedPaymentMethod: 'upi',
+                colorTrading: null,
+                profitDashboard: null,
+                updateUI: function() {
+                    if (this.currentUser) {
+                        authButtons.style.display = 'none';
+                        userMenu.style.display = 'block';
+                        
+                        userName.textContent = this.currentUser.name;
+                        userAvatar.textContent = this.currentUser.name.charAt(0).toUpperCase();
+                        userBalance.textContent = this.currentUser.balance.toLocaleString();
+                        
+                        if (this.currentUser.role === 'admin' || this.currentUser.role === 'officer') {
+                            adminPanelBtn.style.display = 'flex';
+                            adminNavBtn.style.display = 'flex';
+                        } else {
+                            adminPanelBtn.style.display = 'none';
+                            adminNavBtn.style.display = 'none';
+                            adminSection.style.display = 'none';
+                        }
+                    } else {
+                        authButtons.style.display = 'flex';
+                        userMenu.style.display = 'none';
+                        adminPanelBtn.style.display = 'none';
+                        adminNavBtn.style.display = 'none';
+                        adminSection.style.display = 'none';
+                        profileSection.style.display = 'none';
+                    }
                 }
-            }
+            };
+
+            // Event Listeners
+            loginBtn.addEventListener('click', () => openModal(loginModal));
+            signupBtn.addEventListener('click', () => {
+                openModal(loginModal);
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            });
             
-            cacheElements() {
-                this.loginBtn = document.getElementById('loginBtn');
-                this.signupBtn = document.getElementById('signupBtn');
-                this.startInvestingBtn = document.getElementById('startInvestingBtn');
-                this.authButtons = document.getElementById('authButtons');
-                this.userMenu = document.getElementById('userMenu');
-                this.userButton = document.getElementById('userButton');
-                this.dropdownMenu = document.getElementById('dropdownMenu');
-                this.userName = document.getElementById('userName');
-                this.userAvatar = document.getElementById('userAvatar');
-                this.userBalance = document.getElementById('userBalance');
-                
-                this.loginModal = document.getElementById('loginModal');
-                this.paymentModal = document.getElementById('paymentModal');
-                this.contactModal = document.getElementById('contactModal');
-                this.modalOverlay = document.getElementById('modalOverlay');
-                
-                this.closeLoginModal = document.getElementById('closeLoginModal');
-                this.closePaymentModal = document.getElementById('closePaymentModal');
-                this.closeContactModal = document.getElementById('closeContactModal');
-                
-                this.loginForm = document.getElementById('loginForm');
-                this.registerForm = document.getElementById('registerForm');
-                this.switchToRegister = document.getElementById('switchToRegister');
-                this.switchToLogin = document.getElementById('switchToLogin');
-                
-                this.profileBtn = document.getElementById('profileBtn');
-                this.profileSection = document.querySelector('.profile-section');
-                
-                this.logoutBtn = document.getElementById('logoutBtn');
-                this.adminPanelBtn = document.getElementById('adminPanelBtn');
-                this.adminNavBtn = document.getElementById('adminNavBtn');
-                this.adminSection = document.getElementById('admin-section');
-                
-                this.modalTelegramBtn = document.getElementById('modalTelegramBtn');
-                this.footerTelegramBtn = document.getElementById('footerTelegramBtn');
-                
-                this.addBalanceButtons = document.querySelectorAll('.add-balance-btn');
-                this.proceedPaymentBtn = document.getElementById('proceedPaymentBtn');
-                this.openAdminTelegramBtn = document.getElementById('openAdminTelegramBtn');
-                
-                this.investButtons = document.querySelectorAll('.invest-btn');
-                
-                this.learnMoreBtn = document.getElementById('learnMoreBtn');
-                
-                this.menuToggle = document.getElementById('menuToggle');
-                this.headerRight = document.getElementById('headerRight');
-                
-                this.adminTabs = document.querySelectorAll('.admin-tab');
-                this.adminTabContents = document.querySelectorAll('.admin-tab-content');
-                this.usersList = document.getElementById('usersList');
-                this.officersList = document.getElementById('officersList');
-                
-                this.adminForm = document.getElementById('adminForm');
-                this.createOfficerForm = document.getElementById('createOfficerForm');
-                this.reduceBalanceForm = document.getElementById('reduceBalanceForm');
-                this.promoteBtn = document.getElementById('promoteBtn');
-                this.promoteUsername = document.getElementById('promoteUsername');
-            }
-            
-            setupEventListeners() {
-                this.loginBtn.addEventListener('click', () => this.openModal(this.loginModal));
-                this.signupBtn.addEventListener('click', () => {
-                    this.openModal(this.loginModal);
-                    this.loginForm.style.display = 'none';
-                    this.registerForm.style.display = 'block';
-                });
-                
-                this.startInvestingBtn.addEventListener('click', () => {
-                    if (!this.currentUser) {
-                        this.showNotification('Please login first', 'warning');
-                        this.openModal(this.loginModal);
-                    } else if (this.currentUser.balance === 0) {
-                        this.showNotification('Please add balance first', 'warning');
-                        document.getElementById('coin-balance').scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        document.getElementById('ai-trading').scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-                
-                this.switchToRegister.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.loginForm.style.display = 'none';
-                    this.registerForm.style.display = 'block';
-                });
-                
-                this.switchToLogin.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.registerForm.style.display = 'none';
-                    this.loginForm.style.display = 'block';
-                });
-                
-                this.closeLoginModal.addEventListener('click', () => this.closeModal(this.loginModal));
-                this.closePaymentModal.addEventListener('click', () => this.closeModal(this.paymentModal));
-                this.closeContactModal.addEventListener('click', () => this.closeModal(this.contactModal));
-                this.modalOverlay.addEventListener('click', () => {
-                    this.closeModal(this.loginModal);
-                    this.closeModal(this.paymentModal);
-                    this.closeModal(this.contactModal);
-                });
-                
-                this.loginForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleLogin();
-                });
-                
-                this.registerForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleRegister();
-                });
-                
-                this.adminForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleAdminAddBalance();
-                });
-                
-                this.reduceBalanceForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleAdminReduceBalance();
-                });
-                
-                this.createOfficerForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleCreateOfficer();
-                });
-                
-                this.promoteBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.handlePromoteUser();
-                });
-                
-                this.adminTabs.forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        const tabId = tab.dataset.tab;
-                        this.switchAdminTab(tabId);
-                    });
-                });
-                
-                this.userButton.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.dropdownMenu.classList.toggle('show');
-                });
-                
-                document.addEventListener('click', (e) => {
-                    if (!this.userButton.contains(e.target) && !this.dropdownMenu.contains(e.target)) {
-                        this.dropdownMenu.classList.remove('show');
-                    }
-                });
-                
-                this.logoutBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.handleLogout();
-                });
-                
-                this.adminPanelBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showAdminSection();
-                });
-                
-                this.adminNavBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showAdminSection();
-                });
-                
-                this.profileBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showProfile();
-                });
-                
-                this.addBalanceButtons.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const amount = parseInt(e.target.dataset.amount);
-                        this.openPaymentModal(amount);
-                    });
-                });
-                
-                this.proceedPaymentBtn.addEventListener('click', () => {
-                    if (!this.currentUser) {
-                        this.showNotification('Please login first', 'warning');
-                        this.openModal(this.loginModal);
-                        return;
-                    }
-                    
-                    const amount = this.getSelectedAmount();
-                    if (amount > 0) {
-                        this.openPaymentModal(amount);
-                    } else {
-                        this.showNotification('Please select an amount first', 'error');
-                    }
-                });
-                
-                this.openAdminTelegramBtn.addEventListener('click', () => {
-                    const username = this.currentUser ? this.currentUser.username : 'guest';
-                    const amount = this.selectedPaymentAmount;
-                    const message = `Hi Admin, I want to add ₹${amount} balance to my account.\nUsername: ${username}\nPlease add balance after payment.`;
-                    
-                    window.open('tg://openmessage?user_id=6169352386', '_blank');
-                });
-                
-                this.investButtons.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        this.handleInvestmentClick(e.target);
-                    });
-                });
-                
-                this.setupContactButtons();
-                
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        this.closeModal(this.loginModal);
-                        this.closeModal(this.paymentModal);
-                        this.closeModal(this.contactModal);
-                    }
-                });
-                
-                this.learnMoreBtn.addEventListener('click', () => {
+            startInvestingBtn.addEventListener('click', () => {
+                if (!app.currentUser) {
+                    showNotification('Please login first', 'warning');
+                    openModal(loginModal);
+                } else if (app.currentUser.balance === 0) {
+                    showNotification('Please add balance first', 'warning');
+                    document.getElementById('coin-balance').scrollIntoView({ behavior: 'smooth' });
+                } else {
                     document.getElementById('ai-trading').scrollIntoView({ behavior: 'smooth' });
-                });
-                
-                document.querySelectorAll('.coin-option').forEach(option => {
-                    option.addEventListener('click', () => {
-                        document.querySelectorAll('.coin-option').forEach(opt => {
-                            opt.classList.remove('selected');
-                            opt.style.background = 'rgba(0, 0, 0, 0.4)';
-                            opt.style.border = '2px solid rgba(255, 215, 0, 0.2)';
-                        });
-                        option.classList.add('selected');
-                        option.style.background = 'rgba(255, 215, 0, 0.1)';
-                        option.style.border = '2px solid #FFD700';
-                    });
-                });
-                
-                this.menuToggle.addEventListener('click', () => {
-                    const nav = document.getElementById('mainNav');
-                    nav.classList.toggle('show');
-                });
-                
-                document.addEventListener('click', (e) => {
-                    if (!this.menuToggle.contains(e.target) && !document.getElementById('mainNav').contains(e.target)) {
-                        document.getElementById('mainNav').classList.remove('show');
-                    }
-                });
-            }
+                }
+            });
             
-            setupContactButtons() {
-                if (this.footerTelegramBtn) {
-                    this.footerTelegramBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        this.openModal(this.contactModal);
-                    });
+            switchToRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            });
+            
+            switchToLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+            });
+            
+            closeLoginModal.addEventListener('click', () => closeModal(loginModal));
+            closePaymentModal.addEventListener('click', () => closeModal(paymentModal));
+            closeContactModal.addEventListener('click', () => closeModal(contactModal));
+            modalOverlay.addEventListener('click', () => {
+                closeModal(loginModal);
+                closeModal(paymentModal);
+                closeModal(contactModal);
+            });
+            
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('loginUsername').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                
+                if (!username || !password) {
+                    showNotification('Please enter username and password', 'error');
+                    return;
                 }
                 
-                this.modalTelegramBtn.addEventListener('click', () => {
-                    window.open('https://t.me/+7_L2j4iqNow5ZmE1', '_blank');
-                    this.closeModal(this.contactModal);
+                const result = storage.loginUser(username, password);
+                
+                if (result.success) {
+                    app.currentUser = result.user;
+                    app.updateUI();
+                    closeModal(loginModal);
+                    loginForm.reset();
+                    showNotification(result.message, 'success');
+                    
+                    if (app.currentUser.role === 'admin' || app.currentUser.role === 'officer') {
+                        adminPanelBtn.style.display = 'flex';
+                        adminNavBtn.style.display = 'flex';
+                    }
+                    
+                    // Update color trading UI
+                    if (colorTrading) {
+                        colorTrading.updateUI();
+                        colorTrading.updateStats();
+                    }
+                    
+                    // Update profit dashboard
+                    if (profitDashboard) {
+                        profitDashboard.updateProfitStats();
+                    }
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+            
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value.trim();
+                const username = document.getElementById('registerUsername').value.trim();
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                
+                if (!name || !username || !password || !confirmPassword) {
+                    showNotification('Please fill all fields', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showNotification('Passwords do not match', 'error');
+                    return;
+                }
+                
+                const result = storage.registerUser(name, username, password, 'user');
+                
+                if (result.success) {
+                    app.currentUser = result.user;
+                    app.updateUI();
+                    closeModal(loginModal);
+                    registerForm.reset();
+                    showNotification(result.message, 'success');
+                    
+                    registerForm.style.display = 'none';
+                    loginForm.style.display = 'block';
+                    
+                    // Update color trading UI
+                    if (colorTrading) {
+                        colorTrading.updateUI();
+                    }
+                    
+                    // Update profit dashboard
+                    if (profitDashboard) {
+                        profitDashboard.updateProfitStats();
+                    }
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+            
+            userButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('show');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!userButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+            
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                storage.logoutUser();
+                app.currentUser = null;
+                app.updateUI();
+                dropdownMenu.classList.remove('show');
+                showNotification('You have been logged out.', 'info');
+                adminSection.style.display = 'none';
+                profileSection.style.display = 'none';
+                
+                // Update color trading UI
+                if (colorTrading) {
+                    colorTrading.updateUI();
+                    colorTrading.updateStats();
+                }
+                
+                // Update profit dashboard
+                if (profitDashboard) {
+                    profitDashboard.updateProfitStats();
+                }
+            });
+            
+            adminPanelBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showAdminSection();
+            });
+            
+            adminNavBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showAdminSection();
+            });
+            
+            profileBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showProfile();
+            });
+            
+            addBalanceButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const amount = parseInt(e.target.dataset.amount);
+                    openPaymentModal(amount);
                 });
+            });
+            
+            proceedPaymentBtn.addEventListener('click', () => {
+                if (!app.currentUser) {
+                    showNotification('Please login first', 'warning');
+                    openModal(loginModal);
+                    return;
+                }
+                
+                const selectedOption = document.querySelector('.coin-option.selected');
+                const amount = selectedOption ? parseInt(selectedOption.dataset.amount) : 500;
+                
+                if (amount > 0) {
+                    openPaymentModal(amount);
+                } else {
+                    showNotification('Please select an amount first', 'error');
+                }
+            });
+            
+            openAdminTelegramBtn.addEventListener('click', () => {
+                const username = app.currentUser ? app.currentUser.username : 'guest';
+                const amount = app.selectedPaymentAmount;
+                const message = `Hi Admin, I want to add ₹${amount} balance to my account.\nUsername: ${username}\nPlease add balance after payment.`;
+                
+                window.open('tg://openmessage?user_id=6169352386', '_blank');
+            });
+            
+            investButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    handleInvestmentClick(e.target);
+                });
+            });
+            
+            modalTelegramBtn.addEventListener('click', () => {
+                window.open('https://t.me/+7_L2j4iqNow5ZmE1', '_blank');
+                closeModal(contactModal);
+            });
+            
+            footerTelegramBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(contactModal);
+            });
+            
+            learnMoreBtn.addEventListener('click', () => {
+                document.getElementById('ai-trading').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            document.querySelectorAll('.coin-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.coin-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                        opt.style.background = 'rgba(0, 0, 0, 0.4)';
+                        opt.style.border = '2px solid rgba(255, 215, 0, 0.2)';
+                    });
+                    option.classList.add('selected');
+                    option.style.background = 'rgba(255, 215, 0, 0.1)';
+                    option.style.border = '2px solid #FFD700';
+                });
+            });
+            
+            menuToggle.addEventListener('click', () => {
+                const nav = document.getElementById('mainNav');
+                nav.classList.toggle('show');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!menuToggle.contains(e.target) && !document.getElementById('mainNav').contains(e.target)) {
+                    document.getElementById('mainNav').classList.remove('show');
+                }
+            });
+            
+            // Admin functions
+            adminForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                handleAdminAddBalance();
+            });
+            
+            reduceBalanceForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                handleAdminReduceBalance();
+            });
+            
+            createOfficerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                handleCreateOfficer();
+            });
+            
+            promoteBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                handlePromoteUser();
+            });
+            
+            adminTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.dataset.tab;
+                    switchAdminTab(tabId);
+                });
+            });
+            
+            // Initialize components
+            setTimeout(() => {
+                colorTrading = new RealColorTrading(app);
+                app.colorTrading = colorTrading;
+                
+                profitDashboard = new ProfitDashboard(app);
+                app.profitDashboard = profitDashboard;
+                
+                app.updateUI();
+            }, 100);
+            
+            if (!app.currentUser) {
+                setTimeout(() => {
+                    showNotification('Login to access all features');
+                }, 2000);
             }
             
-            switchAdminTab(tabId) {
-                this.adminTabs.forEach(tab => {
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Active nav highlighting
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('section[id]');
+                const navBoxes = document.querySelectorAll('.nav-box');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navBoxes.forEach(box => {
+                    box.classList.remove('active');
+                    if (box.getAttribute('href') === `#${current}`) {
+                        box.classList.add('active');
+                    }
+                });
+            });
+            
+            // Helper functions
+            function openPaymentModal(amount) {
+                app.selectedPaymentAmount = amount;
+                
+                const paymentDetails = document.getElementById('paymentDetails');
+                paymentDetails.innerHTML = `
+                    <div style="background: rgba(0, 0, 0, 0.4); border-radius: 12px; padding: 15px; margin-bottom: 15px; border: 2px solid rgba(255, 215, 0, 0.3);">
+                        <h3 style="font-size: 16px; font-weight: 900; color: white; margin-bottom: 8px;">Add Balance</h3>
+                        <div style="font-size: 32px; font-weight: 900; color: #FFD700; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">₹${amount}</div>
+                        <div style="color: #b8c4d9; font-size: 12px; font-weight: 700;">Username: ${app.currentUser.username}</div>
+                    </div>
+                    <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                        <p style="color: #FFD700; font-weight: 900; font-size: 13px;">
+                            <i class="fas fa-wallet"></i> Your Current Balance: ₹${app.currentUser.balance}
+                        </p>
+                        <p style="color: #FFD700; font-weight: 900; margin-top: 8px; font-size: 13px;">
+                            After Adding: ₹${app.currentUser.balance + amount}
+                        </p>
+                    </div>
+                `;
+                
+                openModal(paymentModal);
+            }
+            
+            function handleInvestmentClick(button) {
+                if (!app.currentUser) {
+                    showNotification('Please login first', 'warning');
+                    openModal(loginModal);
+                    return;
+                }
+                
+                if (app.currentUser.balance === 0) {
+                    showNotification('Please add balance first', 'warning');
+                    document.getElementById('coin-balance').scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+                
+                const plan = button.dataset.plan;
+                const price = parseInt(button.dataset.price);
+                const name = button.closest('.card').querySelector('.card-title').textContent;
+                
+                if (app.currentUser.balance < price) {
+                    showNotification(`Insufficient balance! You need ₹${price}, but you have only ₹${app.currentUser.balance}`, 'error');
+                    document.getElementById('coin-balance').scrollIntoView({ behavior: 'smooth' });
+                    return;
+                }
+                
+                const result = storage.addInvestment(app.currentUser.username, {
+                    name: name,
+                    amount: price,
+                    type: 'package',
+                    id: plan
+                });
+                
+                if (result.success) {
+                    app.currentUser = result.user;
+                    app.updateUI();
+                    if (colorTrading) {
+                        colorTrading.updateUI();
+                    }
+                    if (profitDashboard) {
+                        profitDashboard.updateProfitStats();
+                    }
+                    showNotification(`Successfully invested in ${name} for ₹${price}`, 'success');
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            }
+            
+            function showAdminSection() {
+                if (!app.currentUser || (app.currentUser.role !== 'admin' && app.currentUser.role !== 'officer')) {
+                    showNotification('Access denied. Admin/Officer only.', 'error');
+                    return;
+                }
+                
+                adminSection.style.display = 'block';
+                adminSection.scrollIntoView({ behavior: 'smooth' });
+                
+                switchAdminTab('addBalance');
+            }
+            
+            function switchAdminTab(tabId) {
+                adminTabs.forEach(tab => {
                     tab.classList.remove('active');
                     if (tab.dataset.tab === tabId) {
                         tab.classList.add('active');
                     }
                     
                     if (tabId === 'createOfficer' || tabId === 'manageOfficers') {
-                        if (this.currentUser.role !== 'admin') {
+                        if (app.currentUser.role !== 'admin') {
                             tab.style.display = 'none';
                         } else {
                             tab.style.display = 'block';
@@ -4858,7 +5173,7 @@
                     }
                 });
                 
-                this.adminTabContents.forEach(content => {
+                adminTabContents.forEach(content => {
                     content.classList.remove('active');
                     if (content.id === tabId + 'Tab') {
                         content.classList.add('active');
@@ -4866,15 +5181,15 @@
                 });
                 
                 if (tabId === 'viewUsers') {
-                    this.loadUsersList();
+                    loadUsersList();
                 } else if (tabId === 'manageOfficers') {
-                    this.loadOfficersList();
+                    loadOfficersList();
                 }
             }
             
-            loadUsersList() {
-                if (!this.currentUser || (this.currentUser.role !== 'admin' && this.currentUser.role !== 'officer')) {
-                    this.usersList.innerHTML = `
+            function loadUsersList() {
+                if (!app.currentUser || (app.currentUser.role !== 'admin' && app.currentUser.role !== 'officer')) {
+                    usersList.innerHTML = `
                         <div style="text-align: center; padding: 20px; color: #b8c4d9;">
                             <i class="fas fa-lock" style="font-size: 32px; margin-bottom: 15px; opacity: 0.5; color: #FFD700;"></i>
                             <p style="font-size: 14px; font-weight: 700;">Access denied. Only admins and officers can view users.</p>
@@ -4883,10 +5198,10 @@
                     return;
                 }
                 
-                const users = this.storage.getAllUsers(this.currentUser.role);
+                const users = storage.getAllUsers(app.currentUser.role);
                 
                 if (users.length === 0) {
-                    this.usersList.innerHTML = `
+                    usersList.innerHTML = `
                         <div style="text-align: center; padding: 20px; color: #b8c4d9;">
                             <i class="fas fa-users" style="font-size: 32px; margin-bottom: 15px; opacity: 0.5; color: #FFD700;"></i>
                             <p style="font-size: 14px; font-weight: 700;">No users found.</p>
@@ -4902,9 +5217,9 @@
                     if (user.role === 'admin') roleClass = 'role-admin';
                     
                     let actions = '';
-                    if (this.currentUser.role === 'admin' && user.role === 'user') {
+                    if (app.currentUser.role === 'admin' && user.role === 'user') {
                         actions = `<button class="admin-action-btn promote-btn" data-username="${user.username}">Promote</button>`;
-                    } else if (this.currentUser.role === 'admin' && user.role === 'officer') {
+                    } else if (app.currentUser.role === 'admin' && user.role === 'officer') {
                         actions = `<button class="admin-action-btn demote-btn" data-username="${user.username}">Demote</button>`;
                     }
                     
@@ -4923,26 +5238,26 @@
                     `;
                 });
                 
-                this.usersList.innerHTML = html;
+                usersList.innerHTML = html;
                 
-                this.usersList.querySelectorAll('.promote-btn').forEach(btn => {
+                usersList.querySelectorAll('.promote-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         const username = e.target.dataset.username;
-                        this.promoteUser(username);
+                        promoteUser(username);
                     });
                 });
                 
-                this.usersList.querySelectorAll('.demote-btn').forEach(btn => {
+                usersList.querySelectorAll('.demote-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         const username = e.target.dataset.username;
-                        this.demoteUser(username);
+                        demoteUser(username);
                     });
                 });
             }
             
-            loadOfficersList() {
-                if (!this.currentUser || this.currentUser.role !== 'admin') {
-                    this.officersList.innerHTML = `
+            function loadOfficersList() {
+                if (!app.currentUser || app.currentUser.role !== 'admin') {
+                    officersList.innerHTML = `
                         <div style="text-align: center; padding: 20px; color: #b8c4d9;">
                             <i class="fas fa-lock" style="font-size: 32px; margin-bottom: 15px; opacity: 0.5; color: #FFD700;"></i>
                             <p style="font-size: 14px; font-weight: 700;">Access denied. Only admins can manage officers.</p>
@@ -4951,10 +5266,10 @@
                     return;
                 }
                 
-                const officers = this.storage.getOfficers();
+                const officers = storage.getOfficers();
                 
                 if (officers.length === 0) {
-                    this.officersList.innerHTML = `
+                    officersList.innerHTML = `
                         <div style="text-align: center; padding: 20px; color: #b8c4d9;">
                             <i class="fas fa-user-shield" style="font-size: 32px; margin-bottom: 15px; opacity: 0.5; color: #FFD700;"></i>
                             <p style="font-size: 14px; font-weight: 700;">No officers found.</p>
@@ -4980,107 +5295,27 @@
                     `;
                 });
                 
-                this.officersList.innerHTML = html;
+                officersList.innerHTML = html;
                 
-                this.officersList.querySelectorAll('.demote-btn').forEach(btn => {
+                officersList.querySelectorAll('.demote-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         const username = e.target.dataset.username;
-                        this.demoteUser(username);
+                        demoteUser(username);
                     });
                 });
             }
             
-            handleLogin() {
-                const username = document.getElementById('loginUsername').value.trim();
-                const password = document.getElementById('loginPassword').value;
-                
-                if (!username || !password) {
-                    this.showNotification('Please enter username and password', 'error');
-                    return;
-                }
-                
-                const result = this.storage.loginUser(username, password);
-                
-                if (result.success) {
-                    this.currentUser = result.user;
-                    this.updateUI();
-                    this.closeModal(this.loginModal);
-                    this.loginForm.reset();
-                    this.showNotification(result.message, 'success');
-                    
-                    if (this.currentUser.role === 'admin' || this.currentUser.role === 'officer') {
-                        this.adminPanelBtn.style.display = 'flex';
-                        this.adminNavBtn.style.display = 'flex';
-                    }
-                    
-                    // Update color trading UI
-                    if (this.colorTrading) {
-                        this.colorTrading.updateUI();
-                        this.colorTrading.updateStats();
-                    }
-                    
-                    // Update profit dashboard
-                    if (this.profitDashboard) {
-                        this.profitDashboard.updateProfitStats();
-                    }
-                } else {
-                    this.showNotification(result.message, 'error');
-                }
-            }
-            
-            handleRegister() {
-                const name = document.getElementById('registerName').value.trim();
-                const username = document.getElementById('registerUsername').value.trim();
-                const password = document.getElementById('registerPassword').value;
-                const confirmPassword = document.getElementById('registerConfirmPassword').value;
-                
-                if (!name || !username || !password || !confirmPassword) {
-                    this.showNotification('Please fill all fields', 'error');
-                    return;
-                }
-                
-                if (password !== confirmPassword) {
-                    this.showNotification('Passwords do not match', 'error');
-                    return;
-                }
-                
-                const result = this.storage.registerUser(name, username, password, 'user');
-                
-                if (result.success) {
-                    this.currentUser = result.user;
-                    this.updateUI();
-                    this.closeModal(this.loginModal);
-                    this.registerForm.reset();
-                    this.showNotification(result.message, 'success');
-                    
-                    this.registerForm.style.display = 'none';
-                    this.loginForm.style.display = 'block';
-                    
-                    // Update color trading UI
-                    if (this.colorTrading) {
-                        this.colorTrading.updateUI();
-                    }
-                    
-                    // Update profit dashboard
-                    if (this.profitDashboard) {
-                        this.profitDashboard.updateProfitStats();
-                    }
-                } else {
-                    this.showNotification(result.message, 'error');
-                }
-            }
-            
-            handleAdminAddBalance() {
+            function handleAdminAddBalance() {
                 const username = document.getElementById('adminUsername').value.trim();
                 const amount = parseInt(document.getElementById('adminAmount').value);
                 const reason = document.getElementById('adminReason').value;
                 
                 if (!username || !amount || amount <= 0) {
-                    this.showNotification('Please enter valid username and amount', 'error');
+                    showNotification('Please enter valid username and amount', 'error');
                     return;
                 }
                 
-                if (!this.currentUser || (this.currentUser.role !== 'admin' && this.currentUser.role !== 'officer')) {
+                if (!app.currentUser || (app.currentUser.role !== 'admin' && app.currentUser.role !== 'officer')) {
                     document.getElementById('adminResult').innerHTML = `
                         <div style="color: #ff4757; font-weight: 700;">
                             <i class="fas fa-exclamation-circle"></i> Access denied! Only admins and officers can add balance.
@@ -5089,7 +5324,7 @@
                     return;
                 }
                 
-                const users = this.storage.getUsers();
+                const users = storage.getUsers();
                 if (!users[username]) {
                     document.getElementById('adminResult').innerHTML = `
                         <div style="color: #ff4757; font-weight: 700;">
@@ -5099,7 +5334,7 @@
                     return;
                 }
                 
-                const updatedUser = this.storage.addBalanceToUser(username, amount);
+                const updatedUser = storage.addBalanceToUser(username, amount);
                 if (updatedUser) {
                     document.getElementById('adminResult').innerHTML = `
                         <div style="color: #00d4aa; font-weight: 900;">
@@ -5108,33 +5343,33 @@
                     `;
                     document.getElementById('adminForm').reset();
                     
-                    if (this.currentUser && this.currentUser.username === username) {
-                        this.currentUser = updatedUser;
-                        this.updateUI();
-                        if (this.colorTrading) {
-                            this.colorTrading.updateUI();
+                    if (app.currentUser && app.currentUser.username === username) {
+                        app.currentUser = updatedUser;
+                        app.updateUI();
+                        if (colorTrading) {
+                            colorTrading.updateUI();
                         }
-                        if (this.profitDashboard) {
-                            this.profitDashboard.updateProfitStats();
+                        if (profitDashboard) {
+                            profitDashboard.updateProfitStats();
                         }
                     }
                     
-                    this.loadUsersList();
+                    loadUsersList();
                 }
             }
             
-            handleAdminReduceBalance() {
+            function handleAdminReduceBalance() {
                 const username = document.getElementById('reduceUsername').value.trim();
                 const amount = parseInt(document.getElementById('reduceAmount').value);
                 const reason = document.getElementById('reduceReason').value;
                 const description = document.getElementById('reduceDescription').value;
                 
                 if (!username || !amount || amount <= 0 || !reason) {
-                    this.showNotification('Please fill all required fields', 'error');
+                    showNotification('Please fill all required fields', 'error');
                     return;
                 }
                 
-                if (!this.currentUser || (this.currentUser.role !== 'admin' && this.currentUser.role !== 'officer')) {
+                if (!app.currentUser || (app.currentUser.role !== 'admin' && app.currentUser.role !== 'officer')) {
                     document.getElementById('reduceResult').innerHTML = `
                         <div style="color: #ff4757; font-weight: 700;">
                             <i class="fas fa-exclamation-circle"></i> Access denied! Only admins and officers can reduce balance.
@@ -5143,7 +5378,7 @@
                     return;
                 }
                 
-                const users = this.storage.getUsers();
+                const users = storage.getUsers();
                 if (!users[username]) {
                     document.getElementById('reduceResult').innerHTML = `
                         <div style="color: #ff4757; font-weight: 700;">
@@ -5153,7 +5388,7 @@
                     return;
                 }
                 
-                const result = this.storage.reduceBalanceFromUser(username, amount, reason, description);
+                const result = storage.reduceBalanceFromUser(username, amount, reason, description);
                 if (result && result.success === false) {
                     document.getElementById('reduceResult').innerHTML = `
                         <div style="color: #ff4757; font-weight: 700;">
@@ -5171,23 +5406,23 @@
                     `;
                     document.getElementById('reduceBalanceForm').reset();
                     
-                    if (this.currentUser && this.currentUser.username === username) {
-                        this.currentUser = result;
-                        this.updateUI();
-                        if (this.colorTrading) {
-                            this.colorTrading.updateUI();
+                    if (app.currentUser && app.currentUser.username === username) {
+                        app.currentUser = result;
+                        app.updateUI();
+                        if (colorTrading) {
+                            colorTrading.updateUI();
                         }
-                        if (this.profitDashboard) {
-                            this.profitDashboard.updateProfitStats();
+                        if (profitDashboard) {
+                            profitDashboard.updateProfitStats();
                         }
                     }
                     
-                    this.loadUsersList();
+                    loadUsersList();
                 }
             }
             
-            handleCreateOfficer() {
-                if (!this.currentUser || this.currentUser.role !== 'admin') {
+            function handleCreateOfficer() {
+                if (!app.currentUser || app.currentUser.role !== 'admin') {
                     document.getElementById('officerResult').innerHTML = `
                         <div style="color: #ff4757; font-weight: 700;">
                             <i class="fas fa-exclamation-circle"></i> Only admins can create officers!
@@ -5219,7 +5454,7 @@
                     return;
                 }
                 
-                const result = this.storage.registerUser(name, username, password, 'officer');
+                const result = storage.registerUser(name, username, password, 'officer');
                 
                 if (result.success) {
                     document.getElementById('officerResult').innerHTML = `
@@ -5231,7 +5466,7 @@
                     `;
                     document.getElementById('createOfficerForm').reset();
                     
-                    this.loadOfficersList();
+                    loadOfficersList();
                 } else {
                     document.getElementById('officerResult').innerHTML = `
                         <div style="color: #ff4757; font-weight: 700;">
@@ -5241,191 +5476,103 @@
                 }
             }
             
-            handlePromoteUser() {
-                const username = this.promoteUsername.value.trim();
+            function handlePromoteUser() {
+                const username = promoteUsername.value.trim();
                 
                 if (!username) {
-                    this.showNotification('Please enter a username', 'error');
+                    showNotification('Please enter a username', 'error');
                     return;
                 }
                 
-                this.promoteUser(username);
-                this.promoteUsername.value = '';
+                promoteUser(username);
+                promoteUsername.value = '';
             }
             
-            promoteUser(username) {
-                if (!this.currentUser || this.currentUser.role !== 'admin') {
-                    this.showNotification('Only admins can promote users', 'error');
+            function promoteUser(username) {
+                if (!app.currentUser || app.currentUser.role !== 'admin') {
+                    showNotification('Only admins can promote users', 'error');
                     return;
                 }
                 
                 if (username === 'ABHAY') {
-                    this.showNotification('Cannot change admin role', 'error');
+                    showNotification('Cannot change admin role', 'error');
                     return;
                 }
                 
-                const result = this.storage.promoteToOfficer(username);
+                const result = storage.promoteToOfficer(username);
                 
                 if (result.success) {
-                    this.showNotification(result.message, 'success');
-                    this.loadUsersList();
-                    this.loadOfficersList();
+                    showNotification(result.message, 'success');
+                    loadUsersList();
+                    loadOfficersList();
                     
-                    if (this.currentUser.username === username) {
-                        this.currentUser = result.user;
-                        this.updateUI();
+                    if (app.currentUser.username === username) {
+                        app.currentUser = result.user;
+                        app.updateUI();
                     }
                 } else {
-                    this.showNotification(result.message, 'error');
+                    showNotification(result.message, 'error');
                 }
             }
             
-            demoteUser(username) {
-                if (!this.currentUser || this.currentUser.role !== 'admin') {
-                    this.showNotification('Only admins can demote officers', 'error');
+            function demoteUser(username) {
+                if (!app.currentUser || app.currentUser.role !== 'admin') {
+                    showNotification('Only admins can demote officers', 'error');
                     return;
                 }
                 
                 if (username === 'ABHAY') {
-                    this.showNotification('Cannot demote admin', 'error');
+                    showNotification('Cannot demote admin', 'error');
                     return;
                 }
                 
-                const result = this.storage.demoteToUser(username);
+                const result = storage.demoteToUser(username);
                 
                 if (result.success) {
-                    this.showNotification(result.message, 'success');
-                    this.loadUsersList();
-                    this.loadOfficersList();
+                    showNotification(result.message, 'success');
+                    loadUsersList();
+                    loadOfficersList();
                     
-                    if (this.currentUser.username === username) {
-                        this.currentUser = result.user;
-                        this.updateUI();
+                    if (app.currentUser.username === username) {
+                        app.currentUser = result.user;
+                        app.updateUI();
                     }
                 } else {
-                    this.showNotification(result.message, 'error');
+                    showNotification(result.message, 'error');
                 }
             }
             
-            showAdminSection() {
-                if (!this.currentUser || (this.currentUser.role !== 'admin' && this.currentUser.role !== 'officer')) {
-                    this.showNotification('Access denied. Admin/Officer only.', 'error');
+            function showProfile() {
+                if (!app.currentUser) {
+                    showNotification('Please login to view profile', 'warning');
+                    openModal(loginModal);
                     return;
                 }
                 
-                this.adminSection.style.display = 'block';
-                this.adminSection.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('profileName').textContent = app.currentUser.name;
+                document.getElementById('profileUsername').textContent = '@' + app.currentUser.username;
+                document.getElementById('profileRole').textContent = app.currentUser.role.toUpperCase();
+                document.getElementById('profileRole').className = 'profile-role role-' + app.currentUser.role;
+                document.getElementById('profileAvatar').textContent = app.currentUser.name.charAt(0).toUpperCase();
+                document.getElementById('profileBalance').textContent = app.currentUser.balance;
                 
-                this.switchAdminTab('addBalance');
-            }
-            
-            handleInvestmentClick(button) {
-                if (!this.currentUser) {
-                    this.showNotification('Please login first', 'warning');
-                    this.openModal(this.loginModal);
-                    return;
-                }
-                
-                if (this.currentUser.balance === 0) {
-                    this.showNotification('Please add balance first', 'warning');
-                    document.getElementById('coin-balance').scrollIntoView({ behavior: 'smooth' });
-                    return;
-                }
-                
-                const plan = button.dataset.plan;
-                const price = parseInt(button.dataset.price);
-                const name = button.closest('.card').querySelector('.card-title').textContent;
-                
-                if (this.currentUser.balance < price) {
-                    this.showNotification(`Insufficient balance! You need ₹${price}, but you have only ₹${this.currentUser.balance}`, 'error');
-                    document.getElementById('coin-balance').scrollIntoView({ behavior: 'smooth' });
-                    return;
-                }
-                
-                const result = this.storage.addInvestment(this.currentUser.username, {
-                    name: name,
-                    amount: price,
-                    type: 'package',
-                    id: plan
-                });
-                
-                if (result.success) {
-                    this.currentUser = result.user;
-                    this.updateUI();
-                    if (this.colorTrading) {
-                        this.colorTrading.updateUI();
-                    }
-                    if (this.profitDashboard) {
-                        this.profitDashboard.updateProfitStats();
-                    }
-                    this.showNotification(`Successfully invested in ${name} for ₹${price}`, 'success');
-                } else {
-                    this.showNotification(result.message, 'error');
-                }
-            }
-            
-            getSelectedAmount() {
-                const selectedOption = document.querySelector('.coin-option.selected');
-                if (selectedOption) {
-                    return parseInt(selectedOption.dataset.amount);
-                }
-                return 0;
-            }
-            
-            openPaymentModal(amount) {
-                this.selectedPaymentAmount = amount;
-                
-                const paymentDetails = document.getElementById('paymentDetails');
-                paymentDetails.innerHTML = `
-                    <div style="background: rgba(0, 0, 0, 0.4); border-radius: 12px; padding: 15px; margin-bottom: 15px; border: 2px solid rgba(255, 215, 0, 0.3);">
-                        <h3 style="font-size: 16px; font-weight: 900; color: white; margin-bottom: 8px;">Add Balance</h3>
-                        <div style="font-size: 32px; font-weight: 900; color: #FFD700; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">₹${amount}</div>
-                        <div style="color: #b8c4d9; font-size: 12px; font-weight: 700;">Username: ${this.currentUser.username}</div>
-                    </div>
-                    <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 10px; padding: 15px; margin-bottom: 15px;">
-                        <p style="color: #FFD700; font-weight: 900; font-size: 13px;">
-                            <i class="fas fa-wallet"></i> Your Current Balance: ₹${this.currentUser.balance}
-                        </p>
-                        <p style="color: #FFD700; font-weight: 900; margin-top: 8px; font-size: 13px;">
-                            After Adding: ₹${this.currentUser.balance + amount}
-                        </p>
-                    </div>
-                `;
-                
-                this.openModal(this.paymentModal);
-            }
-            
-            showProfile() {
-                if (!this.currentUser) {
-                    this.showNotification('Please login to view profile', 'warning');
-                    this.openModal(this.loginModal);
-                    return;
-                }
-                
-                document.getElementById('profileName').textContent = this.currentUser.name;
-                document.getElementById('profileUsername').textContent = '@' + this.currentUser.username;
-                document.getElementById('profileRole').textContent = this.currentUser.role.toUpperCase();
-                document.getElementById('profileRole').className = 'profile-role role-' + this.currentUser.role;
-                document.getElementById('profileAvatar').textContent = this.currentUser.name.charAt(0).toUpperCase();
-                document.getElementById('profileBalance').textContent = this.currentUser.balance;
-                
-                const investments = this.currentUser.investments ? this.currentUser.investments.length : 0;
-                const games = this.currentUser.color_games ? this.currentUser.color_games.length : 0;
-                const wins = this.currentUser.color_games ? this.currentUser.color_games.filter(g => g.win).length : 0;
+                const investments = app.currentUser.investments ? app.currentUser.investments.length : 0;
+                const games = app.currentUser.color_games ? app.currentUser.color_games.length : 0;
+                const wins = app.currentUser.color_games ? app.currentUser.color_games.filter(g => g.win).length : 0;
                 
                 document.getElementById('profileInvestments').textContent = investments;
                 document.getElementById('profileGames').textContent = games;
                 document.getElementById('profileWins').textContent = wins;
                 
-                this.loadProfileActivity();
+                loadProfileActivity();
                 
-                this.profileSection.style.display = 'block';
-                this.profileSection.scrollIntoView({ behavior: 'smooth' });
+                profileSection.style.display = 'block';
+                profileSection.scrollIntoView({ behavior: 'smooth' });
             }
             
-            loadProfileActivity() {
+            function loadProfileActivity() {
                 const activityContainer = document.getElementById('profileActivity');
-                const user = this.currentUser;
+                const user = app.currentUser;
                 
                 const allActivities = [
                     ...(user.investments || []).map(inv => ({ 
@@ -5487,161 +5634,7 @@
                 
                 activityContainer.innerHTML = html;
             }
-            
-            handleLogout() {
-                this.storage.logoutUser();
-                this.currentUser = null;
-                this.updateUI();
-                this.dropdownMenu.classList.remove('show');
-                this.showNotification('You have been logged out.', 'info');
-                this.adminSection.style.display = 'none';
-                this.profileSection.style.display = 'none';
-                
-                // Update color trading UI
-                if (this.colorTrading) {
-                    this.colorTrading.updateUI();
-                    this.colorTrading.updateStats();
-                }
-                
-                // Update profit dashboard
-                if (this.profitDashboard) {
-                    this.profitDashboard.updateProfitStats();
-                }
-            }
-            
-            updateUI() {
-                if (this.currentUser) {
-                    this.authButtons.style.display = 'none';
-                    this.userMenu.style.display = 'block';
-                    
-                    this.userName.textContent = this.currentUser.name;
-                    this.userAvatar.textContent = this.currentUser.name.charAt(0).toUpperCase();
-                    this.userBalance.textContent = this.currentUser.balance.toLocaleString();
-                    
-                    if (this.currentUser.role === 'admin' || this.currentUser.role === 'officer') {
-                        this.adminPanelBtn.style.display = 'flex';
-                        this.adminNavBtn.style.display = 'flex';
-                    } else {
-                        this.adminPanelBtn.style.display = 'none';
-                        this.adminNavBtn.style.display = 'none';
-                        this.adminSection.style.display = 'none';
-                    }
-                } else {
-                    this.authButtons.style.display = 'flex';
-                    this.userMenu.style.display = 'none';
-                    this.adminPanelBtn.style.display = 'none';
-                    this.adminNavBtn.style.display = 'none';
-                    this.adminSection.style.display = 'none';
-                    this.profileSection.style.display = 'none';
-                }
-            }
-            
-            openModal(modal) {
-                modal.style.display = 'block';
-                this.modalOverlay.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-                
-                setTimeout(() => {
-                    const firstInput = modal.querySelector('input, select, textarea');
-                    if (firstInput) firstInput.focus();
-                }, 100);
-            }
-            
-            closeModal(modal) {
-                modal.style.display = 'none';
-                this.modalOverlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                this.dropdownMenu.classList.remove('show');
-            }
-            
-            showNotification(message, type = 'info') {
-                document.querySelectorAll('.notification').forEach(n => n.remove());
-                
-                const notification = document.createElement('div');
-                notification.className = 'notification';
-                notification.innerHTML = message;
-                
-                if (type === 'error') {
-                    notification.style.background = 'linear-gradient(45deg, #ff4757, #ff3838)';
-                } else if (type === 'success') {
-                    notification.style.background = 'var(--gold-gradient)';
-                } else if (type === 'warning') {
-                    notification.style.background = 'linear-gradient(45deg, #ff9f43, #ff8c00)';
-                } else if (type === 'info') {
-                    notification.style.background = 'linear-gradient(45deg, #4169E1, #3742fa)';
-                }
-                
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.style.animation = 'slideOut 0.3s ease';
-                    setTimeout(() => notification.remove(), 300);
-                }, 5000);
-                
-                notification.addEventListener('click', () => {
-                    notification.style.animation = 'slideOut 0.3s ease';
-                    setTimeout(() => notification.remove(), 300);
-                });
-            }
-        }
-
-        // ================================================
-        // INITIALIZE APP
-        // ================================================
-
-        document.addEventListener('DOMContentLoaded', () => {
-            window.aiTradeXApp = new AI_TradeX_App();
-            
-            setTimeout(() => {
-                const firstCoinOption = document.querySelector('.coin-option');
-                if (firstCoinOption) {
-                    firstCoinOption.classList.add('selected');
-                    firstCoinOption.style.background = 'rgba(255, 215, 0, 0.1)';
-                    firstCoinOption.style.border = '2px solid #FFD700';
-                }
-                
-                // Select first withdrawal amount
-                const firstWithdrawalAmount = document.querySelector('.withdrawal-amount');
-                if (firstWithdrawalAmount) {
-                    firstWithdrawalAmount.classList.add('selected');
-                    firstWithdrawalAmount.style.background = 'rgba(255, 215, 0, 0.1)';
-                    firstWithdrawalAmount.style.border = '2px solid #FFD700';
-                }
-            }, 500);
-            
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            window.addEventListener('scroll', () => {
-                const sections = document.querySelectorAll('section[id]');
-                const navBoxes = document.querySelectorAll('.nav-box');
-                
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (scrollY >= (sectionTop - 100)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navBoxes.forEach(box => {
-                    box.classList.remove('active');
-                    if (box.getAttribute('href') === `#${current}`) {
-                        box.classList.add('active');
-                    }
-                });
-            });
         });
     </script>
 </body>
-</html>
+    </html>
