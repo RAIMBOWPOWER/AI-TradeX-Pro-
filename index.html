@@ -1934,8 +1934,8 @@
                 padding: 20px;
                 flex-direction: column;
                 gap: 12px;
-                border-bottom: 2px solid rgba(0, 102, 204, 0.3);
                 display: none;
+                border-bottom: 2px solid rgba(0, 102, 204, 0.3);
             }
             
             nav.show {
@@ -2403,7 +2403,7 @@
             <div class="form-group">
                 <label class="form-label">Your Referral Link</label>
                 <div style="display: flex; gap: 10px;">
-                    <input type="text" class="form-input" id="referModalLink" readonly value="https://tradexpro.com/ref=guest">
+                    <input type="text" class="form-input" id="referModalLink" readonly value="https://raimbowpower.github.io/AI-TradeX-Pro-/">
                     <button class="btn-secondary" id="copyReferModalBtn">
                         <i class="fas fa-copy"></i> Copy
                     </button>
@@ -2413,7 +2413,7 @@
             <div class="form-group">
                 <label class="form-label">Your Referral Code</label>
                 <div style="display: flex; gap: 10px;">
-                    <input type="text" class="form-input" id="referModalCode" readonly value="GUESTREF">
+                    <input type="text" class="form-input" id="referModalCode" readonly value="TRADEXREF">
                     <button class="btn-secondary" id="shareReferModalBtn">
                         <i class="fas fa-share-alt"></i> Share
                     </button>
@@ -2977,7 +2977,7 @@
                 <div class="form-group">
                     <label class="form-label">Your Personal Referral Link</label>
                     <div style="display: flex; gap: 10px;">
-                        <input type="text" class="form-input" id="referralLink" readonly value="https://tradexpro.com/ref=guest">
+                        <input type="text" class="form-input" id="referralLink" readonly value="https://raimbowpower.github.io/AI-TradeX-Pro-/">
                         <button class="btn-secondary" id="copyReferralBtn">
                             <i class="fas fa-copy"></i> Copy
                         </button>
@@ -2988,7 +2988,7 @@
                 <div class="form-group">
                     <label class="form-label">Your Referral Code</label>
                     <div style="display: flex; gap: 10px;">
-                        <input type="text" class="form-input" id="referralCode" readonly value="GUESTREF">
+                        <input type="text" class="form-input" id="referralCode" readonly value="TRADEXREF">
                         <button class="btn-secondary" id="shareReferralBtn">
                             <i class="fas fa-share-alt"></i> Share
                         </button>
@@ -4623,7 +4623,71 @@
                 document.execCommand('copy');
                 showNotification('Referral link copied to clipboard!', 'success');
             });
+            
+            // Share referral link buttons
+            document.getElementById('shareReferralBtn').addEventListener('click', () => {
+                const link = 'https://raimbowpower.github.io/AI-TradeX-Pro-/';
+                const text = 'Join TradeX Pro - Premium AI Trading Platform with 2.5% Daily Returns! Use my referral link: ' + link;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'TradeX Pro Referral',
+                        text: text,
+                        url: link
+                    }).then(() => {
+                        showNotification('Successfully shared referral link!', 'success');
+                    }).catch(err => {
+                        console.log('Error sharing:', err);
+                        fallbackShare(link, text);
+                    });
+                } else {
+                    fallbackShare(link, text);
+                }
+            });
+            
+            document.getElementById('shareReferModalBtn').addEventListener('click', () => {
+                const link = 'https://raimbowpower.github.io/AI-TradeX-Pro-/';
+                const text = 'Join TradeX Pro - Premium AI Trading Platform with 2.5% Daily Returns! Use my referral link: ' + link;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'TradeX Pro Referral',
+                        text: text,
+                        url: link
+                    }).then(() => {
+                        showNotification('Successfully shared referral link!', 'success');
+                    }).catch(err => {
+                        console.log('Error sharing:', err);
+                        fallbackShare(link, text);
+                    });
+                } else {
+                    fallbackShare(link, text);
+                }
+            });
+            
+            function fallbackShare(link, text) {
+                // Create a temporary textarea to copy the link
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                // Try to open WhatsApp or Telegram
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+                const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent('Join TradeX Pro - Premium AI Trading Platform!')}`;
+                
+                // Ask user which platform to use
+                if (confirm('Link copied to clipboard! Open WhatsApp to share?')) {
+                    window.open(whatsappUrl, '_blank');
+                } else if (confirm('Open Telegram to share?')) {
+                    window.open(telegramUrl, '_blank');
+                }
+                
+                showNotification('Referral link copied and ready to share!', 'success');
+            }
         }
     </script>
 </body>
-                    </html>
+</html>
