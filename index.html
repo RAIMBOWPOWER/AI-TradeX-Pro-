@@ -2117,6 +2117,140 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
         }
+        
+        /* ADMIN USERS TABLE */
+        .admin-users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .admin-users-table th {
+            background: rgba(0, 102, 204, 0.3);
+            color: white;
+            font-size: 12px;
+            font-weight: 900;
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 2px solid rgba(0, 102, 204, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .admin-users-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+            font-size: 12px;
+            color: #b8c4d9;
+        }
+        
+        .admin-users-table tr:hover {
+            background: rgba(0, 102, 204, 0.1);
+        }
+        
+        .user-password {
+            font-family: 'Courier New', monospace;
+            color: #00ccff;
+            font-weight: 700;
+        }
+        
+        .user-coin {
+            color: #00cc88;
+            font-weight: 900;
+        }
+        
+        .admin-search {
+            margin-bottom: 20px;
+        }
+        
+        .admin-search input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 102, 204, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .admin-search input:focus {
+            outline: none;
+            border-color: #00ccff;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-stat-box {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 102, 204, 0.2);
+        }
+        
+        .admin-stat-value {
+            font-size: 24px;
+            font-weight: 900;
+            color: #00ccff;
+            display: block;
+        }
+        
+        .admin-stat-label {
+            font-size: 10px;
+            color: #b8c4d9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .export-btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        /* ADMIN PERSISTENT NOTIFICATION */
+        .persistent-notification {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, rgba(10, 25, 49, 0.98), rgba(0, 102, 204, 0.9));
+            border-radius: 12px;
+            padding: 25px;
+            width: 400px;
+            max-width: 90%;
+            z-index: 3001;
+            box-shadow: var(--shadow-lg);
+            animation: slideIn 0.3s ease;
+            border: 3px solid rgba(0, 102, 204, 0.3);
+            cursor: default;
+        }
+        
+        .persistent-notification .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: #b8c4d9;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .persistent-notification .close-btn:hover {
+            color: #00ccff;
+            transform: rotate(90deg);
+        }
+        
+        .persistent-notification-content {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -2369,7 +2503,7 @@
         </div>
     </div>
 
-    <!-- REFER MODAL -->
+    <!-- REFER MODAL - UPDATED -->
     <div class="modal" id="referModal">
         <div class="modal-header">
             <div class="modal-title">
@@ -2400,22 +2534,13 @@
                 </ul>
             </div>
             
+            <!-- Only copy button, no share button -->
             <div class="form-group">
-                <label class="form-label">Your Referral Link</label>
+                <label class="form-label">Your Personal Referral Link</label>
                 <div style="display: flex; gap: 10px;">
-                    <input type="text" class="form-input" id="referModalLink" readonly value="https://raimbowpower.github.io/AI-TradeX-Pro-/">
+                    <input type="text" class="form-input" id="referModalCode" readonly>
                     <button class="btn-secondary" id="copyReferModalBtn">
                         <i class="fas fa-copy"></i> Copy
-                    </button>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Your Referral Code</label>
-                <div style="display: flex; gap: 10px;">
-                    <input type="text" class="form-input" id="referModalCode" readonly value="TRADEXREF">
-                    <button class="btn-secondary" id="shareReferModalBtn">
-                        <i class="fas fa-share-alt"></i> Share
                     </button>
                 </div>
             </div>
@@ -2951,7 +3076,7 @@
                 </div>
             </div>
 
-            <!-- My Referrals Tab -->
+            <!-- My Referrals Tab - UPDATED -->
             <div id="referralsTab" class="admin-tab-content">
                 <div id="referralsStats" style="background: rgba(0, 0, 0, 0.4); border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(0, 102, 204, 0.2);">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
@@ -2973,24 +3098,13 @@
                     </div>
                 </div>
 
-                <!-- Referral Link -->
+                <!-- Referral Link - Only copy button, no share button -->
                 <div class="form-group">
                     <label class="form-label">Your Personal Referral Link</label>
                     <div style="display: flex; gap: 10px;">
-                        <input type="text" class="form-input" id="referralLink" readonly value="https://raimbowpower.github.io/AI-TradeX-Pro-/">
+                        <input type="text" class="form-input" id="referralLink" readonly>
                         <button class="btn-secondary" id="copyReferralBtn">
                             <i class="fas fa-copy"></i> Copy
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Referral Code -->
-                <div class="form-group">
-                    <label class="form-label">Your Referral Code</label>
-                    <div style="display: flex; gap: 10px;">
-                        <input type="text" class="form-input" id="referralCode" readonly value="TRADEXREF">
-                        <button class="btn-secondary" id="shareReferralBtn">
-                            <i class="fas fa-share-alt"></i> Share
                         </button>
                     </div>
                 </div>
@@ -3169,7 +3283,7 @@
             </div>
         </section>
 
-        <!-- ADMIN SECTION -->
+        <!-- ADMIN SECTION WITH NEW FEATURES -->
         <section class="admin-section" id="admin-section">
             <h2 class="section-title">
                 <i class="fas fa-shield-alt"></i> Admin Panel
@@ -3177,15 +3291,68 @@
             <p style="color: #b8c4d9; font-size: 14px; margin-bottom: 25px; font-style: italic;">Manage users, add balance, and oversee platform operations</p>
             
             <div class="admin-tabs">
-                <button class="admin-tab active" data-tab="addBalance">Add Balance</button>
+                <button class="admin-tab active" data-tab="viewAllUsers">All Users</button>
+                <button class="admin-tab" data-tab="addBalance">Add Balance</button>
                 <button class="admin-tab" data-tab="reduceBalance">Reduce Balance</button>
                 <button class="admin-tab" data-tab="viewUsers">View Users</button>
                 <button class="admin-tab" data-tab="createOfficer">Create Officer</button>
                 <button class="admin-tab" data-tab="manageOfficers">Manage Officers</button>
             </div>
             
+            <!-- NEW: View All Users Tab with Username, Password, and Coin Balance -->
+            <div class="admin-tab-content active" id="viewAllUsersTab">
+                <div class="admin-stats">
+                    <div class="admin-stat-box">
+                        <span class="admin-stat-value" id="totalUsersCount">0</span>
+                        <span class="admin-stat-label">Total Users</span>
+                    </div>
+                    <div class="admin-stat-box">
+                        <span class="admin-stat-value" id="totalCoinsCount">₹0</span>
+                        <span class="admin-stat-label">Total Coins</span>
+                    </div>
+                    <div class="admin-stat-box">
+                        <span class="admin-stat-value" id="activeUsersCount">0</span>
+                        <span class="admin-stat-label">Active Today</span>
+                    </div>
+                    <div class="admin-stat-box">
+                        <span class="admin-stat-value" id="newUsersCount">0</span>
+                        <span class="admin-stat-label">New Today</span>
+                    </div>
+                </div>
+                
+                <div class="admin-search">
+                    <input type="text" id="adminSearchUsers" placeholder="Search users by username, name, or role...">
+                </div>
+                
+                <div style="overflow-x: auto;">
+                    <table class="admin-users-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Coins (₹)</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allUsersTable">
+                            <!-- All users data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="form-buttons">
+                    <button class="btn-primary export-btn" id="exportUsersBtn">
+                        <i class="fas fa-download"></i> Export Users Data
+                    </button>
+                </div>
+            </div>
+            
             <!-- Add Balance Tab -->
-            <div class="admin-tab-content active" id="addBalanceTab">
+            <div class="admin-tab-content" id="addBalanceTab">
                 <form id="adminForm">
                     <div class="form-group">
                         <label class="form-label">Username</label>
@@ -3375,6 +3542,16 @@
             </p>
         </div>
     </footer>
+
+    <!-- PERSISTENT NOTIFICATION FOR ADMIN VIEW/EDIT -->
+    <div class="persistent-notification" id="persistentNotification" style="display: none;">
+        <button class="close-btn" id="closePersistentNotification">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="persistent-notification-content" id="persistentNotificationContent">
+            <!-- Content will be inserted here -->
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -3925,7 +4102,7 @@
         }
 
         // ================================================
-        // STORAGE SYSTEM
+        // STORAGE SYSTEM WITH PLAIN TEXT PASSWORDS FOR ADMIN VIEW
         // ================================================
         class TradeXStorage {
             constructor() {
@@ -3947,7 +4124,7 @@
                     users['ABHAY'] = {
                         username: 'ABHAY',
                         name: 'Abhay Admin',
-                        password: this.hashPassword('ABHAYxJOD'),
+                        password: 'ABHAYxJOD', // Plain text password for admin
                         balance: 9999999,
                         role: 'admin',
                         joined: new Date().toISOString(),
@@ -3972,20 +4149,6 @@
                 localStorage.setItem(this.prefix + 'users', JSON.stringify(users));
             }
             
-            hashPassword(password) {
-                let hash = 0;
-                for (let i = 0; i < password.length; i++) {
-                    const char = password.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash;
-                }
-                return hash.toString();
-            }
-            
-            verifyPassword(storedHash, password) {
-                return storedHash === this.hashPassword(password);
-            }
-            
             registerUser(name, username, password, role = 'user', referralCode = null) {
                 const users = this.getUsers();
                 
@@ -4001,10 +4164,11 @@
                     }
                 }
                 
+                // Store password in plain text for admin view
                 users[username] = {
                     username: username,
                     name: name,
-                    password: this.hashPassword(password),
+                    password: password, // Plain text password
                     balance: 0,
                     role: role,
                     joined: new Date().toISOString(),
@@ -4047,7 +4211,8 @@
                     return { success: false, message: 'User not found' };
                 }
                 
-                if (!this.verifyPassword(user.password, password)) {
+                // Compare plain text passwords
+                if (user.password !== password) {
                     return { success: false, message: 'Incorrect password' };
                 }
                 
@@ -4116,6 +4281,65 @@
                     deposits: user.deposits
                 });
             }
+            
+            // NEW: Get all users for admin view
+            getAllUsers() {
+                return this.getUsers();
+            }
+            
+            // NEW: Search users
+            searchUsers(query) {
+                const users = this.getUsers();
+                const results = [];
+                
+                for (const username in users) {
+                    const user = users[username];
+                    if (
+                        username.toLowerCase().includes(query.toLowerCase()) ||
+                        user.name.toLowerCase().includes(query.toLowerCase()) ||
+                        user.role.toLowerCase().includes(query.toLowerCase())
+                    ) {
+                        results.push({...user, username});
+                    }
+                }
+                
+                return results;
+            }
+            
+            // NEW: Get admin stats
+            getAdminStats() {
+                const users = this.getUsers();
+                let totalUsers = 0;
+                let totalCoins = 0;
+                let activeToday = 0;
+                let newToday = 0;
+                
+                const today = new Date().toDateString();
+                
+                for (const username in users) {
+                    totalUsers++;
+                    totalCoins += users[username].balance || 0;
+                    
+                    // Check if user was active today
+                    const lastLogin = new Date(users[username].last_login).toDateString();
+                    if (lastLogin === today) {
+                        activeToday++;
+                    }
+                    
+                    // Check if user joined today
+                    const joinedDate = new Date(users[username].joined).toDateString();
+                    if (joinedDate === today) {
+                        newToday++;
+                    }
+                }
+                
+                return {
+                    totalUsers,
+                    totalCoins,
+                    activeToday,
+                    newToday
+                };
+            }
         }
 
         // ================================================
@@ -4149,6 +4373,20 @@
                 notification.style.animation = 'slideOut 0.3s ease';
                 setTimeout(() => notification.remove(), 300);
             });
+        }
+
+        // Persistent notification for admin view/edit
+        function showPersistentNotification(content) {
+            const notification = document.getElementById('persistentNotification');
+            const contentDiv = document.getElementById('persistentNotificationContent');
+            
+            contentDiv.innerHTML = content;
+            notification.style.display = 'block';
+            
+            // Close button event
+            document.getElementById('closePersistentNotification').onclick = function() {
+                notification.style.display = 'none';
+            };
         }
 
         function openModal(modal) {
@@ -4195,6 +4433,14 @@
                             adminPanelBtn.style.display = 'flex';
                             adminNavBtn.style.display = 'flex';
                         }
+                        
+                        // Update referral links
+                        updateReferralLinks();
+                        
+                        // Update admin panel if visible
+                        if (this.currentUser.role === 'admin') {
+                            loadAllUsersForAdmin();
+                        }
                     } else {
                         authButtons.style.display = 'flex';
                         userMenu.style.display = 'none';
@@ -4221,6 +4467,255 @@
             }
         });
 
+        // ================================================
+        // REFERRAL LINKS MANAGEMENT
+        // ================================================
+        function updateReferralLinks() {
+            if (!app.currentUser) return;
+            
+            const referralLink = `https://raimbowpower.github.io/AI-TradeX-Pro-/?ref=${app.currentUser.username}`;
+            
+            // Update referral link in deposit system
+            const referralLinkInput = document.getElementById('referralLink');
+            if (referralLinkInput) {
+                referralLinkInput.value = referralLink;
+            }
+            
+            // Update referral link in modal
+            const referModalCode = document.getElementById('referModalCode');
+            if (referModalCode) {
+                referModalCode.value = referralLink;
+            }
+        }
+
+        // ================================================
+        // ADMIN PANEL FUNCTIONS - VIEW ALL USERS WITH PASSWORDS
+        // ================================================
+        function loadAllUsersForAdmin() {
+            if (!app.currentUser || app.currentUser.role !== 'admin') return;
+            
+            const users = app.storage.getAllUsers();
+            const stats = app.storage.getAdminStats();
+            
+            // Update stats
+            document.getElementById('totalUsersCount').textContent = stats.totalUsers;
+            document.getElementById('totalCoinsCount').textContent = `₹${stats.totalCoins.toLocaleString()}`;
+            document.getElementById('activeUsersCount').textContent = stats.activeToday;
+            document.getElementById('newUsersCount').textContent = stats.newToday;
+            
+            // Clear table
+            const tableBody = document.getElementById('allUsersTable');
+            tableBody.innerHTML = '';
+            
+            let userCount = 1;
+            for (const username in users) {
+                const user = users[username];
+                const row = document.createElement('tr');
+                
+                // Format date
+                const joinedDate = new Date(user.joined);
+                const formattedDate = joinedDate.toLocaleDateString('en-IN', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                });
+                
+                // Determine role badge color
+                let roleBadge = '';
+                if (user.role === 'admin') {
+                    roleBadge = '<span style="background: rgba(255, 71, 87, 0.2); color: #ff4757; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">ADMIN</span>';
+                } else if (user.role === 'officer') {
+                    roleBadge = '<span style="background: rgba(255, 170, 68, 0.2); color: #ffaa44; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">OFFICER</span>';
+                } else {
+                    roleBadge = '<span style="background: rgba(0, 204, 136, 0.2); color: #00cc88; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">USER</span>';
+                }
+                
+                row.innerHTML = `
+                    <td>${userCount}</td>
+                    <td><strong>${username}</strong></td>
+                    <td class="user-password">${user.password}</td>
+                    <td class="user-coin">₹${user.balance.toLocaleString()}</td>
+                    <td>${user.name}</td>
+                    <td>${roleBadge}</td>
+                    <td>${formattedDate}</td>
+                    <td>
+                        <button class="admin-action-btn view-user-btn" data-username="${username}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="admin-action-btn edit-user-btn" data-username="${username}" style="margin-left: 5px;">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+                userCount++;
+            }
+            
+            // Add event listeners to buttons
+            document.querySelectorAll('.view-user-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const username = btn.dataset.username;
+                    viewUserDetails(username);
+                });
+            });
+            
+            document.querySelectorAll('.edit-user-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const username = btn.dataset.username;
+                    editUserBalance(username);
+                });
+            });
+        }
+        
+        function viewUserDetails(username) {
+            const users = app.storage.getAllUsers();
+            const user = users[username];
+            
+            if (!user) return;
+            
+            const joinedDate = new Date(user.joined);
+            const lastLoginDate = new Date(user.last_login);
+            
+            const details = `
+                <div style="background: rgba(0, 0, 0, 0.4); border-radius: 12px; padding: 20px; margin-top: 15px; border: 2px solid rgba(0, 102, 204, 0.3);">
+                    <h4 style="font-size: 16px; color: #00ccff; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-user"></i> User Details: ${username}
+                    </h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <div style="font-size: 11px; color: #b8c4d9;">Full Name</div>
+                            <div style="font-size: 14px; color: white; font-weight: 900;">${user.name}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; color: #b8c4d9;">Role</div>
+                            <div style="font-size: 14px; color: ${user.role === 'admin' ? '#ff4757' : user.role === 'officer' ? '#ffaa44' : '#00cc88'}; font-weight: 900;">${user.role.toUpperCase()}</div>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <div style="font-size: 11px; color: #b8c4d9;">Password</div>
+                            <div style="font-size: 14px; color: #00ccff; font-weight: 900; font-family: 'Courier New', monospace;">${user.password}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; color: #b8c4d9;">Balance</div>
+                            <div style="font-size: 14px; color: #00cc88; font-weight: 900;">₹${user.balance.toLocaleString()}</div>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <div style="font-size: 11px; color: #b8c4d9;">Joined Date</div>
+                            <div style="font-size: 12px; color: white;">${joinedDate.toLocaleString()}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; color: #b8c4d9;">Last Login</div>
+                            <div style="font-size: 12px; color: white;">${lastLoginDate.toLocaleString()}</div>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <div style="font-size: 11px; color: #b8c4d9;">Total Deposits</div>
+                            <div style="font-size: 14px; color: white; font-weight: 900;">₹${(user.total_deposits || 0).toLocaleString()}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; color: #b8c4d9;">Referrals</div>
+                            <div style="font-size: 14px; color: white; font-weight: 900;">${(user.referred_users || []).length}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            showPersistentNotification(details);
+        }
+        
+        function editUserBalance(username) {
+            const users = app.storage.getAllUsers();
+            const user = users[username];
+            
+            if (!user) return;
+            
+            const editForm = `
+                <div style="background: rgba(0, 0, 0, 0.4); border-radius: 12px; padding: 20px; margin-top: 15px; border: 2px solid rgba(0, 102, 204, 0.3);">
+                    <h4 style="font-size: 16px; color: #00ccff; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-edit"></i> Edit User: ${username}
+                    </h4>
+                    <div style="margin-bottom: 15px;">
+                        <div style="font-size: 11px; color: #b8c4d9; margin-bottom: 5px;">Current Balance: ₹${user.balance.toLocaleString()}</div>
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <input type="number" id="editBalanceAmount" class="form-input" placeholder="Enter amount" style="flex: 1;">
+                            <select id="editBalanceAction" class="form-select" style="width: 120px;">
+                                <option value="add">Add</option>
+                                <option value="reduce">Reduce</option>
+                                <option value="set">Set to</option>
+                            </select>
+                        </div>
+                        <input type="text" id="editBalanceReason" class="form-input" placeholder="Reason for change" style="margin-bottom: 10px;">
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn-primary" id="saveBalanceBtn" style="flex: 1;">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <button class="btn-secondary" id="cancelEditBtn" style="flex: 1;">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            showPersistentNotification(editForm);
+            
+            // Add event listeners for the buttons in the persistent notification
+            setTimeout(() => {
+                const saveBtn = document.getElementById('saveBalanceBtn');
+                const cancelBtn = document.getElementById('cancelEditBtn');
+                
+                if (saveBtn) {
+                    saveBtn.addEventListener('click', () => {
+                        const amount = parseFloat(document.getElementById('editBalanceAmount').value);
+                        const action = document.getElementById('editBalanceAction').value;
+                        const reason = document.getElementById('editBalanceReason').value;
+                        
+                        if (!amount || amount <= 0) {
+                            showNotification('Please enter a valid amount', 'error');
+                            return;
+                        }
+                        
+                        let newBalance = user.balance;
+                        if (action === 'add') {
+                            newBalance = user.balance + amount;
+                        } else if (action === 'reduce') {
+                            newBalance = user.balance - amount;
+                        } else if (action === 'set') {
+                            newBalance = amount;
+                        }
+                        
+                        app.storage.updateUser(username, { balance: newBalance });
+                        
+                        // Update current user if it's the same user
+                        if (app.currentUser && app.currentUser.username === username) {
+                            app.currentUser.balance = newBalance;
+                            app.updateUI();
+                            colorTrading.updateUI();
+                        }
+                        
+                        // Reload admin table
+                        loadAllUsersForAdmin();
+                        
+                        // Close persistent notification
+                        document.getElementById('persistentNotification').style.display = 'none';
+                        
+                        showNotification(`Updated ${username}'s balance to ₹${newBalance.toLocaleString()}`, 'success');
+                    });
+                }
+                
+                if (cancelBtn) {
+                    cancelBtn.addEventListener('click', () => {
+                        document.getElementById('persistentNotification').style.display = 'none';
+                    });
+                }
+            }, 100);
+        }
+        
         function setupEventListeners() {
             // Modal open/close
             document.getElementById('loginBtn').addEventListener('click', () => openModal(document.getElementById('loginModal')));
@@ -4484,12 +4979,37 @@
             
             // Refer button
             document.getElementById('headerReferBtn').addEventListener('click', () => {
+                // Update referral link before opening modal
+                if (app.currentUser) {
+                    const referralLink = `https://raimbowpower.github.io/AI-TradeX-Pro-/?ref=${app.currentUser.username}`;
+                    document.getElementById('referModalCode').value = referralLink;
+                }
                 openModal(document.getElementById('referModal'));
             });
             
             document.getElementById('referDropdownBtn').addEventListener('click', (e) => {
                 e.preventDefault();
+                // Update referral link before opening modal
+                if (app.currentUser) {
+                    const referralLink = `https://raimbowpower.github.io/AI-TradeX-Pro-/?ref=${app.currentUser.username}`;
+                    document.getElementById('referModalCode').value = referralLink;
+                }
                 openModal(document.getElementById('referModal'));
+            });
+            
+            // Copy referral link buttons - UPDATED
+            document.getElementById('copyReferralBtn').addEventListener('click', () => {
+                const link = document.getElementById('referralLink');
+                link.select();
+                document.execCommand('copy');
+                showNotification('Referral link copied to clipboard!', 'success');
+            });
+            
+            document.getElementById('copyReferModalBtn').addEventListener('click', () => {
+                const link = document.getElementById('referModalCode');
+                link.select();
+                document.execCommand('copy');
+                showNotification('Referral link copied to clipboard!', 'success');
             });
             
             // Admin panel button
@@ -4497,6 +5017,7 @@
                 if (app.currentUser && (app.currentUser.role === 'admin' || app.currentUser.role === 'officer')) {
                     document.getElementById('admin-section').style.display = 'block';
                     document.getElementById('admin-section').scrollIntoView({ behavior: 'smooth' });
+                    loadAllUsersForAdmin();
                 }
             });
             
@@ -4504,6 +5025,7 @@
                 if (app.currentUser && (app.currentUser.role === 'admin' || app.currentUser.role === 'officer')) {
                     document.getElementById('admin-section').style.display = 'block';
                     document.getElementById('admin-section').scrollIntoView({ behavior: 'smooth' });
+                    loadAllUsersForAdmin();
                 }
             });
             
@@ -4568,6 +5090,11 @@
                         content.classList.remove('active');
                     });
                     document.getElementById(`${tabId}Tab`).classList.add('active');
+                    
+                    // Load users for admin if on viewAllUsersTab
+                    if (tabId === 'viewAllUsers' && app.currentUser && app.currentUser.role === 'admin') {
+                        loadAllUsersForAdmin();
+                    }
                 });
             });
             
@@ -4609,85 +5136,106 @@
                 });
             });
             
-            // Copy referral link buttons
-            document.getElementById('copyReferralBtn').addEventListener('click', () => {
-                const link = document.getElementById('referralLink');
-                link.select();
-                document.execCommand('copy');
-                showNotification('Referral link copied to clipboard!', 'success');
-            });
-            
-            document.getElementById('copyReferModalBtn').addEventListener('click', () => {
-                const link = document.getElementById('referModalLink');
-                link.select();
-                document.execCommand('copy');
-                showNotification('Referral link copied to clipboard!', 'success');
-            });
-            
-            // Share referral link buttons
-            document.getElementById('shareReferralBtn').addEventListener('click', () => {
-                const link = 'https://raimbowpower.github.io/AI-TradeX-Pro-/';
-                const text = 'Join TradeX Pro - Premium AI Trading Platform with 2.5% Daily Returns! Use my referral link: ' + link;
+            // Admin search functionality
+            document.getElementById('adminSearchUsers').addEventListener('input', (e) => {
+                const query = e.target.value.trim();
+                if (query.length === 0) {
+                    loadAllUsersForAdmin();
+                    return;
+                }
                 
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'TradeX Pro Referral',
-                        text: text,
-                        url: link
-                    }).then(() => {
-                        showNotification('Successfully shared referral link!', 'success');
-                    }).catch(err => {
-                        console.log('Error sharing:', err);
-                        fallbackShare(link, text);
+                const results = app.storage.searchUsers(query);
+                const tableBody = document.getElementById('allUsersTable');
+                tableBody.innerHTML = '';
+                
+                results.forEach((user, index) => {
+                    const row = document.createElement('tr');
+                    
+                    // Format date
+                    const joinedDate = new Date(user.joined);
+                    const formattedDate = joinedDate.toLocaleDateString('en-IN', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric'
                     });
-                } else {
-                    fallbackShare(link, text);
-                }
-            });
-            
-            document.getElementById('shareReferModalBtn').addEventListener('click', () => {
-                const link = 'https://raimbowpower.github.io/AI-TradeX-Pro-/';
-                const text = 'Join TradeX Pro - Premium AI Trading Platform with 2.5% Daily Returns! Use my referral link: ' + link;
+                    
+                    // Determine role badge color
+                    let roleBadge = '';
+                    if (user.role === 'admin') {
+                        roleBadge = '<span style="background: rgba(255, 71, 87, 0.2); color: #ff4757; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">ADMIN</span>';
+                    } else if (user.role === 'officer') {
+                        roleBadge = '<span style="background: rgba(255, 170, 68, 0.2); color: #ffaa44; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">OFFICER</span>';
+                    } else {
+                        roleBadge = '<span style="background: rgba(0, 204, 136, 0.2); color: #00cc88; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 900;">USER</span>';
+                    }
+                    
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td><strong>${user.username}</strong></td>
+                        <td class="user-password">${user.password}</td>
+                        <td class="user-coin">₹${user.balance.toLocaleString()}</td>
+                        <td>${user.name}</td>
+                        <td>${roleBadge}</td>
+                        <td>${formattedDate}</td>
+                        <td>
+                            <button class="admin-action-btn view-user-btn" data-username="${user.username}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="admin-action-btn edit-user-btn" data-username="${user.username}" style="margin-left: 5px;">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
                 
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'TradeX Pro Referral',
-                        text: text,
-                        url: link
-                    }).then(() => {
-                        showNotification('Successfully shared referral link!', 'success');
-                    }).catch(err => {
-                        console.log('Error sharing:', err);
-                        fallbackShare(link, text);
+                // Re-add event listeners
+                setTimeout(() => {
+                    document.querySelectorAll('.view-user-btn').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const username = btn.dataset.username;
+                            viewUserDetails(username);
+                        });
                     });
-                } else {
-                    fallbackShare(link, text);
-                }
+                    
+                    document.querySelectorAll('.edit-user-btn').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const username = btn.dataset.username;
+                            editUserBalance(username);
+                        });
+                    });
+                }, 100);
             });
             
-            function fallbackShare(link, text) {
-                // Create a temporary textarea to copy the link
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
+            // Export users data
+            document.getElementById('exportUsersBtn').addEventListener('click', () => {
+                const users = app.storage.getAllUsers();
+                let csvContent = "No.,Username,Password,Coins (₹),Name,Role,Joined Date\n";
                 
-                // Try to open WhatsApp or Telegram
-                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
-                const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent('Join TradeX Pro - Premium AI Trading Platform!')}`;
-                
-                // Ask user which platform to use
-                if (confirm('Link copied to clipboard! Open WhatsApp to share?')) {
-                    window.open(whatsappUrl, '_blank');
-                } else if (confirm('Open Telegram to share?')) {
-                    window.open(telegramUrl, '_blank');
+                let userCount = 1;
+                for (const username in users) {
+                    const user = users[username];
+                    const joinedDate = new Date(user.joined).toLocaleDateString();
+                    
+                    csvContent += `${userCount},${username},${user.password},${user.balance},${user.name},${user.role},${joinedDate}\n`;
+                    userCount++;
                 }
                 
-                showNotification('Referral link copied and ready to share!', 'success');
-            }
+                // Create download link
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'tradex_users.csv';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                showNotification('Users data exported successfully!', 'success');
+            });
         }
     </script>
 </body>
-</html>
+    </html>
