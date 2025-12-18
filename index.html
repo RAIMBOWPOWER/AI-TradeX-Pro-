@@ -2273,6 +2273,7 @@
                 <a href="#color-trading" class="nav-box"><i class="fas fa-palette"></i> Color Trading</a>
                 <a href="#deposit-system" class="nav-box"><i class="fas fa-wallet"></i> Deposit</a>
                 <a href="#profit-dashboard" class="nav-box"><i class="fas fa-chart-line"></i> Profit</a>
+                <a href="#withdrawal-section" class="nav-box"><i class="fas fa-money-bill-wave"></i> Withdrawal</a>
                 <a href="#contact" class="nav-box"><i class="fas fa-headset"></i> Support</a>
                 <button class="nav-box refer-btn" id="headerReferBtn">
                     <i class="fas fa-share-alt"></i> Refer & Earn
@@ -2315,6 +2316,9 @@
             </a>
             <a href="#deposit-system" class="dropdown-item">
                 <i class="fas fa-wallet"></i> Deposit
+            </a>
+            <a href="#withdrawal-section" class="dropdown-item">
+                <i class="fas fa-money-bill-wave"></i> Withdrawal
             </a>
             <a href="#" class="dropdown-item" id="referDropdownBtn">
                 <i class="fas fa-share-alt"></i> Refer & Earn
@@ -3245,6 +3249,187 @@
             </div>
         </section>
 
+        <!-- WITHDRAWAL SECTION - NEW -->
+        <section id="withdrawal-section" style="margin-bottom: 40px; position: relative;">
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                 alt="Withdrawal Background" 
+                 class="trading-background-image">
+            
+            <h2 class="section-title">
+                <i class="fas fa-money-bill-wave"></i> Withdrawal System
+            </h2>
+            <p style="color: #b8c4d9; font-size: 14px; margin-bottom: 25px; font-style: italic;">Withdraw your earnings with 30% tax deduction on withdrawals</p>
+
+            <!-- Withdrawal Tabs -->
+            <div class="profit-tabs" style="margin-bottom: 20px;">
+                <button class="profit-tab active" data-withdrawal-tab="new">New Withdrawal</button>
+                <button class="profit-tab" data-withdrawal-tab="history">Withdrawal History</button>
+                <button class="profit-tab" data-withdrawal-tab="rules">Tax Rules</button>
+            </div>
+
+            <!-- New Withdrawal Tab -->
+            <div id="newWithdrawalTab" class="admin-tab-content active">
+                <div class="form-group">
+                    <label class="form-label">Withdrawal Amount (Minimum ₹300)</label>
+                    <input type="number" class="form-input" id="withdrawalSectionAmount" value="300" min="300">
+                </div>
+
+                <!-- Quick Amounts for Withdrawal -->
+                <div class="withdrawal-amounts">
+                    <div class="withdrawal-amount selected" data-amount="300">
+                        <div class="withdrawal-amount-value">₹300</div>
+                    </div>
+                    <div class="withdrawal-amount" data-amount="500">
+                        <div class="withdrawal-amount-value">₹500</div>
+                    </div>
+                    <div class="withdrawal-amount" data-amount="1000">
+                        <div class="withdrawal-amount-value">₹1,000</div>
+                    </div>
+                    <div class="withdrawal-amount" data-amount="2000">
+                        <div class="withdrawal-amount-value">₹2,000</div>
+                    </div>
+                    <div class="withdrawal-amount" data-amount="3000">
+                        <div class="withdrawal-amount-value">₹3,000</div>
+                    </div>
+                    <div class="withdrawal-amount" data-amount="4000">
+                        <div class="withdrawal-amount-value">₹4,000</div>
+                    </div>
+                    <div class="withdrawal-amount" data-amount="5000">
+                        <div class="withdrawal-amount-value">₹5,000</div>
+                    </div>
+                </div>
+
+                <!-- Withdrawal Preview with Tax Calculation -->
+                <div class="withdrawal-preview" id="withdrawalPreviewSection" style="display: none; background: rgba(0, 204, 136, 0.1); border-color: rgba(0, 204, 136, 0.3);">
+                    <div class="withdrawal-preview-item">
+                        <span style="color: #b8c4d9;">Withdrawal Amount:</span>
+                        <span style="color: white; font-weight: 900;" id="previewWithdrawalAmount">₹0</span>
+                    </div>
+                    <div class="withdrawal-preview-item">
+                        <span style="color: #b8c4d9;">Tax (30%):</span>
+                        <span style="color: #ff4757; font-weight: 900;" id="previewTaxAmount">₹0</span>
+                    </div>
+                    <div class="withdrawal-preview-item">
+                        <span style="color: #b8c4d9;">Net Amount After Tax:</span>
+                        <span style="color: #00cc88; font-weight: 900;" id="previewNetAmount">₹0</span>
+                    </div>
+                    <div class="withdrawal-preview-item">
+                        <span style="color: #b8c4d9;">Your Current Balance:</span>
+                        <span style="color: #00ccff; font-weight: 900;">₹<span id="previewCurrentBalance">0</span></span>
+                    </div>
+                </div>
+
+                <!-- Tax Warning Message -->
+                <div id="taxWarningMessage" style="background: rgba(255, 71, 87, 0.1); border: 2px solid rgba(255, 71, 87, 0.3); border-radius: 12px; padding: 15px; margin: 20px 0; display: none;">
+                    <h4 style="font-size: 13px; color: #ff4757; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-exclamation-triangle"></i> Important Tax Information
+                    </h4>
+                    <p style="font-size: 12px; color: #b8c4d9; margin: 0;">
+                        A 30% tax will be deducted from your withdrawal amount. The tax amount is <span id="taxAmountDisplay" style="color: #ff4757; font-weight: 900;">₹0</span> and you will receive <span id="netAmountDisplay" style="color: #00cc88; font-weight: 900;">₹0</span> after tax deduction.
+                    </p>
+                </div>
+
+                <!-- Not Enough Balance Message -->
+                <div id="notEnoughBalanceMessage" style="background: rgba(255, 170, 68, 0.1); border: 2px solid rgba(255, 170, 68, 0.3); border-radius: 12px; padding: 15px; margin: 20px 0; display: none;">
+                    <h4 style="font-size: 13px; color: #ffaa44; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-exclamation-circle"></i> Insufficient Balance
+                    </h4>
+                    <p style="font-size: 12px; color: #b8c4d9; margin: 0;">
+                        You do not have enough coins for withdrawal. Minimum ₹300 required. Please deposit more funds to continue.
+                    </p>
+                </div>
+
+                <!-- Withdrawal Button -->
+                <div class="form-buttons">
+                    <button class="btn-primary" id="processWithdrawalSectionBtn" style="flex: 1;">
+                        <i class="fas fa-money-check-alt"></i> Process Withdrawal
+                    </button>
+                </div>
+
+                <div id="withdrawalSectionResult" style="margin-top: 20px;"></div>
+
+                <!-- Important Notes -->
+                <div style="background: rgba(0, 102, 204, 0.1); border: 2px solid rgba(0, 102, 204, 0.3); border-radius: 12px; padding: 20px; margin-top: 25px;">
+                    <h4 style="font-size: 14px; color: #00ccff; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-info-circle"></i> Important Notes
+                    </h4>
+                    <ul style="font-size: 12px; color: #b8c4d9; padding-left: 20px; margin: 0;">
+                        <li style="margin-bottom: 8px;">Minimum withdrawal amount is ₹300</li>
+                        <li style="margin-bottom: 8px;">30% tax is applicable on all withdrawals</li>
+                        <li style="margin-bottom: 8px;">Withdrawals are processed within 24 hours</li>
+                        <li style="margin-bottom: 8px;">You must contact admin on Telegram after withdrawal request</li>
+                        <li>Tax is calculated as: Withdrawal Amount × 30%</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Withdrawal History Tab -->
+            <div id="historyWithdrawalTab" class="admin-tab-content">
+                <div id="withdrawalHistoryList">
+                    <!-- Withdrawal history will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Tax Rules Tab -->
+            <div id="rulesWithdrawalTab" class="admin-tab-content">
+                <div style="background: rgba(0, 0, 0, 0.4); border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(0, 102, 204, 0.2);">
+                    <h3 style="font-size: 16px; color: #00ccff; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-percentage"></i> Tax Rules & Regulations
+                    </h3>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="font-size: 14px; color: #ff4757; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-file-invoice-dollar"></i> Tax Calculation
+                        </h4>
+                        <div style="background: rgba(255, 71, 87, 0.1); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                            <div style="font-size: 12px; color: #b8c4d9; margin-bottom: 5px;">Tax Formula:</div>
+                            <div style="font-size: 16px; color: white; font-weight: 900; text-align: center; margin-bottom: 10px;">
+                                Withdrawal Amount × 30% = Tax Deducted
+                            </div>
+                            <div style="font-size: 12px; color: #b8c4d9; text-align: center;">
+                                Net Amount = Withdrawal Amount - Tax
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="font-size: 14px; color: #00cc88; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-calculator"></i> Example Calculation
+                        </h4>
+                        <div style="background: rgba(0, 204, 136, 0.1); border-radius: 8px; padding: 15px;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                                <div>
+                                    <div style="font-size: 11px; color: #b8c4d9;">Withdrawal Amount</div>
+                                    <div style="font-size: 14px; color: white; font-weight: 900;">₹1,000</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 11px; color: #b8c4d9;">Tax (30%)</div>
+                                    <div style="font-size: 14px; color: #ff4757; font-weight: 900;">₹300</div>
+                                </div>
+                            </div>
+                            <div style="text-align: center; padding-top: 10px; border-top: 1px solid rgba(0, 204, 136, 0.3);">
+                                <div style="font-size: 11px; color: #b8c4d9;">You Receive</div>
+                                <div style="font-size: 18px; color: #00cc88; font-weight: 900;">₹700</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="font-size: 14px; color: #4169E1; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-list-check"></i> Important Points
+                        </h4>
+                        <ul style="font-size: 12px; color: #b8c4d9; padding-left: 20px; margin: 0;">
+                            <li style="margin-bottom: 8px;">Tax is only applicable when you have ₹300 or more balance</li>
+                            <li style="margin-bottom: 8px;">No tax message shown if balance is less than ₹300</li>
+                            <li style="margin-bottom: 8px;">Tax is calculated automatically during withdrawal</li>
+                            <li style="margin-bottom: 8px;">Tax amount is deducted before payment processing</li>
+                            <li>All tax calculations are final and non-negotiable</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- PROFILE SECTION -->
         <section class="profile-section" style="display: none;">
             <div class="profile-header">
@@ -3508,7 +3693,7 @@
                     <li><a href="#ai-trading"><i class="fas fa-brain"></i> AI Trading</a></li>
                     <li><a href="#color-trading"><i class="fas fa-palette"></i> Color Trading</a></li>
                     <li><a href="#deposit-system"><i class="fas fa-wallet"></i> Deposit</a></li>
-                    <li><a href="#profit-dashboard"><i class="fas fa-chart-line"></i> Profit Dashboard</a></li>
+                    <li><a href="#withdrawal-section"><i class="fas fa-money-bill-wave"></i> Withdrawal</a></li>
                 </ul>
             </div>
             
@@ -3814,7 +3999,8 @@
                 }
                 
                 if (this.tradeAmount > this.app.currentUser.balance) {
-                    this.showNotification(`Insufficient balance! You need ₹${this.tradeAmount}, but you have only ₹${this.app.currentUser.balance}`, 'error');
+                    // NOT ENOUGH MONEY MESSAGE
+                    this.showNotification('You have not enough money so please contact admin and add your money', 'error');
                     return;
                 }
                 
@@ -4343,6 +4529,248 @@
         }
 
         // ================================================
+        // WITHDRAWAL SYSTEM WITH 30% TAX
+        // ================================================
+        class WithdrawalSystem {
+            constructor(app) {
+                this.app = app;
+                this.init();
+            }
+            
+            init() {
+                this.cacheElements();
+                this.setupEventListeners();
+                this.updateWithdrawalUI();
+            }
+            
+            cacheElements() {
+                this.withdrawalAmountInput = document.getElementById('withdrawalSectionAmount');
+                this.withdrawalPreviewSection = document.getElementById('withdrawalPreviewSection');
+                this.taxWarningMessage = document.getElementById('taxWarningMessage');
+                this.notEnoughBalanceMessage = document.getElementById('notEnoughBalanceMessage');
+                this.processWithdrawalBtn = document.getElementById('processWithdrawalSectionBtn');
+                this.withdrawalAmounts = document.querySelectorAll('#newWithdrawalTab .withdrawal-amount');
+            }
+            
+            setupEventListeners() {
+                // Withdrawal amount input
+                this.withdrawalAmountInput.addEventListener('input', () => {
+                    this.updateWithdrawalPreview();
+                });
+                
+                // Quick amount buttons for withdrawal
+                this.withdrawalAmounts.forEach(amount => {
+                    amount.addEventListener('click', () => {
+                        const value = parseInt(amount.dataset.amount);
+                        this.withdrawalAmountInput.value = value;
+                        
+                        // Update active state
+                        this.withdrawalAmounts.forEach(a => {
+                            a.classList.remove('selected');
+                        });
+                        amount.classList.add('selected');
+                        
+                        this.updateWithdrawalPreview();
+                    });
+                });
+                
+                // Process withdrawal button
+                this.processWithdrawalBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.processWithdrawal();
+                });
+                
+                // Tab switching for withdrawal section
+                document.querySelectorAll('[data-withdrawal-tab]').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const tabId = tab.dataset.withdrawalTab;
+                        
+                        // Update active tab
+                        document.querySelectorAll('[data-withdrawal-tab]').forEach(t => {
+                            t.classList.remove('active');
+                        });
+                        tab.classList.add('active');
+                        
+                        // Show selected tab content
+                        document.querySelectorAll('.admin-tab-content').forEach(content => {
+                            content.classList.remove('active');
+                        });
+                        document.getElementById(`${tabId}WithdrawalTab`).classList.add('active');
+                    });
+                });
+            }
+            
+            updateWithdrawalUI() {
+                if (this.app.currentUser) {
+                    document.getElementById('previewCurrentBalance').textContent = this.app.currentUser.balance.toLocaleString();
+                } else {
+                    document.getElementById('previewCurrentBalance').textContent = '0';
+                }
+            }
+            
+            updateWithdrawalPreview() {
+                const withdrawalAmount = parseInt(this.withdrawalAmountInput.value) || 0;
+                const userBalance = this.app.currentUser ? this.app.currentUser.balance : 0;
+                
+                // Hide all messages first
+                this.withdrawalPreviewSection.style.display = 'none';
+                this.taxWarningMessage.style.display = 'none';
+                this.notEnoughBalanceMessage.style.display = 'none';
+                
+                // If user is not logged in
+                if (!this.app.currentUser) {
+                    this.notEnoughBalanceMessage.style.display = 'block';
+                    this.notEnoughBalanceMessage.querySelector('p').textContent = 'Please login first to make a withdrawal.';
+                    return;
+                }
+                
+                // Check if user has enough balance (minimum 300)
+                if (userBalance < 300) {
+                    this.notEnoughBalanceMessage.style.display = 'block';
+                    this.notEnoughBalanceMessage.querySelector('p').textContent = 'You do not have enough coins for withdrawal. Minimum ₹300 required. Please deposit more funds to continue.';
+                    return;
+                }
+                
+                // Check if withdrawal amount is valid
+                if (withdrawalAmount < 300) {
+                    this.notEnoughBalanceMessage.style.display = 'block';
+                    this.notEnoughBalanceMessage.querySelector('p').textContent = 'Minimum withdrawal amount is ₹300. Please enter a valid amount.';
+                    return;
+                }
+                
+                // Check if user has enough balance for the requested amount
+                if (withdrawalAmount > userBalance) {
+                    this.notEnoughBalanceMessage.style.display = 'block';
+                    this.notEnoughBalanceMessage.querySelector('p').textContent = 'You have not enough money so please contact admin and add your money';
+                    return;
+                }
+                
+                // Calculate tax and net amount
+                const taxAmount = withdrawalAmount * 0.3;
+                const netAmount = withdrawalAmount - taxAmount;
+                
+                // Update preview section
+                document.getElementById('previewWithdrawalAmount').textContent = `₹${withdrawalAmount.toLocaleString()}`;
+                document.getElementById('previewTaxAmount').textContent = `₹${taxAmount.toLocaleString()}`;
+                document.getElementById('previewNetAmount').textContent = `₹${netAmount.toLocaleString()}`;
+                document.getElementById('previewCurrentBalance').textContent = userBalance.toLocaleString();
+                
+                // Update tax warning message
+                document.getElementById('taxAmountDisplay').textContent = `₹${taxAmount.toLocaleString()}`;
+                document.getElementById('netAmountDisplay').textContent = `₹${netAmount.toLocaleString()}`;
+                
+                // Show appropriate sections
+                this.withdrawalPreviewSection.style.display = 'block';
+                this.taxWarningMessage.style.display = 'block';
+            }
+            
+            processWithdrawal() {
+                if (!this.app.currentUser) {
+                    this.showNotification('Please login first to make a withdrawal.', 'warning');
+                    document.getElementById('loginBtn').click();
+                    return;
+                }
+                
+                const withdrawalAmount = parseInt(this.withdrawalAmountInput.value) || 0;
+                const userBalance = this.app.currentUser.balance;
+                
+                // Validation checks
+                if (withdrawalAmount < 300) {
+                    this.showNotification('Minimum withdrawal amount is ₹300.', 'error');
+                    return;
+                }
+                
+                if (userBalance < 300) {
+                    this.showNotification('You do not have enough coins for withdrawal. Minimum ₹300 required.', 'error');
+                    return;
+                }
+                
+                if (withdrawalAmount > userBalance) {
+                    this.showNotification('You have not enough money so please contact admin and add your money', 'error');
+                    return;
+                }
+                
+                // Calculate tax and net amount
+                const taxAmount = withdrawalAmount * 0.3;
+                const netAmount = withdrawalAmount - taxAmount;
+                
+                // Ask for confirmation
+                const confirmWithdrawal = confirm(`You are about to withdraw ₹${withdrawalAmount.toLocaleString()}. A 30% tax (₹${taxAmount.toLocaleString()}) will be deducted. You will receive ₹${netAmount.toLocaleString()}. Do you want to proceed?`);
+                
+                if (!confirmWithdrawal) {
+                    return;
+                }
+                
+                // Process withdrawal
+                const newBalance = userBalance - withdrawalAmount;
+                this.app.storage.updateUser(this.app.currentUser.username, { balance: newBalance });
+                this.app.currentUser.balance = newBalance;
+                this.app.updateUI();
+                
+                // Add to withdrawal history
+                const withdrawals = this.app.currentUser.withdrawals || [];
+                withdrawals.unshift({
+                    id: 'withdraw_' + Date.now(),
+                    amount: withdrawalAmount,
+                    tax: taxAmount,
+                    net_amount: netAmount,
+                    new_balance: newBalance,
+                    date: new Date().toISOString(),
+                    status: 'pending'
+                });
+                
+                this.app.storage.updateUser(this.app.currentUser.username, { withdrawals: withdrawals });
+                
+                // Show success message
+                this.showNotification(`Withdrawal request submitted! ₹${taxAmount.toLocaleString()} tax deducted. You will receive ₹${netAmount.toLocaleString()}.`, 'success');
+                
+                // Open withdrawal modal
+                openModal(document.getElementById('withdrawalModal'));
+                
+                // Reset form
+                this.withdrawalAmountInput.value = 300;
+                this.updateWithdrawalPreview();
+                
+                // Update all UI
+                this.app.updateUI();
+                if (colorTrading) {
+                    colorTrading.updateUI();
+                }
+            }
+            
+            showNotification(message, type = 'info') {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = message;
+                
+                if (type === 'error') {
+                    notification.style.background = 'linear-gradient(45deg, #ff4757, #ff3838)';
+                } else if (type === 'success') {
+                    notification.style.background = 'var(--accent-gradient)';
+                } else if (type === 'warning') {
+                    notification.style.background = 'linear-gradient(45deg, #ffaa44, #ff8c00)';
+                } else if (type === 'info') {
+                    notification.style.background = 'linear-gradient(45deg, #4169E1, #3742fa)';
+                }
+                
+                document.body.appendChild(notification);
+                
+                // Remove notification after 5 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 5000);
+                
+                // Click to dismiss
+                notification.addEventListener('click', () => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                });
+            }
+        }
+
+        // ================================================
         // GLOBAL FUNCTIONS
         // ================================================
         function showNotification(message, type = 'info') {
@@ -4452,6 +4880,9 @@
             
             // Initialize color trading
             colorTrading = new FixedColorTrading(app);
+            
+            // Initialize withdrawal system
+            const withdrawalSystem = new WithdrawalSystem(app);
             
             // Update UI
             app.updateUI();
@@ -4922,7 +5353,7 @@
                 document.getElementById('ai-trading').scrollIntoView({ behavior: 'smooth' });
             });
             
-            // Investment buttons
+            // Investment buttons - ADDED NOT ENOUGH MONEY MESSAGE
             document.querySelectorAll('.invest-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     if (!app.currentUser) {
@@ -4941,7 +5372,8 @@
                     const name = btn.closest('.card').querySelector('.card-title').textContent;
                     
                     if (app.currentUser.balance < price) {
-                        showNotification(`Insufficient balance! You need ₹${price}, but you have only ₹${app.currentUser.balance}`, 'error');
+                        // NOT ENOUGH MONEY MESSAGE
+                        showNotification('You have not enough money so please contact admin and add your money', 'error');
                         return;
                     }
                     
@@ -5238,4 +5670,4 @@
         }
     </script>
 </body>
-    </html>
+</html>
