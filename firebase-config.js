@@ -14,10 +14,8 @@ const firebaseConfig = {
   measurementId: "G-2BMR5ZPYHT"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase(app);
 
-// Export the initialized services
 export { app, analytics, db };
